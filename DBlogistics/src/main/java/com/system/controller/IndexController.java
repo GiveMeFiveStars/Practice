@@ -1,4 +1,4 @@
-package com.logistic.controller;
+package com.system.controller;
 
 import org.springframework.ui.Model;
 import org.springframework.stereotype.Controller;

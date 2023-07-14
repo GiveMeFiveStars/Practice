@@ -1,15 +1,13 @@
-package com.logistic;
+package com.system;
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 
 
-
-/**
- * 表示取消数据源的自动配置
- */
-@SpringBootApplication(exclude= {DataSourceAutoConfiguration.class})
+@SpringBootApplication
+@MapperScan(basePackages = {"com.system.mapper"})
 public class LogisticApplication {
 
     public static void main(String[] args) {
