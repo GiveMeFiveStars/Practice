@@ -7,11 +7,14 @@ import org.springframework.stereotype.Repository;
 /**
 * @author 21628
 * @description 针对表【administrator(管理员信息)】的数据库操作Mapper
-* @createDate 2023-07-15 20:10:05
+* @createDate 2023-07-16 00:13:01
 * @Entity com.system.pojo.Administrator
 */
+
 @Repository
-public interface AdministratorMapper extends BaseMapper<Administrator> {
+public
+interface AdministratorMapper extends BaseMapper<Administrator> {
+
 }
 
 

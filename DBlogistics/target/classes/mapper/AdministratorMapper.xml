@@ -5,7 +5,7 @@
 <mapper namespace="com.system.mapper.AdministratorMapper">
 
     <resultMap id="BaseResultMap" type="com.system.pojo.Administrator">
-            <id property="aId" column="a_id" jdbcType="INTEGER"/>
+            <id property="aUsername" column="a_username" jdbcType="VARCHAR"/>
             <result property="aPassword" column="a_password" jdbcType="VARCHAR"/>
             <result property="aName" column="a_name" jdbcType="VARCHAR"/>
             <result property="aPhone" column="a_phone" jdbcType="BIGINT"/>
@@ -13,7 +13,7 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-        a_id,a_password,a_name,
+        a_username,a_password,a_name,
         a_phone,c_name
     </sql>
 </mapper>

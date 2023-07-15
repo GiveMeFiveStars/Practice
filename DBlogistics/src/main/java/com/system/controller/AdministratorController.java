@@ -1,5 +1,4 @@
 package com.system.controller;
-
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.system.mapper.AdministratorMapper;
 import com.system.pojo.Administrator;
@@ -15,12 +14,12 @@ public class AdministratorController {
     @Autowired
     AdministratorMapper administratorMapper;
     @RequestMapping("/Administrator insert")
-    public String insert(Integer aId,
+    public String insert( String aUsername,
                           String aPassword,
                           String aName,
                           Long aPhone,
                           String cName){
-        return administratorMapper.insert(new Administrator(aId,
+        return administratorMapper.insert(new Administrator(aUsername,
                 aPassword,
                 aName,
                 aPhone,
@@ -33,20 +32,20 @@ public class AdministratorController {
     }
     //根据主键删除表项
     @RequestMapping("/Administrator delete")
-    public void delete(Integer aId){    //传入主键
-        administratorMapper.deleteById(aId);
+    public void delete(Integer aUsername){    //传入主键
+        administratorMapper.deleteById(aUsername);
     }
     //多条件删除
     @RequestMapping("/Administrator deleteByMap")
-    public void deleteByMap( Integer aId,
+    public void deleteByMap( String aUsername,
                              String aPassword,
                              String aName,
                              Long aPhone,
                              String cName) {
         Map<String, Object> map = new HashMap<>();
         //依次判断各属性值是否为空值
-        if (aId!= null) {
-            map.put("a_id", aId);  //注意！:map的key是数据表的列名
+        if (aUsername!= null) {
+            map.put("a_username", aUsername);  //注意！:map的key是数据表的列名
         }
         if (aPassword != null) {
             map.put("a_password", aPassword);
@@ -65,17 +64,17 @@ public class AdministratorController {
     }
     //改操作！
     @RequestMapping("/Administrator update")
-    public void update(Integer aId,
+    public void update(String aUsername,
                        String aPassword,
                        String aName,
                        Long aPhone,
                        String cName) {
         UpdateWrapper<Administrator> wrapper = new UpdateWrapper<>();
         //根据主键进行查询修改，主键不能为空！
-        if (aId == null) {
+        if (aUsername == null) {
             return;
         }
-        wrapper.eq("a_id", aId);
+        wrapper.eq("a_username", aUsername);
         //对传入不为空的元素更改！
         if (aPassword!= null) {
             wrapper.set("a_password", aPassword);

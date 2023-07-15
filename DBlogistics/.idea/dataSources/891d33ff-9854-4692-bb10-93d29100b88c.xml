@@ -1087,9 +1087,9 @@ DYNAMIC</Options>
 DYNAMIC</Options>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </table>
-    <column id="306" parent="298" name="a_id">
+    <column id="306" parent="298" name="a_username">
       <Comment>管理员id</Comment>
-      <DasType>int|0s</DasType>
+      <DasType>varchar(255)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
@@ -1122,7 +1122,7 @@ DYNAMIC</Options>
       <RefTableName>company</RefTableName>
     </foreign-key>
     <index id="312" parent="298" name="PRIMARY">
-      <ColNames>a_id</ColNames>
+      <ColNames>a_username</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>

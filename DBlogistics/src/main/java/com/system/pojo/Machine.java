@@ -11,39 +11,39 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * 管理员信息
- * @TableName administrator
+ * 机电信息
+ * @TableName machine
  */
-@TableName(value ="administrator")
+@TableName(value ="machine")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Administrator implements Serializable {
+public class Machine implements Serializable {
     /**
-     * 管理员id
+     * 机电编号
      */
     @TableId
-    private String aUsername;
+    private Integer mId;
 
     /**
-     * 管理员密码
+     * 名称
      */
-    private String aPassword;
+    private String mName;
 
     /**
-     * 管理员姓名
+     * 型号
      */
-    private String aName;
+    private String modelNum;
 
     /**
-     * 管理员电话
+     * 1:Settings that are still in use 2:Scrap equipment
      */
-    private Long aPhone;
+    private Integer mStatus;
 
     /**
-     * 公司姓名
+     * 仓库的id
      */
-    private String cName;
+    private Integer stashId;
 
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;
