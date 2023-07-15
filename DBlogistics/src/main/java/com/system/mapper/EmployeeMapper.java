@@ -6,8 +6,8 @@ import org.springframework.stereotype.Repository;
 
 /**
 * @author 21628
-* @description 针对表【employee】的数据库操作Mapper
-* @createDate 2023-07-15 00:24:24
+* @description 针对表【employee(员工信息)】的数据库操作Mapper
+* @createDate 2023-07-15 09:13:42
 * @Entity com.system.pojo.Employee
 */
 @Repository

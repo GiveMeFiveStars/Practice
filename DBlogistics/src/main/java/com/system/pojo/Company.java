@@ -5,56 +5,50 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
-import java.math.BigDecimal;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * 员工信息
- * @TableName employee
+ * 公司信息
+ * @TableName company
  */
-@TableName(value ="employee")
+@TableName(value ="company")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Employee implements Serializable {
-    /**
-     * 员工id
-     */
-    @TableId
-    private Integer eId;
-
+public class Company implements Serializable {
     /**
      * 公司代号
      */
+    @TableId
     private Integer cId;
 
     /**
-     * 员工姓名
+     * 公司名称
      */
-    private String eName;
+    private String cName;
+
+    /**
+     * 法定代表人
+     */
+    private String representativeName;
+
+    /**
+     * 公司地址
+     */
+    private String cAddress;
+
+    /**
+     * 单位：万
+     */
+    private Integer registeredCapital;
 
     /**
      * 联系电话
      */
-    private Long ePhone;
-
-    /**
-     * 员工性别
-     */
-    private String eSex;
-
-    /**
-     * 工资
-     */
-    private BigDecimal salary;
-
-    /**
-     * 职位
-     */
-    private String position;
+    private Long cPhone;
 
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;

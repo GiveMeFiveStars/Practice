@@ -19,4 +19,7 @@
         e_phone,e_sex,salary,
         position
     </sql>
+    <select id="selectCIdAndEId">
+
+    </select>
 </mapper>
