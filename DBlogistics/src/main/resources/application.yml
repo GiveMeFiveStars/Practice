@@ -34,6 +34,8 @@ spring:
   thymeleaf:
     cache: false
     enabled: true
+    prefix: classpath:/templates/
+    suffix: .html
 
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
@@ -48,6 +50,9 @@ mybatis-plus:
     db-config:
       id-type: auto
     banner: true
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
 
 shiro:
   hash-algorithm-name: md5

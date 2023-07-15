@@ -24,6 +24,7 @@ public class AdministratorController {
                 aName,
                 aPhone,
                 cName))>0?"successful":"failed";
+
     }
     //实现”查“操作！显示表中所有表项！
     @RequestMapping("/Administrator select1")
