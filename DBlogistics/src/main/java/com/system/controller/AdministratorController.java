@@ -20,11 +20,7 @@ public class AdministratorController {
                           String aName,
                           Long aPhone,
                           String cName){
-        return administratorMapper.insert(new Administrator(aId,
-                aPassword,
-                aName,
-                aPhone,
-                cName))>0?"successful":"failed";
+        return administratorMapper.insert(new Administrator(aId, aPassword, aName, aPhone, cName))>0?"successful":"failed";
     }
     //实现”查“操作！显示表中所有表项！
     @RequestMapping("/Administrator select1")

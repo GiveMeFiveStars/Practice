@@ -2,6 +2,8 @@ package com.system.mapper;
 
 import com.system.pojo.Company;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 /**
