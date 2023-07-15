@@ -1,54 +1,44 @@
 package com.system.controller;
 
-import com.system.pojo.Admin;
-import com.system.service.AdminService;
+import com.system.VO.DataVO;
+import com.system.mapper.AdministratorMapper;
+import com.system.pojo.Administrator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.IOException;
 
 @Controller
+@RequestMapping("/login")
 public class LoginController {
 
     @Autowired
-    private AdminService adminService;
+    AdministratorMapper administratorMapper;
 
     /**
-     * 登录页面的转发
-     */
-    @GetMapping("/login")
-    public String login(){
-        return "login";
-    }
-
-    /**
+     *
      * 登录验证
+     * @param request
+     * @return
      */
-    @RequestMapping("/loginIn")
-    public String loginIn(HttpServletRequest request, Model model){
+    @PostMapping ("/loginIn")
+    public DataVO<Object> loginIn(HttpServletRequest request){
+        HttpSession session = request.getSession();
         //获取用户名与密码
         String username = request.getParameter("username");
         String password = request.getParameter("password");
-
-        //判断验证码是否正确（验证码已经放入session）
-        HttpSession session = request.getSession();
-        String realCode = (String)session.getAttribute("VerifyCode");
-        //管理员信息
         //用户名和密码是否正确
-        Admin admin=adminService.queryUserByNameAndPassword(username,password);
-        if(admin==null){//该用户不存在
-            model.addAttribute("msg","用户名或密码错误");
-            return "login";
-        }
-        session.setAttribute("user",admin);
-        session.setAttribute("type","admin");
-        return "index";
+        Administrator admin = administratorMapper.selectById(username);
+        if(admin == null){//该用户不存在
+            return DataVO.fail("用户名或密码错误");
+        }else if(admin.getAPassword() != password) {
+            return DataVO.fail("用户名或密码错误");
+        }else
+            return DataVO.success();
     }
     /**
      * 退出功能
