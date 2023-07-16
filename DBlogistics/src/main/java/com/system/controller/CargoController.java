@@ -97,7 +97,7 @@ public class CargoController {
         cargoMapper.deleteByMap(map);
     }
     //改操作！
-    @RequestMapping("/Place update")
+    @RequestMapping("/Cargo update")
     public void update(Long gId,//插入各个属性
                        String adresser,
                        String consignee,

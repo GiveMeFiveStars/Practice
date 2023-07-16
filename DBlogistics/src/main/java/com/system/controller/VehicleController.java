@@ -19,7 +19,7 @@ public class VehicleController {
     @Autowired
     //创建PlaceMapper对象，对数据库进行操作！
     VehicleMapper vehicleMapper;
-    @RequestMapping("/Cargo insert")
+    @RequestMapping("/Vehicle insert")
     //实现“增“操作
     public String insert(String vId,//插入各个属性
                          String vType,
