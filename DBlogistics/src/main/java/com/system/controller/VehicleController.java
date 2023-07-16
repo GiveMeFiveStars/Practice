@@ -7,19 +7,22 @@ import com.system.pojo.Cargo;
 import com.system.pojo.Vehicle;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@Controller
+@RestController
+@RequestMapping("Vehicle")
 public class VehicleController {
     @Autowired
     //创建PlaceMapper对象，对数据库进行操作！
     VehicleMapper vehicleMapper;
-    @RequestMapping("/Vehicle insert")
+    @GetMapping ("/insert")
     //实现“增“操作
     public String insert(String vId,//插入各个属性
                          String vType,
@@ -37,15 +40,15 @@ public class VehicleController {
                 tLimit))>0?"successful":"failed";  //正则表达式判断是否插入元素成功
     }
     //实现”查“操作！显示表中所有表项！
-    @RequestMapping("/Vehicle select1")
+    @GetMapping("/select1")
     public List<Vehicle> select1(){return vehicleMapper.selectList(null);}
     //根据主键删除表项
-    @RequestMapping("/Vehicle delete")
+    @GetMapping("/delete")
     public void delete(Integer gId){    //传入主键
         vehicleMapper.deleteById(gId);
     }
     //多条件删除
-    @RequestMapping("/Vehicle deleteByMap")
+    @GetMapping("/deleteByMap")
     public void deleteByMap(String vId,//插入各个属性
                             String vType,
                             Integer vStatus,
@@ -83,7 +86,7 @@ public class VehicleController {
         vehicleMapper.deleteByMap(map);
     }
     //改操作！
-    @RequestMapping("/Vehicle update")
+    @GetMapping("/update")
     public void update(String vId,//插入各个属性
                        String vType,
                        Integer vStatus,

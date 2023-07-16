@@ -5,19 +5,20 @@ import com.system.mapper.MachineMapper;
 import com.system.pojo.Machine;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
-@Controller
+@RestController
+@RequestMapping("Machine")
 public class MachineController {
     @Autowired
     //创建MachineMapper对象，对数据库进行操作！
     MachineMapper machineMapper;
-    @RequestMapping("/Machine insert")
+    @GetMapping("/insert")
     //实现“增“操作
     public String insert(Integer mId,//插入各个属性
                          String mName,
@@ -31,17 +32,17 @@ public class MachineController {
                stashId))>0?"successful":"failed";  //正则表达式判断是否插入元素成功
     }
     //实现”查“操作！显示表中所有表项！
-    @RequestMapping("/Machine select1")
+    @GetMapping("/select1")
     public List<Machine> select1(){
         return machineMapper.selectList(null);
     }
     //根据主键删除表项
-    @RequestMapping("/Machine delete")
+    @GetMapping("/delete")
     public void delete(Integer mId){    //传入主键
         machineMapper.deleteById(mId);
     }
     //多条件删除
-    @RequestMapping("/Machine deleteByMap")
+    @GetMapping("/deleteByMap")
     public void deleteByMap(Integer mId,//插入各个属性
                             String mName,
                             String modelNum,
@@ -68,7 +69,7 @@ public class MachineController {
         machineMapper.deleteByMap(map);
     }
     //改操作！
-    @RequestMapping("/Machine update")
+    @GetMapping("/update")
     public void update(Integer mId,//插入各个属性
                        String mName,
                        String modelNum,

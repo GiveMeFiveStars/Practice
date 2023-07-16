@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.system.mapper.CompanyMapper;
 import com.system.pojo.Company;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import java.util.HashMap;
@@ -11,10 +12,11 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
+@RequestMapping("Company")
 public class CompanyController {
     @Autowired
     CompanyMapper companyMapper;
-    @RequestMapping("/Company insert")
+    @GetMapping("/insert")
     //实现插入操作表项的操作！
     public String insert( Integer cId,
                           String cName,
@@ -30,17 +32,17 @@ public class CompanyController {
                          cPhone))>0?"successful":"failed";
     }
     //实现”查“操作！显示表中所有表项！
-    @RequestMapping("/Company select1")
+    @GetMapping("/select1")
     public List<Company> select1(){
         return companyMapper.selectList(null); //返回所有
     }
     //根据主键删除表项
-    @RequestMapping("/Company delete")
+    @GetMapping("/delete")
     public void delete(Integer cId){    //传入主键
         companyMapper.deleteById(cId);
     }
     //多条件删除
-    @RequestMapping("/Company deleteByMap")
+    @GetMapping("/deleteByMap")
     public void deleteByMap( Integer cId,
                              String cName,
                              String representativeName,
@@ -74,7 +76,7 @@ public class CompanyController {
         companyMapper.deleteByMap(map);
     }
     //改操作！
-    @RequestMapping("/Company update")
+    @GetMapping("/update")
     public void update(Integer cId,
                        String cName,
                        String representativeName,

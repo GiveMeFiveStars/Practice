@@ -5,6 +5,7 @@ import com.system.mapper.PlaceMapper;
 
 import com.system.pojo.Place;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -14,11 +15,12 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
+@RequestMapping("Place")
 public class PlaceController {
     @Autowired
     //创建PlaceMapper对象，对数据库进行操作！
     PlaceMapper placeMapper;
-    @RequestMapping("/Place insert")
+    @GetMapping ("/insert")
     //实现“增“操作
     public String insert(Integer pId,//插入各个属性
                          String pName,
@@ -27,15 +29,15 @@ public class PlaceController {
         return placeMapper.insert(new Place(pId, pName, city, country))>0?"successful":"failed";  //正则表达式判断是否插入元素成功
     }
     //实现”查“操作！显示表中所有表项！
-    @RequestMapping("/Place select1")
+    @GetMapping("/select1")
     public List<Place> select1(){return placeMapper.selectList(null);}
     //根据主键删除表项
-    @RequestMapping("/Place delete")
+    @GetMapping("/delete")
     public void delete(Integer pId){    //传入主键
         placeMapper.deleteById(pId);
     }
     //多条件删除
-    @RequestMapping("/Place deleteByMap")
+    @GetMapping("/deleteByMap")
     public void deleteByMap(Integer pId,//插入各个属性
                             String pName,
                             String city,
@@ -58,7 +60,7 @@ public class PlaceController {
         placeMapper.deleteByMap(map);
     }
     //改操作！
-    @RequestMapping("/Place update")
+    @GetMapping("/update")
     public void update(Integer pId,//插入各个属性
                        String pName,
                        String city,

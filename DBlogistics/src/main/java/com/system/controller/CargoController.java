@@ -6,19 +6,21 @@ import com.system.mapper.PlaceMapper;
 import com.system.pojo.Cargo;
 import com.system.pojo.Place;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@Controller
+@RestController
+@RequestMapping("Cargo")
 public class CargoController {
     @Autowired
     //创建PlaceMapper对象，对数据库进行操作！
     CargoMapper cargoMapper;
-    @RequestMapping("/Cargo insert")
+    @GetMapping ("/insert")
     //实现“增“操作
     public String insert(Long gId,//插入各个属性
                          String adresser,
@@ -42,15 +44,15 @@ public class CargoController {
                 vId))>0?"successful":"failed";  //正则表达式判断是否插入元素成功
     }
     //实现”查“操作！显示表中所有表项！
-    @RequestMapping("/Cargo select1")
+    @GetMapping("/select1")
     public List<Cargo> select1(){return cargoMapper.selectList(null);}
     //根据主键删除表项
-    @RequestMapping("/Cargo delete")
+    @GetMapping("/delete")
     public void delete(Integer gId){    //传入主键
         cargoMapper.deleteById(gId);
     }
     //多条件删除
-    @RequestMapping("/Cargo deleteByMap")
+    @GetMapping("/deleteByMap")
     public void deleteByMap(Long gId,//插入各个属性
                             String adresser,
                             String consignee,
@@ -97,7 +99,7 @@ public class CargoController {
         cargoMapper.deleteByMap(map);
     }
     //改操作！
-    @RequestMapping("/Cargo update")
+    @GetMapping("/update")
     public void update(Long gId,//插入各个属性
                        String adresser,
                        String consignee,

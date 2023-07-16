@@ -7,6 +7,7 @@ import com.system.pojo.Administrator;
 import com.system.pojo.Place;
 import com.system.pojo.Stash;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -16,11 +17,12 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
+@RequestMapping("Stash")
 public class StashController {
     @Autowired
     //创建stashMapper对象，对数据库进行操作！
     StashMapper stashMapper;
-    @RequestMapping("/Stash insert")
+    @GetMapping("/insert")
     //实现“增“操作
     public String insert(Integer stashId,//插入各个属性
                          String sName,
@@ -40,12 +42,13 @@ public class StashController {
                 cTime))>0?"successful":"failed";  //正则表达式判断是否插入元素成功
     }
     //实现”查“操作！显示表中所有表项！
-    @RequestMapping("/Stash select1")
+    @GetMapping("/select1")
     public List<Stash> select1(){return stashMapper.selectList(null);}
     //根据主键删除表项
-    @RequestMapping("/Stash delete")
+    @GetMapping
+            ("/delete")
     public void delete(Integer stashId){stashMapper.deleteById(stashId);}
-    @RequestMapping("/Stash deleteByMap")
+    @GetMapping("/deleteByMap")
     public void deleteByMap(Integer stashId,//插入各个属性
                             String sName,
                             Integer sArea,
@@ -84,7 +87,7 @@ public class StashController {
         stashMapper.deleteByMap(map);
     }
     //改操作！
-    @RequestMapping("/Stash update")
+    @GetMapping("/update")
     public void update(Integer stashId,//插入各个属性
                        String sName,
                        Integer sArea,

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org" >
 <head>
     <meta charset="utf-8">
     <title>轩然物流管理系统</title>
@@ -46,7 +46,7 @@
 					</li>
 					
 					<li class="layui-nav-item layuimini-setting">
-						<a href="javascript:;">admin</a>
+						<a href="javascript:;"><span th:text="${session.userinfo.getCName()}"></span></a>
 						<dl class="layui-nav-child">
 							<dd>
 								<a href="javascript:;" layuimini-content-href="page/admin/user-setting.html" data-title="基本资料" data-icon="fa fa-gears">基本资料<span class="layui-badge-dot"></span></a>
@@ -117,7 +117,7 @@
 	</div>
 	<script src="../static/lib/layui-v2.6.3/layui.js" charset="utf-8"></script>
 	<script src="../static/js/lay-config.js?v=2.0.0" charset="utf-8"></script>
-	<script>
+	<script th:inline="javascript">
 		layui.use(['jquery', 'layer', 'miniAdmin','miniTongji'], function () {
 			var $ = layui.jquery,
 				layer = layui.layer,

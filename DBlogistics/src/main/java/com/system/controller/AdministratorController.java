@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.system.mapper.AdministratorMapper;
 import com.system.pojo.Administrator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import java.util.HashMap;
@@ -11,10 +12,11 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
+@RequestMapping("Administrator")
 public class AdministratorController {
     @Autowired
     AdministratorMapper administratorMapper;
-    @RequestMapping("/Administrator insert")
+    @GetMapping("/insert")
     public String insert(String aId,
                           String aPassword,
                           String aName,
@@ -27,17 +29,17 @@ public class AdministratorController {
                 cName))>0?"successful":"failed";
     }
     //实现”查“操作！显示表中所有表项！
-    @RequestMapping("/Administrator select1")
+    @GetMapping("/select1")
     public List<Administrator> select1(){
         return administratorMapper.selectList(null); //返回所有
     }
     //根据主键删除表项
-    @RequestMapping("/Administrator delete")
+    @GetMapping("/delete")
     public void delete(Integer aId){    //传入主键
         administratorMapper.deleteById(aId);
     }
     //多条件删除
-    @RequestMapping("/Administrator deleteByMap")
+    @GetMapping("/deleteByMap")
     public void deleteByMap( Integer aId,
                              String aPassword,
                              String aName,
@@ -64,7 +66,7 @@ public class AdministratorController {
         administratorMapper.deleteByMap(map);
     }
     //改操作！
-    @RequestMapping("/Administrator update")
+    @GetMapping("/update")
     public void update(Integer aId,
                        String aPassword,
                        String aName,

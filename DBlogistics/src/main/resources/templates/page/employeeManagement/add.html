@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org" >
 <head>
     <meta charset="utf-8">
     <title>layui</title>
@@ -81,7 +81,7 @@
     </div>
 </div>
 <script src="../../../lib/layui-v2.6.3/layui.js" charset="utf-8"></script>
-<script>
+<script th:inline="javascript">
     layui.use(['form'], function () {
         var form = layui.form,
             layer = layui.layer,

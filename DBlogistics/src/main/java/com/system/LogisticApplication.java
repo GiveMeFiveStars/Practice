@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 
 
 @SpringBootApplication
+//mapper接口扫描路径
 @MapperScan(basePackages = {"com.system.mapper"})
 public class LogisticApplication {
 

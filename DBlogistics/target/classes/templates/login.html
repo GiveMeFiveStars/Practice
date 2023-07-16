@@ -108,7 +108,7 @@
 	<script src="../static/lib/jquery-3.4.1/jquery-3.4.1.min.js" charset="utf-8"></script>
 	<script src="../static/lib/layui-v2.6.3/layui.js" charset="utf-8"></script>
 	<script src="../static/lib/jq-module/jquery.particleground.min.js" charset="utf-8"></script>
-	<script>
+	<script th:inline="javascript">
 		layui.use(['form'], function () {
 			var form = layui.form,
 				layer = layui.layer;
@@ -173,7 +173,7 @@
 				$.post(url, data, function (response){
 					console.log(response);
 					if(response.code == 0){
-						layer.msg('登陆成功',{icon:6,time:1000},function (){
+						layer.msg('登录成功',{icon:6,time:1000},function (){
 							window.location = '/index'
 						});
 					}else{

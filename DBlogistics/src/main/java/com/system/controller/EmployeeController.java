@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.system.mapper.EmployeeMapper;
 import com.system.pojo.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import java.math.BigDecimal;
@@ -13,11 +14,12 @@ import java.util.Map;
 
 
 @RestController
+@RequestMapping("/Employee")
 public class EmployeeController {
     @Autowired
     //创建EmployeeMapper对象，对数据库进行操作！
     EmployeeMapper employeeMapper;
-    @RequestMapping("/Employee insert")
+    @GetMapping("/insert")
     //实现“增“操作
     public String insert(Integer eId,//插入各个属性
                          Integer cId,
@@ -35,17 +37,17 @@ public class EmployeeController {
                 position))>0?"successful":"failed";  //正则表达式判断是否插入元素成功
     }
     //实现”查“操作！显示表中所有表项！
-    @RequestMapping("/Employee select1")
-      public   List<Employee> select1(){
+    @GetMapping("/select1")
+    public List<Employee> select1(){
       return employeeMapper.selectList(null);
     }
     //根据主键删除表项
-    @RequestMapping("/Employee delete")
+    @GetMapping("/delete")
      public void delete(Integer eId){    //传入主键
          employeeMapper.deleteById(eId);
     }
     //多条件删除
-    @RequestMapping("/Employee deleteByMap")
+    @GetMapping("/deleteByMap")
     public void deleteByMap(Integer eId,//插入各个属性
                             Integer cId,
                             String  eName,
@@ -80,7 +82,7 @@ public class EmployeeController {
         employeeMapper.deleteByMap(map);
     }
     //改操作！
-    @RequestMapping("/Employee update")
+    @GetMapping("/update")
     public void update(Integer eId, //插入各个属性
                        Integer cId,
                        String  eName,

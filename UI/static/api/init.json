@@ -1,0 +1,86 @@
+{
+  "homeInfo": {
+    "title": "首页",
+    "href": "page/welcome.html?t=1"
+  },
+  "logoInfo": {
+    "title": "轩然物流",
+    "image": "../static/images/favicon.ico",
+    "href": ""
+  },
+  "menuInfo": [
+    {
+      "title": "常规管理",
+      "icon": "fa fa-address-book",
+      "href": "",
+      "target": "_self",
+      "child": [
+        {
+          "title": "基本管理",
+          "href": "",
+          "icon": "fa fa-puzzle-piece",
+          "target": "_self",
+          "child": [
+            {
+              "title": "员工管理",
+              "href": "page/employeeManagement.html",
+              "icon": "fa fa-male",
+              "target": "_self"
+            },
+            {
+              "title": "合作公司",
+              "href": "page/company.html",
+              "icon": "fa fa-tachometer",
+              "target": "_self"
+            }
+          ]
+        },
+        
+        {
+          "title": "车辆管理",
+          "href": "page/vehicle.html",
+          "icon": "fa fa-car",
+          "target": "_self"
+        },
+		{
+          "title": "货物管理",
+          "href": "page/cargo.html",
+          "icon": "fa fa-truck",
+          "target": "_self"
+        },
+        {
+          "title": "物资管理",
+          "href": "",
+          "icon": "fa fa-cubes",
+          "target": "_self",
+		  "child":[
+			  {
+			    "title": "机电",
+			    "href": "page/machine.html",
+			    "icon": "fa fa-legal",
+			    "target": "_self"
+			  },
+			  {
+			    "title": "仓库",
+			    "href": "page/stash.html",
+			    "icon": "fa fa-home",
+			    "target": "_self"
+			  }
+		  ]
+        },
+        {
+          "title": "统计分析",
+          "href": "page/statistics.html",
+          "icon": "fa fa-area-chart",
+          "target": "_self"
+        },
+		{
+		  "title": "公司简介",
+		  "href": "page/companyProfile.html",
+		  "icon": "fa fa-window-maximize",
+		  "target": "_self"
+		}
+      ]
+    }
+  ]
+}

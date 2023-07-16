@@ -22,4 +22,120 @@ public class CommonController {
         return "index";
     }
 
+    /**
+     * 首页界面转发
+     * @return
+     */
+    @GetMapping("/welcome")
+    public String welcome(){
+        return "welcome";
+    }
+
+    /**
+     * 车辆管理界面转发
+     * @return
+     */
+    @GetMapping("/vehicle")
+    public String vehicle(){
+        return "page/vehicle";
+    }
+
+    /**
+     * 统计分析界面转发
+     * @return
+     */
+    @GetMapping("/statistics")
+    public String statistics(){
+        return "page/statistics";
+    }
+
+    /**
+     * 仓库界面转发
+     * @return
+     */
+    @GetMapping("/stash")
+    public String stash(){
+        return "page/stash";
+    }
+
+    /**
+     * 机电界面转发
+     * @return
+     */
+    @GetMapping("/machine")
+    public String machine(){
+        return "page/machine";
+    }
+
+    /**
+     * 员工管理界面转发
+     * @return
+     */
+    @GetMapping("/employeeManagement")
+    public String employeeManagement(){
+        return "page/employeeManagement";
+    }
+
+    /**
+     * 公司简介界面转发
+     * @return
+     */
+    @GetMapping("/companyProfile")
+    public String companyProfile(){
+        return "page/companyProfile";
+    }
+
+    /**
+     * 合作公司界面转发
+     * @return
+     */
+    @GetMapping("/company")
+    public String company(){
+        return "page/company";
+    }
+
+    /**
+     * 货物管理界面转发
+     * @return
+     */
+    @GetMapping("/cargo")
+    public String cargo(){
+        return "page/cargo";
+    }
+
+    /**
+     * 用户密码修改界面转发
+     * @return
+     */
+    @GetMapping("/userPassword")
+    public String userPassword(){
+        return "page/admin/user-password";
+    }
+
+    /**
+     * 用户基本信息界面转发
+     * @return
+     */
+    @GetMapping("/userSetting")
+    public String userSetting(){
+        return "page/admin/user-setting";
+    }
+
+    /**
+     * 员工信息添加界面转发
+     * @return
+     */
+    @GetMapping("/employeeAdd")
+    public String employeeAdd(){
+        return "page/employeeManagement/add";
+    }
+
+    /**
+     * 员工信息编辑界面转发
+     * @return
+     */
+    @GetMapping("/employeeEdit")
+    public String employeeEdit(){
+        return "page/employeeManagement/edit";
+    }
 }
