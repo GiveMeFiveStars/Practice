@@ -16,43 +16,62 @@
 </head>
 <body>
 <div class="layui-form layuimini-form">
+	<!-- 字段的匹配看是否为主键，如果不是，这个lay-verify="required" lay-reqtext="员工ID不能为空" 可以删掉，就可以不写这个东西也可以提交-->
+	<!-- 员工ID -->
     <div class="layui-form-item">
-        <label class="layui-form-label required">用户名</label>
-        <div class="layui-input-block">
-            <input type="text" name="username" lay-verify="required" lay-reqtext="用户名不能为空" placeholder="请输入用户名" value="" class="layui-input">
-            <tip>填写自己管理账号的名称。</tip>
+        <label class="layui-form-label required">员工ID</label>
+        <div class="layui-input-inline">
+            <input type="text" name="e_id" lay-verify="required" lay-reqtext="员工ID不能为空" placeholder="请输入员工ID" value="" class="layui-input">
         </div>
     </div>
+	<!-- 公司代号 -->
+	<div class="layui-form-item">
+	    <label class="layui-form-label required">公司代号</label>
+	    <div class="layui-input-inline">
+	        <input type="text" name="e_id" lay-verify="required" lay-reqtext="公司代号不能为空" placeholder="请输入公司代号" value="" class="layui-input">
+	    </div>
+	</div>
+	<!-- 员工姓名 -->
+	<div class="layui-form-item">
+	    <label class="layui-form-label required">员工姓名</label>
+	    <div class="layui-input-inline">
+	        <input type="text" name="e_name" lay-verify="required" lay-reqtext="员工姓名不能为空" placeholder="请输入员工姓名" value="" class="layui-input">
+	    </div>
+	</div>
+	<!-- 个人电话 -->
+	<div class="layui-form-item">
+        <label class="layui-form-label required">个人电话</label>
+        <div class="layui-input-block">
+            <input type="number" name="e_phone" lay-verify="required" lay-reqtext="手机不能为空" placeholder="请输入手机" value="" class="layui-input">
+        </div>
+    </div>
+	<!--  性别-->
     <div class="layui-form-item">
         <label class="layui-form-label required">性别</label>
         <div class="layui-input-block">
-            <input type="radio" name="sex" value="男" title="男" checked="">
-            <input type="radio" name="sex" value="女" title="女">
+            <input type="radio" name="sex" value="man" title="男" checked>
+            <input type="radio" name="sex" value="woman" title="女">
         </div>
     </div>
+	<!-- 工资 -->
+	<div class="layui-form-item">
+	    <label class="layui-form-label required">工资</label>
+	    <div class="layui-input-block">
+	        <input type="number" name="salary" lay-verify="required" lay-reqtext="工资不能为空" placeholder="请输入工资" value="" class="layui-input">
+	    </div>
+	</div>
+	<!-- 职位 -->
     <div class="layui-form-item">
-        <label class="layui-form-label required">手机</label>
-        <div class="layui-input-block">
-            <input type="number" name="phone" lay-verify="required" lay-reqtext="手机不能为空" placeholder="请输入手机" value="" class="layui-input">
-        </div>
-    </div>
-    <div class="layui-form-item">
-        <label class="layui-form-label">邮箱</label>
-        <div class="layui-input-block">
-            <input type="email" name="email" placeholder="请输入邮箱" value="" class="layui-input">
-        </div>
-    </div>
-    <div class="layui-form-item">
-        <label class="layui-form-label">职业</label>
-        <div class="layui-input-block">
-            <input type="text" name="work" placeholder="请输入职业" value="" class="layui-input">
-        </div>
-    </div>
-    <div class="layui-form-item layui-form-text">
-        <label class="layui-form-label">备注信息</label>
-        <div class="layui-input-block">
-            <textarea name="remark" class="layui-textarea" placeholder="请输入备注信息"></textarea>
-        </div>
+        <label class="layui-form-label">职位</label>
+            <div class="layui-input-inline">
+                <select name="city" lay-verify="" lay-search>
+                    <option value ="">请选择</option>
+					<!-- 可以自己设置 -->
+                    <option value="010">成功人士</option>
+                    <option value="021">打工人</option>
+                    <option value="0571">百万富翁</option>
+                </select>
+            </div>
     </div>
 
     <div class="layui-form-item">
@@ -61,7 +80,7 @@
         </div>
     </div>
 </div>
-<script src="../../lib/layui-v2.6.3/layui.js" charset="utf-8"></script>
+<script src="../../../lib/layui-v2.6.3/layui.js" charset="utf-8"></script>
 <script>
     layui.use(['form'], function () {
         var form = layui.form,

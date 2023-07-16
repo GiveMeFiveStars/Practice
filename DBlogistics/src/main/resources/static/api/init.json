@@ -23,7 +23,7 @@
           "child": [
             {
               "title": "员工管理",
-              "href": "page/emloyeeManagement.html",
+              "href": "page/employeeManagement.html",
               "icon": "fa fa-male",
               "target": "_self"
             },
