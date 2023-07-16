@@ -6,34 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="acdafa83-e604-4187-ac7d-f09eb9c00dcb" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/system/controller/AdministratorController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/system/controller/AdministratorController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/system/controller/MachineController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/login-1.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/application.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/system/LogisticApplication.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/system/VO/Constants.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/system/VO/DataVO.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/system/config/MyMvcConfig.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/system/controller/CommonController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/system/controller/CompanyController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/system/controller/EmployeeController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/system/mapper/CompanyMapper.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/system/mapper/EmployeeMapper.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/system/pojo/Administrator.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/system/pojo/Company.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/system/pojo/Employee.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/system/service/CompanyService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/system/service/EmployeeService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/system/service/impl/CompanyServiceImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/system/service/impl/EmployeeServiceImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/mapper/AdministratorMapper.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/mapper/CompanyMapper.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/mapper/EmployeeMapper.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/mapper/MachineMapper.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/mapper/VehicleMapper.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/system/DemoApplicationTests.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/system/controller/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/system/controller/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/login.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -127,6 +102,7 @@
       <workItem from="1689389203141" duration="16909000" />
       <workItem from="1689426009608" duration="276000" />
       <workItem from="1689442568342" duration="778000" />
+      <workItem from="1689467971545" duration="1195000" />
     </task>
     <servers />
   </component>
