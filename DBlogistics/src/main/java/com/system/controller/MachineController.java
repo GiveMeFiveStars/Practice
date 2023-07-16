@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+
 @RestController
 public class MachineController {
     @Autowired
@@ -66,7 +67,7 @@ public class MachineController {
         machineMapper.deleteByMap(map);
     }
     //改操作！
-    @RequestMapping("/Employee update")
+    @RequestMapping("/Machine update")
     public void update(Integer mId,//插入各个属性
                        String mName,
                        String modelNum,
@@ -74,7 +75,7 @@ public class MachineController {
                        Integer stashId) {
         UpdateWrapper<Machine> wrapper = new UpdateWrapper<>();
         //根据主键进行查询修改，主键不能为空！
-        if ( mId == null) {
+        if (mId == null) {
             return;
         }
         wrapper.eq("m_id",  mId);

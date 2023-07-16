@@ -6,7 +6,10 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.util.Date;
+
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * 车辆信息
@@ -14,6 +17,8 @@ import lombok.Data;
  */
 @TableName(value ="vehicle")
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Vehicle implements Serializable {
     /**
      * 车牌号

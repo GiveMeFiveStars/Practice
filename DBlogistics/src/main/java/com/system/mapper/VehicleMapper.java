@@ -2,6 +2,7 @@ package com.system.mapper;
 
 import com.system.pojo.Vehicle;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.springframework.stereotype.Repository;
 
 /**
 * @author 21628
@@ -9,6 +10,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 * @createDate 2023-07-15 23:31:55
 * @Entity com.system.pojo.Vehicle
 */
+@Repository
 public interface VehicleMapper extends BaseMapper<Vehicle> {
 
 }
