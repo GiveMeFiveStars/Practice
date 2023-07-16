@@ -46,7 +46,7 @@
 					</li>
 					
 					<li class="layui-nav-item layuimini-setting">
-						<a href="javascript:;"><span th:text="${session.userinfo.getCName()}"></span></a>
+						<a href="javascript:;"><span th:text="${session.userinfo.getAName()}"></span></a>
 						<dl class="layui-nav-child">
 							<dd>
 								<a href="javascript:;" layuimini-content-href="page/admin/user-setting.html" data-title="基本资料" data-icon="fa fa-gears">基本资料<span class="layui-badge-dot"></span></a>
@@ -118,6 +118,7 @@
 	<script src="../static/lib/layui-v2.6.3/layui.js" charset="utf-8"></script>
 	<script src="../static/js/lay-config.js?v=2.0.0" charset="utf-8"></script>
 	<script th:inline="javascript">
+		var contextPath = [[@{/}]];
 		layui.use(['jquery', 'layer', 'miniAdmin','miniTongji'], function () {
 			var $ = layui.jquery,
 				layer = layui.layer,
@@ -148,8 +149,8 @@
 			});
 
 			$('.login-out').on("click", function () {
-				layer.msg('退出登录成功', function () {
-					window.location = '../static/login-1.html';
+				layer.msg('退出登录成功', {time: 1000},function () {
+					window.location = contextPath + 'login/loginOut';
 				});
 			});
 		});

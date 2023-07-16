@@ -1,11 +1,17 @@
 package com.system.controller;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.system.VO.DataVO;
 import com.system.mapper.EmployeeMapper;
 import com.system.pojo.Employee;
+import com.system.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import java.math.BigDecimal;
 import java.util.HashMap;
@@ -14,11 +20,15 @@ import java.util.Map;
 
 
 @RestController
-@RequestMapping("/Employee")
+@RequestMapping("/employee")
 public class EmployeeController {
     @Autowired
     //创建EmployeeMapper对象，对数据库进行操作！
     EmployeeMapper employeeMapper;
+
+    @Autowired
+    //创建EmployeeMapper对象，对数据库进行操作！
+    EmployeeService employeeService;
     @GetMapping("/insert")
     //实现“增“操作
     public String insert(Integer eId,//插入各个属性
@@ -116,5 +126,52 @@ public class EmployeeController {
             wrapper.set("position", position);
         }
         employeeMapper.update(null, wrapper);
+    }
+    @GetMapping("/list")
+    @ResponseBody
+    public DataVO<Object> listAll(int page,int limit){
+        Page<Employee> pager = new Page<>(page,limit);
+        //分页查询Employee信息
+        IPage<Employee> employeePage = employeeService.page(pager, new QueryWrapper<>());
+        // schoolPage.getTotal() 信息总条数
+        // schoolPage.getRecords() 分页数据
+        List<Employee> list = employeePage.getRecords();
+        return new DataVO(employeePage.getTotal(),list);
+    }
+
+    @GetMapping("/selectBy")
+    @ResponseBody
+    public DataVO<Object> select(Integer eId, //插入各个属性
+                                 Integer cId,
+                                 String  eName,
+                                 Long  ePhone,
+                                 String  eSex,
+                                 BigDecimal salary,
+                                 String position) {
+        QueryWrapper<Employee> queryWrapper = new QueryWrapper<>();
+        if (eId != null) {
+            queryWrapper.like("e_id", eId);
+        }
+        if (cId != null) {
+            queryWrapper.like("c_id", cId);
+        }
+        if (eName != null) {
+            queryWrapper.like("e_name", eName);
+        }
+        if (ePhone != null) {
+            queryWrapper.like("e_phone", ePhone);
+        }
+        if (eSex != null) {
+            queryWrapper.like("e_sex", eSex);
+        }
+        if (salary != null) {
+            queryWrapper.like("salary", salary);
+        }
+        if (position != null) {
+            queryWrapper.like("position", position);
+        }
+        List<Map<String, Object>> maps = employeeMapper.selectMaps(queryWrapper);
+        long count = maps.size();
+        return DataVO.success(maps, count);
     }
 }

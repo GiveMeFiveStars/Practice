@@ -53,6 +53,6 @@ public class LoginController {
     public String loginOut(HttpServletRequest request){
         HttpSession session = request.getSession();
         session.invalidate();//注销
-        return "/login";
+        return "login";
     }
 }

@@ -2,7 +2,11 @@ package com.system.mapper;
 
 import com.system.pojo.Employee;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
+
+import java.math.BigDecimal;
+import java.util.List;
 
 /**
 * @author 21628
