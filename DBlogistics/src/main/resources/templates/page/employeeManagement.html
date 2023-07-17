@@ -75,7 +75,6 @@
 	</div>
 	<script src="../../static/lib/layui-v2.6.3/layui.js" charset="utf-8"></script>
 	<script th:inline="javascript">
-		var contextPath = [[@{/}]];
 		// 监听表单
 		layui.use(['form', 'table'], function () {
 			var $ = layui.jquery,
@@ -85,8 +84,7 @@
 			table.render({
 				elem: '#currentTableId',
 				// 这里需要修改数据库接口（试水的静态数据在staic的api的table.json下面）
-				url: contextPath + 'employee/list',
-				method: 'post',
+				url: '/employee/list',
 				toolbar: '#toolbarDemo',
 				defaultToolbar: ['filter', 'exports', 'print', {
 					title: '提示',
@@ -95,11 +93,11 @@
 				}],
 				cols: [ [
 					{type: "checkbox", width: 50,fixed: true},
-					{field: 'e_id', width: 120, title: '员工ID', sort: true,fixed: true},
-					{field: 'c_id', width: 120, title: '公司代号',sort: true},
-					{field: 'e_name', width: 120, title: '员工姓名'},
-					{field: 'e_phone', width: 180, title: '个人电话'},
-					{field: 'e_sex',width: 80, title: '性别'},
+					{field: 'eid', width: 120, title: '员工ID', sort: true,fixed: true},
+					{field: 'cid', width: 120, title: '公司代号',sort: true},
+					{field: 'ename', width: 120, title: '员工姓名'},
+					{field: 'ephone', width: 180, title: '个人电话'},
+					{field: 'esex',width: 80, title: '性别'},
 					{field: 'salary', width: 120, title: '工资', sort: true},
 					{field: 'position', width: 120, title: '职位'},
 					{title: '操作', minWidth: 150, toolbar: '#currentTableBar', align: "center"}
@@ -107,7 +105,15 @@
 				limits: [10, 15, 20, 25, 50, 100],
 				limit: 15,
 				page: true,
-				skin: 'line'
+				skin: 'line',
+				parseData: function(res){ //将原始数据解析成 table 组件所规定的数据
+					return {
+						"code": res.code, //解析接口状态
+						"msg": res.msg, //解析提示文本
+						"count": res.count, //解析数据长度
+						"data": res.data //解析数据列表
+					};
+				}
 			});
 
 			// 1.监听搜索的模糊查询
