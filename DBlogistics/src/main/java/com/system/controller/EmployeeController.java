@@ -9,14 +9,11 @@ import com.system.mapper.EmployeeMapper;
 import com.system.pojo.Employee;
 import com.system.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.*;
+
 import java.math.BigDecimal;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 
 @RestController
@@ -129,18 +126,21 @@ public class EmployeeController {
     }
     @GetMapping("/list")
     @ResponseBody
+    @Transactional
     public DataVO<Object> listAll(int page,int limit){
-        Page<Employee> pager = new Page<>(page,limit);
+
+        QueryWrapper<Employee> queryWrapper = new QueryWrapper<Employee>();
         //分页查询Employee信息
-        IPage<Employee> employeePage = employeeService.page(pager, new QueryWrapper<>());
-        // schoolPage.getTotal() 信息总条数
-        // schoolPage.getRecords() 分页数据
+        Page<Employee>pages=new Page<Employee>(page,limit);
+        IPage<Employee> employeePage = employeeMapper.selectPage(pages, queryWrapper);
         List<Employee> list = employeePage.getRecords();
+
         return new DataVO(employeePage.getTotal(),list);
     }
 
     @GetMapping("/selectBy")
     @ResponseBody
+    @Transactional
     public DataVO<Object> select(Integer eId, //插入各个属性
                                  Integer cId,
                                  String  eName,
@@ -170,8 +170,8 @@ public class EmployeeController {
         if (position != null) {
             queryWrapper.like("position", position);
         }
-        List<Map<String, Object>> maps = employeeMapper.selectMaps(queryWrapper);
-        long count = maps.size();
-        return DataVO.success(maps, count);
+        List<Employee> list = employeeMapper.selectList(queryWrapper);
+        long count = employeeMapper.selectCount(queryWrapper);
+        return DataVO.success(count, list);
     }
 }

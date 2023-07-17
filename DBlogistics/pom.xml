@@ -11,8 +11,8 @@
     <groupId>com</groupId>
     <artifactId>DBlogistic</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>demo</name>
-    <description>demo</description>
+    <name>system</name>
+    <description>物流系统</description>
     <properties>
         <java.version>17</java.version>
         <maven-jar-plugin.version>3.1.0</maven-jar-plugin.version>
@@ -131,6 +131,11 @@
         <groupId>com.github.pagehelper</groupId>
         <artifactId>pagehelper</artifactId>
         <version>5.1.10</version>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 

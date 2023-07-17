@@ -7,9 +7,9 @@ import com.system.mapper.EmployeeMapper;
 import org.springframework.stereotype.Service;
 
 /**
-* @author 21628
+* @author Alex Mercer
 * @description 针对表【employee(员工信息)】的数据库操作Service实现
-* @createDate 2023-07-15 09:13:42
+* @createDate 2023-07-17 09:44:02
 */
 @Service
 public class EmployeeServiceImpl extends ServiceImpl<EmployeeMapper, Employee>
