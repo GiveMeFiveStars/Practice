@@ -32,6 +32,9 @@ public class DataVO<T> {
     public static DataVO<Object> success(){
         return new DataVO(0,OK_MSG, (Object) null,null);
     }
+    public static DataVO<Object> success(String msg){
+        return new DataVO(0,msg, (Object) null,null);
+    }
     public static DataVO<Object> success(Long count,Object data){
         return new DataVO(0,"OK_MSG",count,data);
     }

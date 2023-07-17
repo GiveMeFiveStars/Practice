@@ -1,14 +1,17 @@
 package com.system.controller;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
-import com.system.mapper.CargoMapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.system.VO.DataVO;
 import com.system.mapper.VehicleMapper;
-import com.system.pojo.Cargo;
 import com.system.pojo.Vehicle;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Date;
@@ -22,22 +25,11 @@ public class VehicleController {
     @Autowired
     //创建PlaceMapper对象，对数据库进行操作！
     VehicleMapper vehicleMapper;
-    @GetMapping ("/insert")
+    @GetMapping("/insert")
     //实现“增“操作
-    public String insert(String vId,//插入各个属性
-                         String vType,
-                         Integer vStatus,
-                         Integer stashId,
-                         Integer eId,
-                         Integer licenseId,
-                         Date tLimit) {
-        return vehicleMapper.insert(new Vehicle(vId,//插入各个属性
-                vType,
-                vStatus,
-                stashId,
-                eId,
-                licenseId,
-                tLimit))>0?"successful":"failed";  //正则表达式判断是否插入元素成功
+    public DataVO<Object> insert(Vehicle param) {
+        vehicleMapper.insert(param);
+        return DataVO.success("添加成功!");
     }
     //实现”查“操作！显示表中所有表项！
     @GetMapping("/select1")
@@ -121,5 +113,50 @@ public class VehicleController {
         }
 
         vehicleMapper.update(null, wrapper);
+    }
+    @GetMapping("/list")
+    @ResponseBody
+    @Transactional
+    public DataVO<Object> listAll(int page, int limit){
+
+        QueryWrapper<Vehicle> queryWrapper = new QueryWrapper<Vehicle>();
+        //分页查询Vehicle信息
+        Page<Vehicle> pages=new Page<Vehicle>(page,limit);
+        IPage<Vehicle> vehiclePage = vehicleMapper.selectPage(pages, queryWrapper);
+        List<Vehicle> list = vehiclePage.getRecords();
+        return DataVO.success(vehiclePage.getTotal(),list);
+    }
+
+    @GetMapping("/selectBy")
+    @ResponseBody
+    @Transactional
+    public DataVO<Object> select(Vehicle param,int page,int limit) {
+        QueryWrapper<Vehicle> queryWrapper = new QueryWrapper<>();
+        if (param.getVId() != null) {
+            queryWrapper.like("v_id", param.getVId());
+        }
+        if (param.getVType() != null) {
+            queryWrapper.like("v_type", param.getVType());
+        }
+        if (param.getVStatus() != null) {
+            queryWrapper.like("v_status", param.getVStatus());
+        }
+        if (param.getStashId() != null) {
+            queryWrapper.like("stash_id", param.getStashId());
+        }
+        if (param.getEId() != null) {
+            queryWrapper.like("e_id", param.getEId());
+        }
+        if (param.getLicenseId() != null) {
+            queryWrapper.like("license_id", param.getLicenseId());
+        }
+        if (param.getTLimit() != null) {
+            queryWrapper.like("t_limit", param.getTLimit());
+        }
+        Page<Vehicle>pages=new Page<Vehicle>(page,limit);
+        IPage<Vehicle> vehiclePage = vehicleMapper.selectPage(pages, queryWrapper);
+        long count = vehicleMapper.selectCount(queryWrapper);
+        List<Vehicle> list = vehiclePage.getRecords();
+        return DataVO.success(count, list);
     }
 }

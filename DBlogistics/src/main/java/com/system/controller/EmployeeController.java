@@ -9,7 +9,6 @@ import com.system.VO.DataVO;
 import com.system.mapper.EmployeeMapper;
 import com.system.pojo.Employee;
 import com.system.service.EmployeeService;
-import org.apache.commons.lang3.StringEscapeUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -30,20 +29,9 @@ public class EmployeeController {
     EmployeeService employeeService;
     @GetMapping("/insert")
     //实现“增“操作
-    public String insert(Integer eId,//插入各个属性
-                         Integer cId,
-                         String  eName,
-                         Long  ePhone,
-                         String  eSex,
-                         BigDecimal salary,
-                         String position) {
-        return employeeMapper.insert(new Employee(eId,
-                cId,
-                eName,
-                ePhone,
-                eSex,
-                salary,
-                position))>0?"successful":"failed";  //正则表达式判断是否插入元素成功
+    public DataVO<Object> insert(Employee param) {
+        employeeMapper.insert(param);
+        return DataVO.success("添加成功!");
     }
     //实现”查“操作！显示表中所有表项！
     @GetMapping("/select1")
@@ -165,10 +153,10 @@ public class EmployeeController {
         if (param.getPosition() != null) {
             queryWrapper.like("position", param.getPosition());
         }
-        List<Employee> list = employeeMapper.selectList(queryWrapper);
         Page<Employee>pages=new Page<Employee>(page,limit);
         IPage<Employee> employeePage = employeeMapper.selectPage(pages, queryWrapper);
         long count = employeeMapper.selectCount(queryWrapper);
+        List<Employee> list = employeePage.getRecords();
         return DataVO.success(count, list);
     }
 }
