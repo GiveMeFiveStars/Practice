@@ -132,49 +132,42 @@ public class EmployeeController {
     public DataVO<Object> listAll(int page,int limit){
 
         QueryWrapper<Employee> queryWrapper = new QueryWrapper<Employee>();
-//        //分页查询Employee信息
-//        Page<Employee>pages=new Page<Employee>(page,limit);
-//        IPage<Employee> employeePage = employeeMapper.selectPage(pages, queryWrapper);
-//        List<Employee> list = employeePage.getRecords();
-//        return DataVO.success(employeePage.getTotal(),list);
-        List<Employee> list = employeeMapper.selectList(queryWrapper);
-        long count = employeeMapper.selectCount(queryWrapper);
-        return DataVO.success(count, list);
+        //分页查询Employee信息
+        Page<Employee>pages=new Page<Employee>(page,limit);
+        IPage<Employee> employeePage = employeeMapper.selectPage(pages, queryWrapper);
+        List<Employee> list = employeePage.getRecords();
+        return DataVO.success(employeePage.getTotal(),list);
     }
 
     @GetMapping("/selectBy")
     @ResponseBody
     @Transactional
-    public DataVO<Object> select(Integer eId, //插入各个属性
-                                 Integer cId,
-                                 String  eName,
-                                 Long  ePhone,
-                                 String  eSex,
-                                 BigDecimal salary,
-                                 String position) {
+    public DataVO<Object> select(Employee param,int page,int limit) {
         QueryWrapper<Employee> queryWrapper = new QueryWrapper<>();
-        if (eId != null) {
-            queryWrapper.like("e_id", eId);
+        if (param.getEId() != null) {
+            queryWrapper.like("e_id", param.getEId());
         }
-        if (cId != null) {
-            queryWrapper.like("c_id", cId);
+        if (param.getCId() != null) {
+            queryWrapper.like("c_id", param.getCId());
         }
-        if (eName != null) {
-            queryWrapper.like("e_name", eName);
+        if (param.getEName() != null) {
+            queryWrapper.like("e_name", param.getEName());
         }
-        if (ePhone != null) {
-            queryWrapper.like("e_phone", ePhone);
+        if (param.getEPhone() != null) {
+            queryWrapper.like("e_phone", param.getEPhone());
         }
-        if (eSex != null) {
-            queryWrapper.like("e_sex", eSex);
+        if (param.getESex() != null) {
+            queryWrapper.like("e_sex", param.getESex());
         }
-        if (salary != null) {
-            queryWrapper.like("salary", salary);
+        if (param.getSalary() != null) {
+            queryWrapper.like("salary", param.getSalary());
         }
-        if (position != null) {
-            queryWrapper.like("position", position);
+        if (param.getPosition() != null) {
+            queryWrapper.like("position", param.getPosition());
         }
         List<Employee> list = employeeMapper.selectList(queryWrapper);
+        Page<Employee>pages=new Page<Employee>(page,limit);
+        IPage<Employee> employeePage = employeeMapper.selectPage(pages, queryWrapper);
         long count = employeeMapper.selectCount(queryWrapper);
         return DataVO.success(count, list);
     }

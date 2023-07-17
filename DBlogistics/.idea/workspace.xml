@@ -6,15 +6,15 @@
   <component name="ChangeListManager">
     <list default="true" id="acdafa83-e604-4187-ac7d-f09eb9c00dcb" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/system/VO/DataVO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/system/VO/DataVO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/system/controller/EmployeeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/system/controller/EmployeeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/system/pojo/Employee.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/system/pojo/Employee.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/page/cargo.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/page/cargo.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/page/company.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/page/company.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/page/employeeManagement.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/page/employeeManagement.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/system/VO/DataGridView.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/system/VO/DataVO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/system/VO/DataVO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/system/VO/EmployeeVO.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/page/employeeManagement/add.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/page/employeeManagement/add.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/page/machine.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/page/machine.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/page/stash.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/page/stash.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/page/vehicle.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/page/vehicle.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/system/controller/EmployeeController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/system/controller/EmployeeController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/system/pojo/Employee.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/system/pojo/Employee.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/templates/page/employeeManagement.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/page/employeeManagement.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -50,32 +50,32 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;X:/GitHub repository/Practice/DBlogistics&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;项目&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.repository.indices&quot;,
-    &quot;spring.configuration.checksum&quot;: &quot;1d3cd9f52669a56417e2a935f25e10e6&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "X:/Programs/DB Program/warehouse",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "project.structure.last.edited": "项目",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "reference.settings.project.maven.repository.indices",
+    "spring.configuration.checksum": "1d3cd9f52669a56417e2a935f25e10e6",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;mysql&quot;
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mysql"
     ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="E:\GitHub\Practice\DBlogistics\src\main\java\com\system\pojo" />
@@ -125,7 +125,7 @@
       <workItem from="1689498629300" duration="8951000" />
       <workItem from="1689519770099" duration="16208000" />
       <workItem from="1689554254214" duration="22271000" />
-      <workItem from="1689583989748" duration="180000" />
+      <workItem from="1689583989748" duration="3544000" />
     </task>
     <servers />
   </component>

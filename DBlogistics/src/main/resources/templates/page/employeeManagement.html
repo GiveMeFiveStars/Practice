@@ -48,7 +48,7 @@
 							</div>
 							<div class="layui-inline">
 								<button type="submit" class="layui-btn layui-btn-warm"  lay-submit lay-filter="data-search-btn"><i class="layui-icon"></i> 搜 索</button>
-								<button type="reset" class="layui-btn layui-btn-warm"><i class="layui-icon layui-icon-refresh-1"></i>重置</button>
+								<button type="reset" onclick="javascript:document.getElementById('search_deptid').value=''" class="layui-btn layui-btn-warm"><span class="layui-icon layui-icon-refresh-1"></span>重置</button>
 							</div>
 						</div>
 					</form>
@@ -75,6 +75,7 @@
 	</div>
 	<script src="../../static/lib/layui-v2.6.3/layui.js" charset="utf-8"></script>
 	<script th:inline="javascript">
+		var contextPath = [[@{/}]];
 		// 监听表单
 		layui.use(['form', 'table'], function () {
 			var $ = layui.jquery,
@@ -84,7 +85,7 @@
 			table.render({
 				elem: '#currentTableId',
 				// 这里需要修改数据库接口（试水的静态数据在staic的api的table.json下面）
-				url: '/employee/list',
+				url: contextPath + 'employee/list',
 				toolbar: '#toolbarDemo',
 				defaultToolbar: ['filter', 'exports', 'print', {
 					title: '提示',
@@ -116,7 +117,7 @@
 				}
 			});
 
-			// 1.监听搜索的模糊查询
+			//监听搜索的模糊查询
 			form.on('submit(data-search-btn)', function (data) {
 				var result = JSON.stringify(data.field);
 				layer.alert(result, {
@@ -136,7 +137,7 @@
 				// 		layer.msg(response."查询失败",{icon:5,anim:6});
 				// 	}
 				// })
-			
+
 			    //执行搜索重载
 			    table.reload('currentTableId', {
 			        page: {
@@ -146,7 +147,6 @@
 			            searchParams: result
 			        }
 			    }, 'data');
-			
 			    return false;
 			});
 

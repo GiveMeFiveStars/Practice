@@ -70,6 +70,7 @@
 			</div>
 			<script src="../../static/lib/layui-v2.6.3/layui.js" charset="utf-8"></script>
 			<script th:inline="javascript">
+				var contextPath = [[@{/}]];
 				layui.use(['form', 'table'], function () {
 					var $ = layui.jquery,
 						form = layui.form,
@@ -78,7 +79,7 @@
 					table.render({
 						elem: '#currentTableId',
 						// 这里需要修改数据库接口（试水的静态数据在staic的api的table.json下面）
-						url: '../../static/api/table.json',
+						url: contextPath + 'vehicle',
 						//
 						toolbar: '#toolbarDemo',
 						defaultToolbar: ['filter', 'exports', 'print', {
