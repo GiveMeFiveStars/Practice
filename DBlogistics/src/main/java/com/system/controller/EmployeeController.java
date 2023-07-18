@@ -50,10 +50,9 @@ public class EmployeeController {
      */
     @GetMapping("/add")
     public String employeeAdd(Model model){
-//        List<Company> cIdList = companyMapper.selectList(null);
-//        model.addAttribute("cIdList",cIdList);
+        List<Company> cIdList = companyMapper.selectList(null);
+        model.addAttribute("cIdList",cIdList);
         return "page/employeeManagement/add";
-
     }
 
     /**
@@ -68,7 +67,9 @@ public class EmployeeController {
     @ResponseBody
     //实现“增“操作
     public DataVO<Object> insert(Employee param) {
+
         employeeMapper.insert(param);
+
         return DataVO.success("添加成功");
     }
     //实现”查“操作！显示表中所有表项！
@@ -77,16 +78,23 @@ public class EmployeeController {
       return employeeMapper.selectList(null);
     }
     //根据主键删除表项
-    @PostMapping("/deleteByIds")
-    @ResponseBody
-     public DataVO<Object> deleteByIds(List<Integer> idlist){    //传入主键
-         employeeMapper.deleteBatchIds(idlist);
-         return DataVO.success("删除成功");
-    }
 //    @PostMapping("/deleteByIds")
-//    public void deleteByIds(ArrayList<Integer> idlist){    //传入主键
-//        idlist.forEach(System.out::println);
+//    @ResponseBody
+//     public DataVO<Object> deleteByIds(List<Integer> idlist){    //传入主键
+//         employeeMapper.deleteBatchIds(idlist);
+//         return DataVO.success("删除成功");
 //    }
+    @PostMapping("/deleteByIds")
+    public DataVO<Object> deleteByIds(String idlist){    //传入主键
+        List<Integer> list = new ArrayList<>();
+        idlist=idlist.substring(1,idlist.length() - 1);
+        String res[]=idlist.split(",");
+        for(int i=0;i< res.length;i++){
+            list.add(Integer.parseInt(res[i]));
+        }
+        employeeMapper.selectBatchIds(list);
+        return DataVO.success("删除成功");
+    }
     //多条件删除
     @GetMapping("/deleteByMap")
     public void deleteByMap(Integer eId,//插入各个属性

@@ -163,14 +163,14 @@
 						layer.alert('您没有选中任何数据',{icon:2,anim:6,title:"警告"})
 						return false;
 					}
-					// //选中的id
-					// var idArr = new List();
-					// $(data).each(function (){
-					// 	idArr.push(this.eid);
-					// })
+					//选中的id
+					var idArr = new Array();
+					$(data).each(function (){
+						idArr.push(this.eid);
+					})
 					//Json打印选择的数据
-					layer.alert(JSON.stringify(data));	//抛出数据
-					console.log(data);
+					layer.alert(JSON.stringify(idArr));	//抛出数据
+					console.log(idArr);
 					//异步请求删除数据，结果提示
 					// var url = contextPath + "employee/deleteByIds";
 					// $.post(url, idArr ,function(response){

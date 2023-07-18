@@ -5,16 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5639cb69-4aea-4206-8018-6d82caf88ef7" name="更改" comment="u">
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/81ada579-e4bc-48ff-a95c-805e954f68c6.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/81ada579-e4bc-48ff-a95c-805e954f68c6.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/system/controller/EmployeeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/system/controller/EmployeeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/page/employeeManagement.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/page/employeeManagement.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/system/controller/CargoController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/system/controller/CargoController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/system/controller/CompanyController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/system/controller/CompanyController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/page/employeeManagement/add.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/page/employeeManagement/add.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/system/controller/EmployeeController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/system/controller/EmployeeController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/system/controller/MachineController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/system/controller/MachineController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/system/controller/StashController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/system/controller/StashController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/system/controller/VehicleController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/system/controller/VehicleController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/templates/page/employeeManagement.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/page/employeeManagement.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -42,7 +39,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "X:/Programs/DB Program/warehouse",
+    "last_opened_file_path": "E:/DBlogistics",
     "node.js.detected.package.eslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
@@ -68,6 +65,7 @@
       <option name="presentableId" value="Default" />
       <updated>1689649782425</updated>
       <workItem from="1689649783548" duration="9962000" />
+      <workItem from="1689667416193" duration="7325000" />
     </task>
     <servers />
   </component>
