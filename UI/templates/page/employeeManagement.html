@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link rel="stylesheet" href="../../static/lib/layui-v2.6.3/css/layui.css" media="all">
     <link rel="stylesheet" href="../../static/css/public.css" media="all">
+	<script src="../../static/lib/jquery-3.4.1/jquery-3.4.1.min.js" type="text/javascript" charset="utf-8"></script>
 </head>
 <body>
 	<div class="layuimini-container">
@@ -47,7 +48,7 @@
 								</div>
 							</div>
 							<div class="layui-inline">
-								<button type="submit" class="layui-btn layui-btn-warm"  lay-submit lay-filter="data-search-btn"><i class="layui-icon"></i> 搜 索</button>
+								<button type="submit" class="layui-btn layui-btn-normal"  lay-submit lay-filter="data-search-btn"><i class="layui-icon"></i> 搜 索</button>
 								<button type="reset" class="layui-btn layui-btn-warm"><i class="layui-icon layui-icon-refresh-1"></i>重置</button>
 							</div>
 						</div>
@@ -59,6 +60,7 @@
 			<script type="text/html" id="toolbarDemo">
 				<div class="layui-btn-container">
 					<button class="layui-btn layui-btn-normal layui-btn-sm data-add-btn" lay-event="add"><i class="layui-icon layui-icon-add-1"></i>添加 </button>
+					<button class="layui-btn layui-btn-danger layui-btn-sm data-delete-btn" lay-envent="delete"><i class="layui-icon"></i>删除</button>
 				</div>
 			</script>
 
@@ -138,7 +140,7 @@
 						shade: 0.2,
 						maxmin:true,
 						shadeClose: true,
-						area: ['80%', '80%'],
+						area: ['80%', '90%'],
 						content: 'employeeManagement/add.html',
 					});
 					$(window).on("resize", function () {
@@ -161,12 +163,12 @@
 				if (obj.event === 'edit') {
 
 					var index = layer.open({
-						title: '编辑用户',
+						title: '编辑员工',
 						type: 2,
 						shade: 0.2,
 						maxmin:true,
 						shadeClose: true,
-						area: ['80%', '80%'],
+						area: ['80%', '90%'],
 						content: 'employeeManagement/edit.html',
 					});
 					$(window).on("resize", function () {

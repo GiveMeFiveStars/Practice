@@ -6,16 +6,65 @@
   <component name="ChangeListManager">
     <list default="true" id="acdafa83-e604-4187-ac7d-f09eb9c00dcb" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/system/VO/DataVO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/system/VO/DataVO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/system/config/MybatisPlusConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/system/config/MybatisPlusConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/system/controller/CommonController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/system/controller/CommonController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/system/controller/EmployeeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/system/controller/EmployeeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/api/init.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/api/init.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/page/admin/user-password.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/page/admin/user-password.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/page/admin/user-setting.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/page/admin/user-setting.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/page/cargo.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/page/cargo.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/page/company.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/page/company.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/page/companyProfile.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/page/companyProfile.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/page/employeeManagement.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/page/employeeManagement.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/page/employeeManagement/add.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/page/employeeManagement/add.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/page/employeeManagement/edit.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/page/employeeManagement/edit.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/page/machine.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/page/machine.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/page/stash.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/page/stash.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/page/statistics.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/page/statistics.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/page/vehicle.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/page/vehicle.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/welcome.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/system/VO/DataVO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/system/VO/DataVO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/system/config/MybatisPlusConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/system/config/MybatisPlusConfig.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/system/controller/CommonController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/system/controller/CommonController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/system/controller/EmployeeController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/system/controller/EmployeeController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/api/init.json" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/api/init.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/templates/page/admin/user-password.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/page/admin/user-password.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/templates/page/admin/user-setting.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/page/admin/user-setting.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/templates/page/cargo.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/page/cargo.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/templates/page/company.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/page/company.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/templates/page/companyProfile.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/page/companyProfile.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/templates/page/employeeManagement.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/page/employeeManagement.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/templates/page/employeeManagement/add.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/page/employeeManagement/add.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/templates/page/employeeManagement/edit.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/page/employeeManagement/edit.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/templates/page/machine.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/page/machine.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/templates/page/stash.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/page/stash.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/templates/page/statistics.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/page/statistics.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/templates/page/vehicle.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/page/vehicle.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/templates/welcome.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UI/static/login-1.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UI/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../UI/templates/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UI/templates/page/cargo.html" beforeDir="false" afterPath="$PROJECT_DIR$/../UI/templates/page/cargo.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UI/templates/page/company.html" beforeDir="false" afterPath="$PROJECT_DIR$/../UI/templates/page/company.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UI/templates/page/companyProfile.html" beforeDir="false" afterPath="$PROJECT_DIR$/../UI/templates/page/companyProfile.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UI/templates/page/employeeManagement.html" beforeDir="false" afterPath="$PROJECT_DIR$/../UI/templates/page/employeeManagement.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UI/templates/page/employeeManagement/add.html" beforeDir="false" afterPath="$PROJECT_DIR$/../UI/templates/page/employeeManagement/add.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UI/templates/page/employeeManagement/edit.html" beforeDir="false" afterPath="$PROJECT_DIR$/../UI/templates/page/employeeManagement/edit.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UI/templates/page/machine.html" beforeDir="false" afterPath="$PROJECT_DIR$/../UI/templates/page/machine.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UI/templates/page/stash.html" beforeDir="false" afterPath="$PROJECT_DIR$/../UI/templates/page/stash.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UI/templates/page/statistics.html" beforeDir="false" afterPath="$PROJECT_DIR$/../UI/templates/page/statistics.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UI/templates/page/vehicle.html" beforeDir="false" afterPath="$PROJECT_DIR$/../UI/templates/page/vehicle.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UI/templates/page/welcome.html" beforeDir="false" afterPath="$PROJECT_DIR$/../UI/templates/page/welcome.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../logistics.sql" beforeDir="false" afterPath="$PROJECT_DIR$/../logistics.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../备份/DBlogistics-SpringBoot-7.14/.idea/mybatisx/templates.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../备份/DBlogistics-SpringBoot-7.14/.idea/mybatisx/templates.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../备份/DBlogistics-SpringBoot-7.14/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../备份/DBlogistics-SpringBoot-7.14/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../备份/DBlogistics-SpringBoot-7.14/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../备份/DBlogistics-SpringBoot-7.14/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../备份/DBlogistics-SpringBoot-7.14/target/classes/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../备份/DBlogistics-SpringBoot-7.14/target/classes/application.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,7 +108,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "X:/Programs/DB Program/warehouse",
+    "last_opened_file_path": "X:/GitHub repository/Practice/备份/DBlogistics-SpringBoot-7.14",
     "node.js.detected.package.eslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
@@ -125,7 +174,8 @@
       <workItem from="1689498629300" duration="8951000" />
       <workItem from="1689519770099" duration="16208000" />
       <workItem from="1689554254214" duration="22271000" />
-      <workItem from="1689583989748" duration="3544000" />
+      <workItem from="1689583989748" duration="17909000" />
+      <workItem from="1689640693668" duration="8709000" />
     </task>
     <servers />
   </component>
@@ -133,6 +183,14 @@
     <option name="version" value="3" />
   </component>
   <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="org.thymeleaf.exceptions.TemplateProcessingException" package="org.thymeleaf.exceptions" />
+          <option name="timeStamp" value="1" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
     <pin-to-top-manager>
       <pinned-members>
         <PinnedItemInfo parentTag="jdk.proxy3.$Proxy75" memberName="h" />

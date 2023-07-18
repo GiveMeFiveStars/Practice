@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="../static/css/layuimini.css?v=2.0.4.2" media="all">
     <link rel="stylesheet" href="../static/css/themes/default.css" media="all">
     <link rel="stylesheet" href="../static/lib/font-awesome-4.7.0/css/font-awesome.min.css" media="all">
+	
     <!--[if lt IE 9]>
     <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
     <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
@@ -46,7 +47,7 @@
 					</li>
 					
 					<li class="layui-nav-item layuimini-setting">
-						<a href="javascript:;"><span th:text="${session.userinfo.getAName()}"></span></a>
+						<a href="javascript:;">admin</a>
 						<dl class="layui-nav-child">
 							<dd>
 								<a href="javascript:;" layuimini-content-href="page/admin/user-setting.html" data-title="基本资料" data-icon="fa fa-gears">基本资料<span class="layui-badge-dot"></span></a>
@@ -149,8 +150,8 @@
 			});
 
 			$('.login-out').on("click", function () {
-				layer.msg('退出登录成功', {time: 1000},function () {
-					window.location = contextPath + 'login/loginOut';
+				layer.msg('退出登录成功', function () {
+					window.location = 'login';
 				});
 			});
 		});

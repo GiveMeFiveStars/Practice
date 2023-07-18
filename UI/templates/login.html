@@ -17,11 +17,11 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<!--  -->
-	<link href="css/login/default.css" rel="stylesheet" type="text/css" />
+	<link href="../static/css/login/default.css" rel="stylesheet" type="text/css" />
 	<!--必要样式-->
-	<link href="css/login/styles.css" rel="stylesheet" type="text/css" />
-	<link href="css/login/demo.css" rel="stylesheet" type="text/css" />
-	<link href="css/login/loaders.css" rel="stylesheet" type="text/css" />
+	<link href="../static/css/login/styles.css" rel="stylesheet" type="text/css" />
+	<link href="../static/css/login/demo.css" rel="stylesheet" type="text/css" />
+	<link href="../static/css/login/loaders.css" rel="stylesheet" type="text/css" />
 	<!--  -->
     <!--[if lt IE 9]>
     <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
@@ -57,7 +57,7 @@
 	                    <div class='login_fields__user'>
 							<!-- 用户名前面的小图标 -->
 	                        <div class='icon'>
-	                            <img alt="" src='images/login/user_icon_copy.png'>
+	                            <img alt="" src='../static/images/login/user_icon_copy.png'>
 	                        </div>
 							<!-- 用户名输入框 -->
 	                        <div class="layui-input-inline">
@@ -70,7 +70,7 @@
 	                    <div class='login_fields__password'>
 							<!-- 密码前面的小图标 -->
 	                        <div class='icon'>
-	                            <img alt="" src='images/login/lock_icon_copy.png'>
+	                            <img alt="" src='../static/images/login/lock_icon_copy.png'>
 	                        </div>
 							<!-- 密码输入框 -->
 	                        <div class="layui-input-inline">
@@ -96,18 +96,18 @@
 	    </div>
 	</div>
 	
-	<script type="text/javascript" src="js/login/jquery.min.js"></script>
-	<script type="text/javascript" src="js/login/jquery-ui.min.js"></script>
-	<script type="text/javascript" src='js/login/stopExecutionOnTimeout.js?t=1'></script>
-	<script type="text/javascript" src="js/login/Particleground.js"></script>
-	<script type="text/javascript" src="js/login/Treatment.js"></script>
-	<script src="js/login/jquery.cookie.js"></script>
-	<script src="js/login/nginx.js"></script>
-	<script src="js/login/login.js"></script>
+	<script type="text/javascript" src="../static/js/login/jquery.min.js"></script>
+	<script type="text/javascript" src="../static/js/login/jquery-ui.min.js"></script>
+	<script type="text/javascript" src='../static/js/login/stopExecutionOnTimeout.js?t=1'></script>
+	<script type="text/javascript" src="../static/js/login/Particleground.js"></script>
+	<script type="text/javascript" src="../static/js/login/Treatment.js"></script>
+	<script src="../static/js/login/jquery.cookie.js"></script>
+	<script src="../static/js/login/nginx.js"></script>
+	<script src="../static/js/login/login.js"></script>
 	
-	<script src="lib/jquery-3.4.1/jquery-3.4.1.min.js" charset="utf-8"></script>
-	<script src="lib/layui-v2.6.3/layui.js" charset="utf-8"></script>
-	<script src="lib/jq-module/jquery.particleground.min.js" charset="utf-8"></script>
+	<script src="../static/lib/jquery-3.4.1/jquery-3.4.1.min.js" charset="utf-8"></script>
+	<script src="../static/lib/layui-v2.6.3/layui.js" charset="utf-8"></script>
+	<script src="../static/lib/jq-module/jquery.particleground.min.js" charset="utf-8"></script>
 	<script>
 		layui.use(['form'], function () {
 			var form = layui.form,
@@ -167,7 +167,7 @@
 				// 	return false;
 				// }
 				layer.msg('登录成功', function () {
-					window.location = '../index.html';
+					window.location = 'index.html';
 				});
 				return false;
 			});

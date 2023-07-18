@@ -6,44 +6,69 @@ import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.system.VO.DataVO;
+import com.system.mapper.CompanyMapper;
 import com.system.mapper.EmployeeMapper;
+import com.system.pojo.Company;
 import com.system.pojo.Employee;
+import com.system.service.CompanyService;
 import com.system.service.EmployeeService;
 import org.apache.commons.lang3.StringEscapeUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
 import java.util.*;
 
 
-@RestController
+@Controller
 @RequestMapping("/employee")
 public class EmployeeController {
     @Autowired
     //创建EmployeeMapper对象，对数据库进行操作！
     EmployeeMapper employeeMapper;
-
     @Autowired
-    //创建EmployeeMapper对象，对数据库进行操作！
     EmployeeService employeeService;
-    @GetMapping("/insert")
+    @Autowired
+    //创建EmployeeService对象，对数据库进行操作！
+    CompanyMapper companyMapper;
+
+    /**
+     * 员工管理界面转发
+     * @return
+     */
+    @GetMapping("")
+    public String employeeManagement(){
+        return "page/employeeManagement";
+    }
+    /**
+     * 员工信息添加
+     * @return
+     */
+    @GetMapping("/add")
+    public String employeeAdd(Model model){
+//        List<Company> cIdList = companyMapper.selectList(null);
+//        model.addAttribute("cIdList",cIdList);
+        return "page/employeeManagement/add";
+
+    }
+
+    /**
+     * 员工信息编辑界面转发
+     * @return
+     */
+    @GetMapping("/edit")
+    public String employeeEdit(){
+        return "page/employeeManagement/edit";
+    }
+    @RequestMapping("/add/insert")
+    @ResponseBody
     //实现“增“操作
-    public String insert(Integer eId,//插入各个属性
-                         Integer cId,
-                         String  eName,
-                         Long  ePhone,
-                         String  eSex,
-                         BigDecimal salary,
-                         String position) {
-        return employeeMapper.insert(new Employee(eId,
-                cId,
-                eName,
-                ePhone,
-                eSex,
-                salary,
-                position))>0?"successful":"failed";  //正则表达式判断是否插入元素成功
+    public DataVO<Object> insert(Employee param) {
+        employeeMapper.insert(param);
+        return DataVO.success("添加成功");
     }
     //实现”查“操作！显示表中所有表项！
     @GetMapping("/select1")
@@ -131,7 +156,7 @@ public class EmployeeController {
     @Transactional
     public DataVO<Object> listAll(int page,int limit){
 
-        QueryWrapper<Employee> queryWrapper = new QueryWrapper<Employee>();
+        QueryWrapper<Employee> queryWrapper = new QueryWrapper<>();
         //分页查询Employee信息
         Page<Employee>pages=new Page<Employee>(page,limit);
         IPage<Employee> employeePage = employeeMapper.selectPage(pages, queryWrapper);
@@ -142,7 +167,7 @@ public class EmployeeController {
     @GetMapping("/selectBy")
     @ResponseBody
     @Transactional
-    public DataVO<Object> select(Employee param,int page,int limit) {
+    public DataVO<Object> select(int page,int limit,Employee param) {
         QueryWrapper<Employee> queryWrapper = new QueryWrapper<>();
         if (param.getEId() != null) {
             queryWrapper.like("e_id", param.getEId());
@@ -165,10 +190,10 @@ public class EmployeeController {
         if (param.getPosition() != null) {
             queryWrapper.like("position", param.getPosition());
         }
-        List<Employee> list = employeeMapper.selectList(queryWrapper);
-        Page<Employee>pages=new Page<Employee>(page,limit);
+        Page<Employee> pages = new Page<Employee>(page,limit);
         IPage<Employee> employeePage = employeeMapper.selectPage(pages, queryWrapper);
         long count = employeeMapper.selectCount(queryWrapper);
+        List<Employee> list = employeePage.getRecords();
         return DataVO.success(count, list);
     }
 }

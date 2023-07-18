@@ -39,7 +39,8 @@
 											</div>
 											
 											<div class="layui-inline">
-												<button type="submit" class="layui-btn layui-btn-primary"  lay-submit lay-filter="data-search-btn"><i class="layui-icon"></i> 搜 索</button>
+												<button type="submit" class="layui-btn layui-btn-normal"  lay-submit lay-filter="data-search-btn"><i class="layui-icon"></i> 搜 索</button>
+												<button type="reset" class="layui-btn layui-btn-warm"><i class="layui-icon layui-icon-refresh-1"></i>重置</button>
 											</div>
 										</div>
 									</form>
@@ -48,15 +49,15 @@
 				
 							<script type="text/html" id="toolbarDemo">
 								<div class="layui-btn-container">
-									<button class="layui-btn layui-btn-normal layui-btn-sm data-add-btn" lay-event="add"> 添加 </button>
-									<button class="layui-btn layui-btn-sm layui-btn-danger data-delete-btn" lay-event="delete"> 删除 </button>
+									<button class="layui-btn layui-btn-normal layui-btn-sm data-add-btn" lay-event="add"><i class="layui-icon layui-icon-add-1"></i>租新仓库 </button>
+									<button class="layui-btn layui-btn-danger layui-btn-sm data-delete-btn" lay-envent="delete"><i class="layui-icon"></i>删除</button>
 								</div>
 							</script>
 				
 							<table class="layui-hide" id="currentTableId" lay-filter="currentTableFilter"></table>
 				
 							<script type="text/html" id="currentTableBar">
-								<a class="layui-btn layui-btn-normal layui-btn-xs data-count-edit" lay-event="edit">编辑</a>
+								<a class="layui-btn layui-btn-normal layui-btn-xs data-count-edit" lay-event="edit">修改仓库信息</a>
 								<a class="layui-btn layui-btn-xs layui-btn-danger data-count-delete" lay-event="delete">删除</a>
 							</script>
 				
@@ -129,8 +130,8 @@
 										shade: 0.2,
 										maxmin:true,
 										shadeClose: true,
-										area: ['100%', '100%'],
-										content: 'employeeManagement/add.html',
+										area: ['80%', '90%'],
+										content: 'stash/add.html',
 									});
 									$(window).on("resize", function () {
 										layer.full(index);
@@ -157,8 +158,8 @@
 										shade: 0.2,
 										maxmin:true,
 										shadeClose: true,
-										area: ['100%', '100%'],
-										content: 'employeeManagement/edit.html',
+										area: ['80%', '90%'],
+										content: 'stash/edit.html',
 									});
 									$(window).on("resize", function () {
 										layer.full(index);

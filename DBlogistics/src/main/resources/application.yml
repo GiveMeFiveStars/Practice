@@ -18,7 +18,7 @@ spring:
     maxWait: 60000
     timeBetweenEvictionRunsMillis: 60000
     minEvictableIdleTimeMillis: 300000
-    validationQuery: SELECT SELECT 'x'
+    validationQuery: SELECT 1 FROM DUAL
     testWhileIdle: true
     testOnBorrow: false
     testOnReturn: false
@@ -53,7 +53,6 @@ mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
     map-underscore-to-camel-case:  true #驼峰转换
-    aggressive-lazy-loading: true
 
 
 shiro:

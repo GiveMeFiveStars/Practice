@@ -23,7 +23,7 @@
           "child": [
             {
               "title": "员工管理",
-              "href": "/employeeManagement",
+              "href": "/employee",
               "icon": "fa fa-male",
               "target": "_self"
             },
@@ -35,7 +35,7 @@
             }
           ]
         },
-
+        
         {
           "title": "车辆管理",
           "href": "/vehicle",

@@ -28,14 +28,17 @@ public class DataVO<T> {
         this.data = data;
     }
 
-    //登陆成功返回信息
+    //操作成功返回信息
     public static DataVO<Object> success(){
         return new DataVO(0,OK_MSG, (Object) null,null);
+    }
+    public static DataVO<Object> success(String msg){
+        return new DataVO(0,msg, (Object) null,null);
     }
     public static DataVO<Object> success(Long count,Object data){
         return new DataVO(0,"OK_MSG",count,data);
     }
-    //登录失败返回信息
+    //操作失败返回信息
     public static DataVO<Object> fail(){
         return new DataVO(-1,FAIL_MSG, (Object) null,null);
     }

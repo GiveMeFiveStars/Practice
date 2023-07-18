@@ -28,7 +28,7 @@ public class CommonController {
      */
     @GetMapping("/welcome")
     public String welcome(){
-        return "welcome";
+        return "page/welcome";
     }
 
     /**
@@ -65,15 +65,6 @@ public class CommonController {
     @GetMapping("/machine")
     public String machine(){
         return "page/machine";
-    }
-
-    /**
-     * 员工管理界面转发
-     * @return
-     */
-    @GetMapping("/employeeManagement")
-    public String employeeManagement(){
-        return "page/employeeManagement";
     }
 
     /**
@@ -121,21 +112,5 @@ public class CommonController {
         return "page/admin/user-setting";
     }
 
-    /**
-     * 员工信息添加界面转发
-     * @return
-     */
-    @GetMapping("/employeeAdd")
-    public String employeeAdd(){
-        return "page/employeeManagement/add";
-    }
 
-    /**
-     * 员工信息编辑界面转发
-     * @return
-     */
-    @GetMapping("/employeeEdit")
-    public String employeeEdit(){
-        return "page/employeeManagement/edit";
-    }
 }

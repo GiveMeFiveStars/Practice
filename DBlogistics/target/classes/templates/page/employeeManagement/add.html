@@ -21,36 +21,46 @@
 			<div class="layui-form-item">
 				<label class="layui-form-label required">员工ID</label>
 				<div class="layui-input-inline">
-					<input type="text" name="e_id" lay-verify="required" lay-reqtext="员工ID不能为空" placeholder="请输入员工ID" value="" class="layui-input">
+					<input type="text" name="eId" lay-verify="required" lay-reqtext="员工ID不能为空" placeholder="请输入员工ID" value="" class="layui-input">
 				</div>
 			</div>
 			<!-- 公司代号 -->
 			<div class="layui-form-item">
-				<label class="layui-form-label required">公司代号</label>
-				<div class="layui-input-inline">
-					<input type="text" name="e_id" lay-verify="required" lay-reqtext="公司代号不能为空" placeholder="请输入公司代号" value="" class="layui-input">
-				</div>
+				<label class="layui-form-label">公司代号</label>
+					<div class="layui-input-inline">
+						<select name="cId" lay-verify="" lay-search>
+							<option value ="">请选择一个公司代号</option>
+							<!-- 可以自己设置 -->
+							<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+							<option value="4">4</option>
+							<option value="5">5</option>
+							<option value="6">6</option>
+							<option value="7">7</option>
+						</select>
+					</div>
 			</div>
 			<!-- 员工姓名 -->
 			<div class="layui-form-item">
 				<label class="layui-form-label required">员工姓名</label>
 				<div class="layui-input-inline">
-					<input type="text" name="e_name" lay-verify="required" lay-reqtext="员工姓名不能为空" placeholder="请输入员工姓名" value="" class="layui-input">
+					<input type="text" name="eName" lay-verify="required" lay-reqtext="员工姓名不能为空" placeholder="请输入员工姓名" value="" class="layui-input">
 				</div>
 			</div>
 			<!-- 个人电话 -->
 			<div class="layui-form-item">
 				<label class="layui-form-label required">个人电话</label>
 				<div class="layui-input-block">
-					<input type="number" name="e_phone" lay-verify="required" lay-reqtext="手机不能为空" placeholder="请输入手机" value="" class="layui-input">
+					<input type="number" name="ePhone" lay-verify="required" lay-reqtext="手机不能为空" placeholder="请输入手机" value="" class="layui-input">
 				</div>
 			</div>
 			<!--  性别-->
 			<div class="layui-form-item">
 				<label class="layui-form-label required">性别</label>
 				<div class="layui-input-block">
-					<input type="radio" name="sex" value="男" title="男" checked="">
-					<input type="radio" name="sex" value="女" title="女">
+					<input type="radio" name="eSex" value="男" title="男" checked="">
+					<input type="radio" name="eSex" value="女" title="女">
 				</div>
 			</div>
 			<!-- 工资 -->
@@ -62,16 +72,10 @@
 			</div>
 			<!-- 职位 -->
 			<div class="layui-form-item">
-				<label class="layui-form-label">职位</label>
-					<div class="layui-input-inline">
-						<select name="city" lay-verify="" lay-search>
-							<option value ="">请选择</option>
-							<!-- 可以自己设置 -->
-							<option value="010">成功人士</option>
-							<option value="021">打工人</option>
-							<option value="0571">百万富翁</option>
-						</select>
-					</div>
+				<label class="layui-form-label required">职位</label>
+				<div class="layui-input-block">
+					<input type="String" name="position" lay-verify="required" lay-reqtext="职位不能为空" placeholder="请输入职位" value="" class="layui-input">
+				</div>
 			</div>
 			<!--  -->
 			<div class="layui-form-item">
@@ -83,6 +87,7 @@
 	</div>
 	<script src="../../../static/lib/layui-v2.6.3/layui.js" charset="utf-8"></script>
 	<script th:inline="javascript">
+		var contextPath = [[@{/}]];
 		layui.use(['form'], function () {
 			var form = layui.form,
 				layer = layui.layer,
@@ -90,21 +95,31 @@
 
 			//监听提交
 			form.on('submit(saveBtn)', function (data) {
-				var index = layer.alert(JSON.stringify(data.field), {
-					title: '最终的提交信息'
-				}, function () {
-
-					// 关闭弹出层
-					layer.close(index);
-
-					var iframeIndex = parent.layer.getFrameIndex(window.name);
-					parent.layer.close(iframeIndex);
-
+				var url = contextPath + "employee/add/insert"
+				console.log(data.field)//当前容器所有表单字段
+				//异步请求提交数据
+				$.post(url, data.field,function(response){
+					if(response.code == 0){
+						//成功提示
+						layer.msg(response.msg,{
+							icon:1,
+							time:1000
+						},function (){
+							// 关闭弹出层
+							var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层索引
+							parent.layer.close(index);//执行关闭
+						})
+					}else {
+						//失败则提示错误信息，窗口不关闭
+						layer.msg(response.msg, {
+							icon: 2,
+							anim: 6,
+							time: 2000
+						});
+					}
 				});
-
 				return false;
 			});
-
 		});
 	</script>
 </body>

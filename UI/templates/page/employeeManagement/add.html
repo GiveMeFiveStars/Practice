@@ -26,10 +26,20 @@
 			</div>
 			<!-- 公司代号 -->
 			<div class="layui-form-item">
-				<label class="layui-form-label required">公司代号</label>
-				<div class="layui-input-inline">
-					<input type="text" name="e_id" lay-verify="required" lay-reqtext="公司代号不能为空" placeholder="请输入公司代号" value="" class="layui-input">
-				</div>
+				<label class="layui-form-label">公司代号</label>
+					<div class="layui-input-inline">
+						<select name="c_id" lay-verify="" lay-search>
+							<option value ="">请选择一个公司代号</option>
+							<!-- 可以自己设置 -->
+							<option value="1">1_中通快递</option>
+							<option value="2">2_韵达快递</option>
+							<option value="3">3_申通快递</option>
+							<option value="4">4_德邦</option>
+							<option value="5">5_圆通快递</option>
+							<option value="6">6_百世</option>
+							<option value="7">7_轩然公司</option>
+						</select>
+					</div>
 			</div>
 			<!-- 员工姓名 -->
 			<div class="layui-form-item">
@@ -62,17 +72,18 @@
 			</div>
 			<!-- 职位 -->
 			<div class="layui-form-item">
-				<label class="layui-form-label">职位</label>
-					<div class="layui-input-inline">
-						<select name="city" lay-verify="" lay-search>
-							<option value ="">请选择</option>
-							<!-- 可以自己设置 -->
-							<option value="010">成功人士</option>
-							<option value="021">打工人</option>
-							<option value="0571">百万富翁</option>
-						</select>
-					</div>
+				<label class="layui-form-label required">职位</label>
+				<div class="layui-input-block">
+					<input type="number" name="position" lay-verify="required" lay-reqtext="职位不能为空" placeholder="请输入工资" value="" class="layui-input">
+				</div>
 			</div>
+			<!--  -->
+			<div class="layui-form-item">
+				<div class="layui-input-block">
+					<button class="layui-btn layui-btn-normal" lay-submit lay-filter="saveBtn">确认保存</button>
+				</div>
+			</div>
+			<!--  -->
 	</div>
 	<script src="../../../static/lib/layui-v2.6.3/layui.js" charset="utf-8"></script>
 	<script>
