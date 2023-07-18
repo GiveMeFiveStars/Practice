@@ -77,58 +77,23 @@ public class EmployeeController {
     public List<Employee> select1(){
       return employeeMapper.selectList(null);
     }
-    //根据主键删除表项
-//    @PostMapping("/deleteByIds")
-//    @ResponseBody
-//     public DataVO<Object> deleteByIds(List<Integer> idlist){    //传入主键
-//         employeeMapper.deleteBatchIds(idlist);
-//         return DataVO.success("删除成功");
-//    }
-    @PostMapping("/deleteByIds")
-    public DataVO<Object> deleteByIds(String idlist){    //传入主键
+    /**
+     * 根据主键删除表项
+     */
+    @DeleteMapping("/{ids}")
+    @ResponseBody
+    public DataVO<Object> deleteByIds(@PathVariable("ids") String ids){    //传入主键
         List<Integer> list = new ArrayList<>();
-        idlist=idlist.substring(1,idlist.length() - 1);
-        String res[]=idlist.split(",");
+        String res[]=ids.split(",");
         for(int i=0;i< res.length;i++){
             list.add(Integer.parseInt(res[i]));
         }
-        employeeMapper.selectBatchIds(list);
-        return DataVO.success("删除成功");
-    }
-    //多条件删除
-    @GetMapping("/deleteByMap")
-    public void deleteByMap(Integer eId,//插入各个属性
-                            Integer cId,
-                            String  eName,
-                            Long  ePhone,
-                            String  eSex,
-                            BigDecimal salary,
-                            String position) {
-        Map<String, Object> map = new HashMap<>();
-        //依次判断各属性值是否为空值
-        if (eId != null) {
-            map.put("e_id", eId);  //注意！:map的key是数据表的列名
+        int result = this.employeeMapper.deleteBatchIds(list);
+        if(result > 0){
+            return DataVO.success("删除成功");
+        }else{
+            return DataVO.fail("删除失败,未查到该数据");
         }
-        if (cId != null) {
-            map.put("c_id", cId);
-        }
-        if (eName != null) {
-            map.put("e_name", eName);
-        }
-        if (ePhone != null) {
-            map.put("e_phone", ePhone);
-        }
-        if (eSex != null) {
-            map.put("e_sex", eSex);
-        }
-        if (salary != null) {
-            map.put("salary", salary);
-        }
-        if (position != null) {
-            map.put("position", position);
-        }
-        //删除满足条件的表项
-        employeeMapper.deleteByMap(map);
     }
     //改操作！
     @GetMapping("/update")

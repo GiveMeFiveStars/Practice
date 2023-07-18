@@ -157,48 +157,50 @@
 					});
 				} else if (obj.event === 'delete') {  // 监听删除操作
 					var checkStatus = table.checkStatus('currentTableId')
-							,data = checkStatus.data;
+							, data = checkStatus.data;
 					//如果没有选中任何数据
-					if(checkStatus.data.length == 0){
-						layer.alert('您没有选中任何数据',{icon:2,anim:6,title:"警告"})
+					if (checkStatus.data.length == 0) {
+						layer.alert('您没有选中任何数据', {icon: 2, anim: 6, title: "警告"})
 						return false;
 					}
 					//选中的id
 					var idArr = new Array();
-					$(data).each(function (){
+					$(data).each(function () {
 						idArr.push(this.eid);
 					})
-					//Json打印选择的数据
-					layer.alert(JSON.stringify(idArr));	//抛出数据
-					console.log(idArr);
-					//异步请求删除数据，结果提示
-					// var url = contextPath + "employee/deleteByIds";
-					// $.post(url, idArr ,function(response){
-					// 	if(response.code === 0){
-					// 		//成功提示
-					// 		layer.msg(response.msg,{
-					// 			icon:1,
-					// 			time:1000
-					// 		},function (){
-					// 			// 关闭弹出层
-					// 			var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层索引
-					// 			parent.layer.close(index);//执行关闭
-					// 		})
-					// 	}else {
-					// 		//失败则提示错误信息，同时关闭窗口
-					// 		layer.msg(response.msg, {
-					// 			icon: 2,
-					// 			anim: 6,
-					// 			time: 2000
-					// 		},function (){
-					// 			// 关闭弹出层
-					// 			var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层索引
-					// 			parent.layer.close(index);//执行关闭
-					// 		});
-					// 	}
-					// });
-					// return false;
-
+					// Json打印选择的数据
+					// layer.alert(JSON.stringify(idArr));	//抛出数据
+					// console.log(idArr);
+					// 异步请求删除数据，结果提示
+					layer.confirm('您确认删除选中记录？',{icon:3,title:'删除确认'},function (index){
+						var url = contextPath + "employee/"+idArr.join(",");
+						var params ={_method:"DELETE"}
+						$.post(url, params ,function(response){
+							if(response.code === 0){
+								//成功提示
+								layer.msg(response.msg,{
+									icon:1,
+									time:1000
+								},function (){
+									// 关闭弹出层
+									var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层索引
+									parent.layer.close(index);//执行关闭
+								})
+							}else {
+								//失败则提示错误信息，同时关闭窗口
+								layer.msg(response.msg, {
+									icon: 2,
+									anim: 6,
+									time: 2000
+								},function (){
+									// 关闭弹出层
+									var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层索引
+									parent.layer.close(index);//执行关闭
+								});
+							}
+						});
+						return false;
+					})
 				}
 			});
 
