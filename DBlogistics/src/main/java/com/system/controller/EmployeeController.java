@@ -19,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.xml.transform.Result;
 import java.lang.reflect.Array;
 import java.math.BigDecimal;
 import java.util.*;
@@ -30,8 +31,6 @@ public class EmployeeController {
     @Autowired
     //创建EmployeeMapper对象，对数据库进行操作！
     EmployeeMapper employeeMapper;
-    @Autowired
-    EmployeeService employeeService;
     @Autowired
     //创建EmployeeService对象，对数据库进行操作！
     CompanyMapper companyMapper;
@@ -45,10 +44,11 @@ public class EmployeeController {
         return "page/employeeManagement";
     }
     /**
-     * 员工信息添加
+     * 员工信息添加界面转发
      * @return
      */
     @GetMapping("/add")
+    @Transactional
     public String employeeAdd(Model model){
         List<Company> cIdList = companyMapper.selectList(null);
         model.addAttribute("cIdList",cIdList);
@@ -59,17 +59,46 @@ public class EmployeeController {
      * 员工信息编辑界面转发
      * @return
      */
-    @GetMapping("/edit")
-    public String employeeEdit(){
+    @GetMapping("/edit/{id}")
+    public String getEmployeeById(@PathVariable("id")String id,Model model){
+        Employee employee = employeeMapper.selectById(id);
+        model.addAttribute("employee",employee);
+        model.addAttribute("cIdList",companyMapper.selectList(null));
         return "page/employeeManagement/edit";
     }
+    @PostMapping  ("")
+    @ResponseBody
+    public DataVO<Object> updateEmployee(Employee employee){
+        UpdateWrapper<Employee> wrapper = new UpdateWrapper<>();
+        //根据主键进行查询修改，主键不能为空！
+        wrapper.eq("e_id", employee.getEId());
+        //传入不为空的元素更改！
+        if (employee.getCId() != null) {
+            wrapper.set("c_id", employee.getCId());
+        }
+        if (employee.getEName() != null) {
+            wrapper.set("e_name", employee.getEName());
+        }
+        if (employee.getEPhone() != null) {
+            wrapper.set("e_phone", employee.getEPhone());
+        }
+        if (employee.getESex() != null) {
+            wrapper.set("e_sex", employee.getESex());
+        }
+        if (employee.getSalary() != null) {
+            wrapper.set("salary", employee.getSalary());
+        }
+        if (employee.getPosition()!= null) {
+            wrapper.set("position", employee.getPosition());
+        }
+        employeeMapper.update(null, wrapper);
+        return DataVO.success("员工信息修改成功!");
+}
     @RequestMapping("/add/insert")
     @ResponseBody
     //实现“增“操作
     public DataVO<Object> insert(Employee param) {
-
         employeeMapper.insert(param);
-
         return DataVO.success("添加成功");
     }
     //实现”查“操作！显示表中所有表项！
@@ -80,8 +109,9 @@ public class EmployeeController {
     /**
      * 根据主键删除表项
      */
-    @DeleteMapping("/{ids}")
+    @DeleteMapping("/delete/{ids}")
     @ResponseBody
+    @Transactional
     public DataVO<Object> deleteByIds(@PathVariable("ids") String ids){    //传入主键
         List<Integer> list = new ArrayList<>();
         String res[]=ids.split(",");
@@ -95,7 +125,11 @@ public class EmployeeController {
             return DataVO.fail("删除失败,未查到该数据");
         }
     }
-    //改操作！
+<<<<<<< HEAD
+    /**
+     * 编辑操作更新数据库！
+     */
+
     @GetMapping("/update")
     public void update(Integer eId, //插入各个属性
                        Integer cId,
@@ -131,6 +165,8 @@ public class EmployeeController {
         }
         employeeMapper.update(null, wrapper);
     }
+=======
+>>>>>>> 50305ea5c4d08c694205dac4a73538b3fd94f7ed
     @GetMapping("/list")
     @ResponseBody
     @Transactional
@@ -144,6 +180,13 @@ public class EmployeeController {
         return DataVO.success(employeePage.getTotal(),list);
     }
 
+    /**
+     * 选择查询所有记录
+     * @param page
+     * @param limit
+     * @param param
+     * @return
+     */
     @GetMapping("/selectBy")
     @ResponseBody
     @Transactional

@@ -36,7 +36,7 @@ public class DataVO<T> {
         return new DataVO(0,msg, (Object) null,null);
     }
     public static DataVO<Object> success(Long count,Object data){
-        return new DataVO(0,"OK_MSG",count,data);
+        return new DataVO(0,OK_MSG,count,data);
     }
     //操作失败返回信息
     public static DataVO<Object> fail(){

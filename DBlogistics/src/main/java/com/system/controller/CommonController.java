@@ -23,7 +23,7 @@ public class CommonController {
     }
 
     /**
-     * 首页界面转发
+     * 欢迎界面转发
      * @return
      */
     @GetMapping("/welcome")
@@ -74,15 +74,6 @@ public class CommonController {
     @GetMapping("/companyProfile")
     public String companyProfile(){
         return "page/companyProfile";
-    }
-
-    /**
-     * 合作公司界面转发
-     * @return
-     */
-    @GetMapping("/company")
-    public String company(){
-        return "page/company";
     }
 
     /**

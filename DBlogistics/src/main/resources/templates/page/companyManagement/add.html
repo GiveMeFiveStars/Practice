@@ -21,7 +21,7 @@
 			<div class="layui-form-item">
 				<label class="layui-form-label required">公司ID</label>
 				<div class="layui-input-inline">
-					<input type="number" name="c_id" lay-verify="required" lay-reqtext="公司ID不能为空" placeholder="请输入公司ID" value="" class="layui-input">
+					<input type="number" name="cId" lay-verify="required" lay-reqtext="公司ID不能为空" placeholder="请输入公司ID" value="" class="layui-input">
 				</div>
 			</div>
 			
@@ -29,21 +29,21 @@
 			<div class="layui-form-item">
 				<label class="layui-form-label required">公司名称</label>
 				<div class="layui-input-inline">
-					<input type="text" name="c_name" lay-verify="required" lay-reqtext="公司名称不能为空" placeholder="请输入公司名称" value="" class="layui-input">
+					<input type="text" name="cName" lay-verify="required" lay-reqtext="公司名称不能为空" placeholder="请输入公司名称" value="" class="layui-input">
 				</div>
 			</div>
 			<!--  法定代表人-->
 			<div class="layui-form-item">
 				<label class="layui-form-label required">法定代表人</label>
 				<div class="layui-input-block">
-					<input type="text" name="representative_name" lay-verify="required" lay-reqtext="法定代表人不能为空" placeholder="请输入法定代表人" value="" class="layui-input">
+					<input type="text" name="representativeName" lay-verify="required" lay-reqtext="法定代表人不能为空" placeholder="请输入法定代表人" value="" class="layui-input">
 				</div>
 			</div>
 			<!-- 公司地址 -->
 			<div class="layui-form-item">
 				<label class="layui-form-label required">公司地址</label>
 				<div class="layui-input-block">
-					<input type="text" name="c_address" lay-verify="required" lay-reqtext="公司地址为空" placeholder="请输入公司地址" value="" class="layui-input">
+					<input type="text" name="cAddress" lay-verify="required" lay-reqtext="公司地址为空" placeholder="请输入公司地址" value="" class="layui-input">
 				</div>
 			</div>
 			
@@ -51,14 +51,14 @@
 			<div class="layui-form-item">
 				<label class="layui-form-label required">注册资金</label>
 				<div class="layui-input-block">
-					<input type="number" name="registered_capital"  value="" class="layui-input">
+					<input type="number" name="registeredCapital"  value="" class="layui-input">
 				</div>
 			</div>
 			<!-- 联系电话-->
 			<div class="layui-form-item">
 				<label class="layui-form-label required">联系电话</label>
 				<div class="layui-input-block">
-					<input type="number" name="c_phone"  value="" class="layui-input">
+					<input type="number" name="cPhone"  value="" class="layui-input">
 				</div>
 			</div>
 			<!--  -->
@@ -78,22 +78,33 @@
 				$ = layui.$;
 
 			//监听提交
+			//监听提交
 			form.on('submit(saveBtn)', function (data) {
-				var index = layer.alert(JSON.stringify(data.field), {
-					title: '最终的提交信息'
-				}, function () {
-
-					// 关闭弹出层
-					layer.close(index);
-
-					var iframeIndex = parent.layer.getFrameIndex(window.name);
-					parent.layer.close(iframeIndex);
-
+				var url = contextPath + "company/add/insert"
+				console.log(data.field)//当前容器所有表单字段
+				//异步请求提交数据
+				$.post(url, data.field,function(response){
+					if(response.code == 0){
+						//成功提示
+						layer.msg(response.msg,{
+							icon:1,
+							time:1000
+						},function (){
+							// 关闭弹出层
+							var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层索引
+							parent.layer.close(index);//执行关闭
+						})
+					}else {
+						//失败则提示错误信息，窗口不关闭
+						layer.msg(response.msg, {
+							icon: 2,
+							anim: 6,
+							time: 2000
+						});
+					}
 				});
-
 				return false;
 			});
-
 		});
 	</script>
 </body>

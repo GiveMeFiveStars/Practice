@@ -8,69 +8,45 @@ import com.system.VO.DataVO;
 import com.system.mapper.CompanyMapper;
 import com.system.pojo.Company;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@RestController
-@RequestMapping("/Company")
+@Controller
+@RequestMapping("/company")
 public class CompanyController {
+
     @Autowired
     CompanyMapper companyMapper;
-    @GetMapping("/insert")
+
+    /**
+     * 合作公司界面转发
+     * @return
+     */
+    @GetMapping("")
+    public String company(){
+        return "page/company";
+    }
+
+    /**
+     * 合作公司信息添加界面转发
+     * @return
+     */
+    @GetMapping("/add")
+    public String companyAdd(){
+        return "page/companyManagement/add";
+    }
+    @GetMapping("/add/insert")
     //实现“增“操作
     public DataVO<Object> insert(Company param) {
         companyMapper.insert(param);
         return DataVO.success("添加成功!");
-    }
-    //实现”查“操作！显示表中所有表项！
-    @GetMapping("/select1")
-    public List<Company> select1(){
-        return companyMapper.selectList(null); //返回所有
-    }
-    //根据主键删除表项
-    @GetMapping("/delete")
-    public void delete(Integer cId){    //传入主键
-        companyMapper.deleteById(cId);
-    }
-    //多条件删除
-    @GetMapping("/deleteByMap")
-    public void deleteByMap( Integer cId,
-                             String cName,
-                             String representativeName,
-                             String cAddress,
-                             Integer registeredCapital,
-                             Long cPhone) {
-        Map<String, Object> map = new HashMap<>();
-        //依次判断各属性值是否为空值
-        if (cId != null) {
-            map.put("c_id", cId);  //注意！:map的key是数据表的列名
-        }
-        if (cName != null) {
-            map.put("c_name", cId);
-        }
-        if (representativeName != null) {
-            map.put("representative_name", representativeName);
-        }
-        if (cAddress != null) {
-            map.put("c_address", cAddress);
-        }
-        if (registeredCapital != null) {
-            map.put("registeredCapital", registeredCapital);
-        }
-        if (registeredCapital != null) {
-            map.put("registered_capital", registeredCapital);
-        }
-        if (cPhone != null) {
-            map.put("c_phone", cPhone);
-        }
-        //删除满足条件的表项
-        companyMapper.deleteByMap(map);
     }
 
     //改操作！
@@ -105,21 +81,17 @@ public class CompanyController {
         }
         companyMapper.update(null, wrapper);
     }
-    @GetMapping("/list")
-    @ResponseBody
-    @Transactional
-    public DataVO<Object> listAll(int page, int limit){
-        QueryWrapper<Company> queryWrapper = new QueryWrapper<Company>();
-        //分页查询Company信息
-        Page<Company> pages=new Page<Company>(page,limit);
-        IPage<Company> companyPage = companyMapper.selectPage(pages, queryWrapper);
-        List<Company> list = companyPage.getRecords();
-        return DataVO.success(companyPage.getTotal(),list);
-    }
+    /**
+     * 选择查询所有记录
+     * @param param
+     * @param page
+     * @param limit
+     * @return
+     */
     @GetMapping("/selectBy")
     @ResponseBody
     @Transactional
-    public DataVO<Object> select(Company param,int page,int limit) {
+    public DataVO<Object> select(int page,int limit,Company param) {
         QueryWrapper<Company> queryWrapper = new QueryWrapper<>();
         if (param.getCId() != null) {
             queryWrapper.like("c_id", param.getCId());
@@ -139,7 +111,7 @@ public class CompanyController {
         if (param.getCPhone() != null) {
             queryWrapper.like("c_phone", param.getCPhone());
         }
-        Page<Company>pages=new Page<Company>(page,limit);
+        Page<Company> pages =new Page<Company>(page,limit);
         IPage<Company> companyPage = companyMapper.selectPage(pages, queryWrapper);
         long count = companyMapper.selectCount(queryWrapper);
         List<Company> list = companyPage.getRecords();
