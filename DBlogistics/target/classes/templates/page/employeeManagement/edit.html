@@ -15,15 +15,15 @@
     </style>
 </head>
 <body>
-	<div class="layui-form layuimini-form">
+	<form class="layui-form layuimini-form" th:object="${employee}">
 		<!-- 公司代号 -->
 		<div class="layui-form-item">
 		    <label class="layui-form-label">公司代号</label>
 		                <div class="layui-input-inline">
-		                    <select name="city" lay-verify="required">
+		                    <select name="eId" th:field="*{getEId()}" lay-verify="required">
 		                           <option value="">请选择一个公司代号</option>
-		                           <option value="07">7_轩然公司</option>
-		                           <option value="08" selected>8_圆通公司</option>
+		                           <option value="07">7</option>
+		                           <option value="08" selected>8</option>
 							</select>
 		                </div>
 		</div>
@@ -37,15 +37,21 @@
 		<div class="layui-form-item">
 			<label class="layui-form-label">性别</label>
 			<div class="layui-input-block">
-				<input type="radio" name="sex" value="男" title="男" checked="">
-				<input type="radio" name="sex" value="女" title="女">
+				<input type="radio" name="eSex" value="男" title="男" checked="">
+				<input type="radio" name="eSex" value="女" title="女">
 			</div>
 		</div>
 		<!-- 工资 -->
 		<div class="layui-form-item">
 			<label class="layui-form-label">工资</label>
 			<div class="layui-input-block">
-				<input type="email" name="email" placeholder="请输入工资" value="" class="layui-input">
+				<input type="number" name="salary" th:field="*{getSalary()}" placeholder="请输入工资" value="" class="layui-input">
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">职位</label>
+			<div class="layui-input-block">
+				<input type="text" name="position" th:field="*{getPosition()}" lay-verify="required" lay-reqtext="职位不能为空" placeholder="请输入工资" value="" class="layui-input">
 			</div>
 		</div>
 		<div class="layui-form-item">
@@ -53,13 +59,7 @@
 				<button class="layui-btn layui-btn-normal" lay-submit lay-filter="saveBtn">确认保存</button>
 			</div>
 		</div>
-		<div class="layui-form-item">
-			<label class="layui-form-label">职位</label>
-			<div class="layui-input-block">
-				<input type="number" name="position" lay-verify="required" lay-reqtext="职位不能为空" placeholder="请输入工资" value="" class="layui-input">
-			</div>
-		</div>
-	</div>
+	</form>
 	</div>
 	<script src="../../../static/lib/layui-v2.6.3/layui.js" charset="utf-8"></script>
 	<script th:inline="javascript">
@@ -71,18 +71,29 @@
 
 			//监听提交
 			form.on('submit(saveBtn)', function (data) {
-				var index = layer.alert(JSON.stringify(data.field), {
-					title: '最终的提交信息'
-				}, function () {
-
-					// 关闭弹出层
-					layer.close(index);
-
-					var iframeIndex = parent.layer.getFrameIndex(window.name);
-					parent.layer.close(iframeIndex);
-
+				var url = contextPath + "employee/edit/updateById"
+				console.log(data.field)//当前容器所有表单字段
+				//异步请求提交数据
+				$.post(url, data.field,function(response){
+					if(response.code == 0){
+						//成功提示
+						layer.msg(response.msg,{
+							icon:1,
+							time:1000
+						},function (){
+							// 关闭弹出层
+							var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层索引
+							parent.layer.close(index);//执行关闭
+						})
+					}else {
+						//失败则提示错误信息，窗口不关闭
+						layer.msg(response.msg, {
+							icon: 2,
+							anim: 6,
+							time: 2000
+						});
+					}
 				});
-
 				return false;
 			});
 

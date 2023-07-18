@@ -1,6 +1,5 @@
 package com.system.controller;
 
-import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -8,18 +7,14 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.system.VO.DataVO;
 import com.system.mapper.CompanyMapper;
 import com.system.mapper.EmployeeMapper;
-import com.system.pojo.Company;
 import com.system.pojo.Employee;
-import com.system.service.CompanyService;
 import com.system.service.EmployeeService;
-import org.apache.commons.lang3.StringEscapeUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.lang.reflect.Array;
 import java.math.BigDecimal;
 import java.util.*;
 
@@ -45,25 +40,19 @@ public class EmployeeController {
         return "page/employeeManagement";
     }
     /**
-     * 员工信息添加
+     * 员工信息添加界面跳转
      * @return
      */
     @GetMapping("/add")
-    public String employeeAdd(Model model){
-//        List<Company> cIdList = companyMapper.selectList(null);
-//        model.addAttribute("cIdList",cIdList);
+    public String employeeAdd(){
         return "page/employeeManagement/add";
-
     }
 
     /**
-     * 员工信息编辑界面转发
+     * 数据库进行添加操作
+     * @param param
      * @return
      */
-    @GetMapping("/edit")
-    public String employeeEdit(){
-        return "page/employeeManagement/edit";
-    }
     @RequestMapping("/add/insert")
     @ResponseBody
     //实现“增“操作
@@ -71,22 +60,73 @@ public class EmployeeController {
         employeeMapper.insert(param);
         return DataVO.success("添加成功");
     }
-    //实现”查“操作！显示表中所有表项！
-    @GetMapping("/select1")
-    public List<Employee> select1(){
-      return employeeMapper.selectList(null);
-    }
-    //根据主键删除表项
-    @PostMapping("/deleteByIds")
+    /**
+     * 根据主键删除表项
+     *
+     * @return
+     */
+    @DeleteMapping ("/{ids}")
     @ResponseBody
-     public DataVO<Object> deleteByIds(List<Integer> idlist){    //传入主键
-         employeeMapper.deleteBatchIds(idlist);
-         return DataVO.success("删除成功");
+    public DataVO<Object> deleteByIds(@PathVariable("ids") String ids){    //传入主键
+        List<Integer> list = new ArrayList<>();
+        String res[]=ids.split(",");
+        for(int i=0;i< res.length;i++){
+            list.add(Integer.parseInt(res[i]));
+        }
+//        list.forEach(System.out::println);
+        employeeMapper.deleteBatchIds(list);
+        return DataVO.success("删除成功");
     }
-//    @PostMapping("/deleteByIds")
-//    public void deleteByIds(ArrayList<Integer> idlist){    //传入主键
-//        idlist.forEach(System.out::println);
-//    }
+
+    /**
+     * 根据当前用户编号进行查询员工信息编辑界面转发
+     * @param eId
+     * @param model
+     * @return
+     */
+    @GetMapping("/{id}")
+    @ResponseBody
+    @Transactional
+    public String selectById(@PathVariable("id")Integer eId, Model model){
+        Employee employee = employeeMapper.selectById(eId);
+        model.addAttribute("employee",employee);
+        return "page/employeeManagement/edit";
+    }
+
+    /**
+     * 根据ID编辑员工信息
+     * @param param
+     * @return
+     */
+    @PutMapping("/updateById")
+    @ResponseBody
+    @Transactional
+    public DataVO<Object> updateById(Employee param){
+        UpdateWrapper<Employee> wrapper = new UpdateWrapper<>();
+        //根据主键进行查询修改，主键不能为空！
+        wrapper.eq("e_id", param.getEId());
+        //传入不为空的元素更改！
+        if (param.getCId()!= null) {
+            wrapper.set("c_id", param.getCId());
+        }
+        if (param.getEName() != null) {
+            wrapper.set("e_name", param.getEName());
+        }
+        if (param.getEPhone() != null) {
+            wrapper.set("e_phone", param.getEPhone());
+        }
+        if (param.getESex() != null) {
+            wrapper.set("e_sex", param.getESex());
+        }
+        if (param.getSalary()!= null) {
+            wrapper.set("salary", param.getSalary());
+        }
+        if (param.getPosition() != null) {
+            wrapper.set("position", param.getPosition());
+        }
+        employeeMapper.update(null, wrapper);
+        return DataVO.success("修改成功!");
+    }
     //多条件删除
     @GetMapping("/deleteByMap")
     public void deleteByMap(Integer eId,//插入各个属性
