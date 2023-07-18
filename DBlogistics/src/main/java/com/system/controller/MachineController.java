@@ -1,12 +1,17 @@
 package com.system.controller;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.system.VO.DataVO;
 import com.system.mapper.MachineMapper;
 import com.system.pojo.Machine;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import java.util.HashMap;
 import java.util.List;
@@ -20,16 +25,9 @@ public class MachineController {
     MachineMapper machineMapper;
     @GetMapping("/insert")
     //实现“增“操作
-    public String insert(Integer mId,//插入各个属性
-                         String mName,
-                         String modelNum,
-                         Integer mStatus,
-                         Integer stashId) {
-        return machineMapper.insert(new Machine(mId,
-                mName,
-                modelNum,
-                mStatus,
-               stashId))>0?"successful":"failed";  //正则表达式判断是否插入元素成功
+    public DataVO<Object> insert(Machine param) {
+        machineMapper.insert(param);
+        return DataVO.success("添加成功!");
     }
     //实现”查“操作！显示表中所有表项！
     @GetMapping("/select1")
@@ -47,7 +45,7 @@ public class MachineController {
                             String mName,
                             String modelNum,
                             Integer mStatus,
-                            Integer stashId) {
+                            Integer machine) {
         Map<String, Object> map = new HashMap<>();
         //依次判断各属性值是否为空值
         if (mId != null) {
@@ -62,8 +60,8 @@ public class MachineController {
         if (mStatus != null) {
             map.put("m_status", mStatus);
         }
-        if ( stashId != null) {
-            map.put("stash_id",  stashId);
+        if ( machine != null) {
+            map.put("stash_id",  machine);
         }
           //满足条件的表项
         machineMapper.deleteByMap(map);
@@ -95,5 +93,43 @@ public class MachineController {
             wrapper.set("stash_id",stashId);
         }
         machineMapper.update(null, wrapper);
+    }
+    @GetMapping("/list")
+    @ResponseBody
+    @Transactional
+    public DataVO<Object> listAll(int page, int limit){
+        QueryWrapper<Machine> queryWrapper = new QueryWrapper<Machine>();
+        //分页查询Machine信息
+        Page<Machine> pages=new Page<Machine>(page,limit);
+        IPage<Machine> machinePage = machineMapper.selectPage(pages, queryWrapper);
+        List<Machine> list = machinePage.getRecords();
+        return DataVO.success(machinePage.getTotal(),list);
+    }
+
+    @GetMapping("/selectBy")
+    @ResponseBody
+    @Transactional
+    public DataVO<Object> select(Machine param,int page,int limit) {
+        QueryWrapper<Machine> queryWrapper = new QueryWrapper<>();
+        if (param.getMId() != null) {
+            queryWrapper.like("m_id", param.getMId());
+        }
+        if (param.getMName() != null) {
+            queryWrapper.like("m_name", param.getMName());
+        }
+        if (param.getModelNum() != null) {
+            queryWrapper.like("model_num", param.getModelNum());
+        }
+        if (param.getMStatus() != null) {
+            queryWrapper.like("m_status", param.getMStatus());
+        }
+        if (param.getStashId() != null) {
+            queryWrapper.like("stash_id", param.getStashId());
+        }
+        Page<Machine>pages=new Page<Machine>(page,limit);
+        IPage<Machine> machinePage = machineMapper.selectPage(pages, queryWrapper);
+        long count = machineMapper.selectCount(queryWrapper);
+        List<Machine> list = machinePage.getRecords();
+        return DataVO.success(count, list);
     }
 }

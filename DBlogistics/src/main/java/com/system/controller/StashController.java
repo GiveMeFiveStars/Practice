@@ -1,14 +1,17 @@
 package com.system.controller;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
-import com.system.mapper.PlaceMapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.system.VO.DataVO;
 import com.system.mapper.StashMapper;
-import com.system.pojo.Administrator;
-import com.system.pojo.Place;
 import com.system.pojo.Stash;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Date;
@@ -24,22 +27,9 @@ public class StashController {
     StashMapper stashMapper;
     @GetMapping("/insert")
     //实现“增“操作
-    public String insert(Integer stashId,//插入各个属性
-                         String sName,
-                         Integer sArea,
-                         String sAdress,
-                         Integer cId,
-                         String eName,
-                         Date sTime,
-                         Date cTime) {
-        return stashMapper.insert(new Stash(stashId,
-                sName,
-                sArea,
-                sAdress,
-                cId,
-                eName,
-                sTime,
-                cTime))>0?"successful":"failed";  //正则表达式判断是否插入元素成功
+    public DataVO<Object> insert(Stash param) {
+        stashMapper.insert(param);
+        return DataVO.success("添加成功!");
     }
     //实现”查“操作！显示表中所有表项！
     @GetMapping("/select1")
@@ -125,5 +115,49 @@ public class StashController {
             wrapper.set("c_time",cTime);
         }
        stashMapper.update(null, wrapper);
+    }
+    @GetMapping("/list")
+    @ResponseBody
+    @Transactional
+    public DataVO<Object>listAll(int page, int limit){
+        QueryWrapper<Stash> queryWrapper = new QueryWrapper<Stash>();
+        //分页查询Stash信息
+        Page<Stash> pages=new Page<Stash>(page,limit);
+        IPage<Stash> stashPage = stashMapper.selectPage(pages, queryWrapper);
+        List<Stash> list = stashPage.getRecords();
+        return DataVO.success(stashPage.getTotal(),list);
+    }
+
+    @GetMapping("/selectBy")
+    @ResponseBody
+    @Transactional
+    public DataVO<Object> select(Stash param,int page,int limit) {
+        QueryWrapper<Stash> queryWrapper = new QueryWrapper<>();
+        if (param.getStashId() != null) {
+            queryWrapper.like("stash_id", param.getStashId());
+        }
+        if (param.getSName() != null) {
+            queryWrapper.like("s_name", param.getSName());
+        }
+        if (param.getSArea() != null) {
+            queryWrapper.like("s_area", param.getSArea());
+        }
+        if (param.getSAdress() != null) {
+            queryWrapper.like("s_adress", param.getSAdress());
+        }
+        if (param.getEName() != null) {
+            queryWrapper.like("e_name", param.getEName());
+        }
+        if (param.getSTime() != null) {
+            queryWrapper.like("s_time", param.getSTime());
+        }
+        if (param.getCTime() != null) {
+            queryWrapper.like("c_time", param.getCTime());
+        }
+        Page<Stash>pages=new Page<Stash>(page,limit);
+        IPage<Stash> stashPage = stashMapper.selectPage(pages, queryWrapper);
+        long count = stashMapper.selectCount(queryWrapper);
+        List<Stash> list = stashPage.getRecords();
+        return DataVO.success(count, list);
     }
 }

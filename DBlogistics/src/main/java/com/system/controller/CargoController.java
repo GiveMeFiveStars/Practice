@@ -1,13 +1,17 @@
 package com.system.controller;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.system.VO.DataVO;
 import com.system.mapper.CargoMapper;
-import com.system.mapper.PlaceMapper;
 import com.system.pojo.Cargo;
-import com.system.pojo.Place;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
@@ -20,28 +24,11 @@ public class CargoController {
     @Autowired
     //创建PlaceMapper对象，对数据库进行操作！
     CargoMapper cargoMapper;
-    @GetMapping ("/insert")
+    @GetMapping("/insert")
     //实现“增“操作
-    public String insert(Long gId,//插入各个属性
-                         String adresser,
-                         String consignee,
-                         Integer weight,
-                         String departurePlace,
-                         String reachPlace,
-                         Integer cId,
-                         Integer gType,
-                         String sName,
-                         String vId) {
-        return cargoMapper.insert(new Cargo(gId,
-                adresser,
-                consignee,
-                weight,
-                departurePlace,
-                reachPlace,
-                cId,
-                gType,
-                sName,
-                vId))>0?"successful":"failed";  //正则表达式判断是否插入元素成功
+    public DataVO<Object> insert(Cargo param) {
+       cargoMapper.insert(param);
+        return DataVO.success("添加成功!");
     }
     //实现”查“操作！显示表中所有表项！
     @GetMapping("/select1")
@@ -145,5 +132,46 @@ public class CargoController {
             wrapper.set("v_Id", vId);
         }
         cargoMapper.update(null, wrapper);
+    }
+    @GetMapping("/selectBy")
+    @ResponseBody
+    @Transactional
+    public DataVO<Object> select(Cargo param, int page, int limit) {
+        QueryWrapper<Cargo> queryWrapper = new QueryWrapper<>();
+        if (param.getGId() != null) {
+            queryWrapper.like("g_id", param.getGId());
+        }
+        if (param.getAdresser() != null) {
+            queryWrapper.like("adresser", param.getAdresser());
+        }
+        if (param.getConsignee()!= null) {
+            queryWrapper.like("consignee", param.getConsignee());
+        }
+        if (param.getWeight() != null) {
+            queryWrapper.like("weight", param.getWeight());
+        }
+        if (param.getDeparturePlace() != null) {
+            queryWrapper.like("departure_place", param.getDeparturePlace());
+        }
+        if (param.getReachPlace() != null) {
+            queryWrapper.like("reach_place", param.getReachPlace());
+        }
+        if (param.getCId() != null) {
+            queryWrapper.like("c_id", param.getCId());
+        }
+        if (param.getGType() != null) {
+            queryWrapper.like("g_type", param.getGType());
+        }
+        if (param.getSName() != null) {
+            queryWrapper.like("s_name", param.getSName());
+        }
+        if (param.getVId() != null) {
+            queryWrapper.like("v_id", param.getVId());
+        }
+        Page<Cargo> pages=new Page<Cargo>(page,limit);
+        IPage<Cargo> cargoPage = cargoMapper.selectPage(pages, queryWrapper);
+        long count = cargoMapper.selectCount(queryWrapper);
+        List<Cargo> list = cargoPage.getRecords();
+        return DataVO.success(count, list);
     }
 }

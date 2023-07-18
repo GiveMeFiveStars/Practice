@@ -1,35 +1,32 @@
 package com.system.controller;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.system.VO.DataVO;
 import com.system.mapper.CompanyMapper;
 import com.system.pojo.Company;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("Company")
+@RequestMapping("/Company")
 public class CompanyController {
     @Autowired
     CompanyMapper companyMapper;
     @GetMapping("/insert")
-    //实现插入操作表项的操作！
-    public String insert( Integer cId,
-                          String cName,
-                          String representativeName,
-                          String cAddress,
-                          Integer registeredCapital,
-                          Long cPhone){
-        return companyMapper.insert(new Company(cId,
-                         cName,
-                         representativeName,
-                         cAddress,
-                         registeredCapital,
-                         cPhone))>0?"successful":"failed";
+    //实现“增“操作
+    public DataVO<Object> insert(Company param) {
+        companyMapper.insert(param);
+        return DataVO.success("添加成功!");
     }
     //实现”查“操作！显示表中所有表项！
     @GetMapping("/select1")
@@ -75,6 +72,7 @@ public class CompanyController {
         //删除满足条件的表项
         companyMapper.deleteByMap(map);
     }
+
     //改操作！
     @GetMapping("/update")
     public void update(Integer cId,
@@ -106,5 +104,45 @@ public class CompanyController {
             wrapper.set("c_phone", cPhone);
         }
         companyMapper.update(null, wrapper);
+    }
+    @GetMapping("/list")
+    @ResponseBody
+    @Transactional
+    public DataVO<Object> listAll(int page, int limit){
+        QueryWrapper<Company> queryWrapper = new QueryWrapper<Company>();
+        //分页查询Company信息
+        Page<Company> pages=new Page<Company>(page,limit);
+        IPage<Company> companyPage = companyMapper.selectPage(pages, queryWrapper);
+        List<Company> list = companyPage.getRecords();
+        return DataVO.success(companyPage.getTotal(),list);
+    }
+    @GetMapping("/selectBy")
+    @ResponseBody
+    @Transactional
+    public DataVO<Object> select(Company param,int page,int limit) {
+        QueryWrapper<Company> queryWrapper = new QueryWrapper<>();
+        if (param.getCId() != null) {
+            queryWrapper.like("c_id", param.getCId());
+        }
+        if (param.getCName() != null) {
+            queryWrapper.like("c_name", param.getCName());
+        }
+        if (param.getRepresentativeName()!= null) {
+            queryWrapper.like("representative_name", param.getRepresentativeName());
+        }
+        if (param.getCAddress() != null) {
+            queryWrapper.like("c_address", param.getCAddress());
+        }
+        if (param.getRegisteredCapital() != null) {
+            queryWrapper.like("registered_capital", param.getRegisteredCapital());
+        }
+        if (param.getCPhone() != null) {
+            queryWrapper.like("c_phone", param.getCPhone());
+        }
+        Page<Company>pages=new Page<Company>(page,limit);
+        IPage<Company> companyPage = companyMapper.selectPage(pages, queryWrapper);
+        long count = companyMapper.selectCount(queryWrapper);
+        List<Company> list = companyPage.getRecords();
+        return DataVO.success(count, list);
     }
 }
