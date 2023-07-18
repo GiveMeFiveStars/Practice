@@ -173,7 +173,7 @@
 					// console.log(idArr);
 					// 异步请求删除数据，结果提示
 					layer.confirm('您确认删除选中记录？',{icon:3,title:'删除确认'},function (index){
-						var url = contextPath + "employee/"+idArr.join(",");
+						var url = contextPath + "employee/delete/"+idArr.join(",");
 						var params ={_method:"DELETE"}
 						$.post(url, params ,function(response){
 							if(response.code === 0){
@@ -212,6 +212,7 @@
 			table.on('tool(currentTableFilter)', function (obj) {
 				var data = obj.data;
 				if (obj.event === 'edit') {
+					// layer.alert(JSON.stringify(data.eid));	//抛出数据
 					var index = layer.open({
 						title: '编辑用户',
 						type: 2,
@@ -219,7 +220,7 @@
 						maxmin:true,
 						shadeClose: true,
 						area: ['80%', '80%'],
-						content: contextPath + 'employee/edit',
+						content: contextPath + 'employee/edit/'+ data.eid
 					});
 					$(window).on("resize", function () {
 						layer.full(index);

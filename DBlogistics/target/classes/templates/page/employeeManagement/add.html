@@ -20,17 +20,16 @@
 			<!-- 员工ID -->
 			<div class="layui-form-item">
 				<label class="layui-form-label required">员工ID</label>
-				<div class="layui-input-inline">
+				<div class="layui-input-block">
 					<input type="text" name="eId" lay-verify="required" lay-reqtext="员工ID不能为空" placeholder="请输入员工ID" value="" class="layui-input">
 				</div>
 			</div>
 			<!-- 公司代号 -->
 			<div class="layui-form-item">
-				<label class="layui-form-label">公司代号</label>
-					<div class="layui-input-inline">
-						<select name="cId" lay-verify="" lay-search>
+				<label class="layui-form-label">公司名称</label>
+					<div class="layui-input-block">
+						<select name="cId">
 							<option value ="">请选择一个公司名称</option>
-							<!-- 可以自己设置 -->
 							<option th:each="company:${cIdList}" th:value="${company.CId}">
 								<span th:text="${company.CName}"></span>
 							</option>
@@ -40,7 +39,7 @@
 			<!-- 员工姓名 -->
 			<div class="layui-form-item">
 				<label class="layui-form-label required">员工姓名</label>
-				<div class="layui-input-inline">
+				<div class="layui-input-block">
 					<input type="text" name="eName" lay-verify="required" lay-reqtext="员工姓名不能为空" placeholder="请输入员工姓名" value="" class="layui-input">
 				</div>
 			</div>
