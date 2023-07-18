@@ -59,7 +59,7 @@
 			<script type="text/html" id="toolbarDemo">
 				<div class="layui-btn-container">
 					<button class="layui-btn layui-btn-normal layui-btn-sm data-add-btn" lay-event="add"><i class="layui-icon layui-icon-add-1"></i>添加 </button>
-					<button class="layui-btn layui-btn-danger layui-btn-sm data-delete-btn" lay-envent="delete"><i class="layui-icon"></i>删除</button>
+					<button class="layui-btn layui-btn-danger layui-btn-sm data-delete-btn" lay-event="delete"><i class="layui-icon"></i>删除</button>
 				</div>
 				</div>
 			</script>
@@ -156,18 +156,55 @@
 						layer.full(index);
 					});
 				} else if (obj.event === 'delete') {  // 监听删除操作
-					var checkStatus = table.checkStatus('currentTableId');
-					var data = checkStatus.data;
-					layer.alert(JSON.stringify(data));
+					var checkStatus = table.checkStatus('currentTableId')
+							,data = checkStatus.data;
+					//如果没有选中任何数据
+					if(checkStatus.data.length == 0){
+						layer.alert('您没有选中任何数据',{icon:2,anim:6,title:"警告"})
+						return false;
+					}
+					//选中的id
+					var idArr = new List();
+					$(data).each(function (){
+						idArr.push(this.eid);
+					})
+					//Json打印选择的数据
+					layer.alert(JSON.stringify(data));	//抛出数据
+					console.log(data);
+					//异步请求删除数据，结果提示
+					// var url = contextPath + "employee/deleteByIds";
+					// $.post(url, idArr ,function(response){
+					// 	if(response.code === 0){
+					// 		//成功提示
+					// 		layer.msg(response.msg,{
+					// 			icon:1,
+					// 			time:1000
+					// 		},function (){
+					// 			// 关闭弹出层
+					// 			var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层索引
+					// 			parent.layer.close(index);//执行关闭
+					// 		})
+					// 	}else {
+					// 		//失败则提示错误信息，同时关闭窗口
+					// 		layer.msg(response.msg, {
+					// 			icon: 2,
+					// 			anim: 6,
+					// 			time: 2000
+					// 		},function (){
+					// 			// 关闭弹出层
+					// 			var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层索引
+					// 			parent.layer.close(index);//执行关闭
+					// 		});
+					// 	}
+					// });
+					// return false;
+
 				}
 			});
-			// var idArr = new Array();
+
 			//监听表格复选框选择
 			table.on('checkbox(currentTableFilter)', function (obj) {
-				// $(obj).each(function (){
-				// 	idArr.push(this.eId);
-				// })
-				console.log(obj)
+				//console.log(obj)
 			});
 
 			table.on('tool(currentTableFilter)', function (obj) {

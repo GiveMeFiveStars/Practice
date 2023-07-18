@@ -19,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.lang.reflect.Array;
 import java.math.BigDecimal;
 import java.util.*;
 
@@ -76,10 +77,16 @@ public class EmployeeController {
       return employeeMapper.selectList(null);
     }
     //根据主键删除表项
-    @GetMapping("/delete")
-     public void delete(Integer eId){    //传入主键
-         employeeMapper.deleteById(eId);
+    @PostMapping("/deleteByIds")
+    @ResponseBody
+     public DataVO<Object> deleteByIds(List<Integer> idlist){    //传入主键
+         employeeMapper.deleteBatchIds(idlist);
+         return DataVO.success("删除成功");
     }
+//    @PostMapping("/deleteByIds")
+//    public void deleteByIds(ArrayList<Integer> idlist){    //传入主键
+//        idlist.forEach(System.out::println);
+//    }
     //多条件删除
     @GetMapping("/deleteByMap")
     public void deleteByMap(Integer eId,//插入各个属性
