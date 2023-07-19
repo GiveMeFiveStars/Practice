@@ -42,44 +42,12 @@ public class CompanyController {
     public String companyAdd(){
         return "page/companyManagement/add";
     }
-    @GetMapping("/add/insert")
+    @RequestMapping("/add/insert")
+    @ResponseBody
     //实现“增“操作
     public DataVO<Object> insert(Company param) {
         companyMapper.insert(param);
         return DataVO.success("添加成功!");
-    }
-
-    //改操作！
-    @GetMapping("/update")
-    public void update(Integer cId,
-                       String cName,
-                       String representativeName,
-                       String cAddress,
-                       Integer registeredCapital,
-                       Long cPhone) {
-        UpdateWrapper<Company> wrapper = new UpdateWrapper<>();
-        //根据主键进行查询修改，主键不能为空！
-        if (cId == null) {
-            return;
-        }
-        wrapper.eq("c_id", cId);
-        //对传入不为空的元素更改！
-        if (cName != null) {
-            wrapper.set("c_name", cName);
-        }
-        if (representativeName != null) {
-            wrapper.set("representative_name", representativeName);
-        }
-        if (cAddress != null) {
-            wrapper.set("c_address", cAddress);
-        }
-        if (registeredCapital != null) {
-            wrapper.set("registered_capital", registeredCapital);
-        }
-        if (cPhone != null) {
-            wrapper.set("c_phone", cPhone);
-        }
-        companyMapper.update(null, wrapper);
     }
     /**
      * 选择查询所有记录

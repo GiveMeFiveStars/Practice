@@ -113,8 +113,11 @@ public class EmployeeController {
         employeeMapper.insert(param);
         return DataVO.success("添加成功");
     }
+
     /**
      * 根据主键删除表项
+     * @param ids
+     * @return
      */
     @DeleteMapping("/delete/{ids}")
     @ResponseBody
