@@ -1,11 +1,11 @@
 package com.system.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.View;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
-import org.springframework.web.servlet.config.annotation.ViewControllerRegistration;
-import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.config.annotation.*;
 
 @Configuration
 public class MyMvcConfig implements WebMvcConfigurer {
@@ -18,4 +18,29 @@ public class MyMvcConfig implements WebMvcConfigurer {
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/");
     }
+//    @Autowired
+//
+//    @Qualifier(value="loginInterceptor")
+//    private HandlerInterceptor handlerInterceptor;
+//
+//    @Override
+//    public void addInterceptors(InterceptorRegistry registry) {
+//        InterceptorRegistration registration=
+//                registry.addInterceptor(handlerInterceptor);
+//        //拦截请求
+//        registration.addPathPatterns("/**");
+//        //放行请求
+//        registration.excludePathPatterns(
+//                "/login",
+//                "/api/**",
+//                "/css/**",
+//                "/echarts/**",
+//                "/images/**",
+//                "/js/**",
+//                "/lib/**",
+//                "/webjars/**",
+//                "/captcha",
+//                "/templates/**"
+//        );
+//    }
 }

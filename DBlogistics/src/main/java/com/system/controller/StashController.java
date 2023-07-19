@@ -8,6 +8,7 @@ import com.system.VO.DataVO;
 import com.system.mapper.StashMapper;
 import com.system.pojo.Stash;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,12 +20,20 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@RestController
-@RequestMapping("Stash")
+@Controller
+@RequestMapping("/stash")
 public class StashController {
     @Autowired
     //创建stashMapper对象，对数据库进行操作！
     StashMapper stashMapper;
+    /**
+     * 仓库界面转发
+     * @return
+     */
+    @GetMapping("")
+    public String stash(){
+        return "page/stash";
+    }
     @GetMapping("/insert")
     //实现“增“操作
     public DataVO<Object> insert(Stash param) {
@@ -116,18 +125,14 @@ public class StashController {
         }
        stashMapper.update(null, wrapper);
     }
-    @GetMapping("/list")
-    @ResponseBody
-    @Transactional
-    public DataVO<Object>listAll(int page, int limit){
-        QueryWrapper<Stash> queryWrapper = new QueryWrapper<Stash>();
-        //分页查询Stash信息
-        Page<Stash> pages=new Page<Stash>(page,limit);
-        IPage<Stash> stashPage = stashMapper.selectPage(pages, queryWrapper);
-        List<Stash> list = stashPage.getRecords();
-        return DataVO.success(stashPage.getTotal(),list);
-    }
 
+    /**
+     * 查找
+     * @param
+     * @param page
+     * @param limit
+     * @return
+     */
     @GetMapping("/selectBy")
     @ResponseBody
     @Transactional

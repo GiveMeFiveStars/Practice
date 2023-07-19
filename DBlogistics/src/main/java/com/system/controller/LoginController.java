@@ -3,12 +3,10 @@ package com.system.controller;
 import com.system.VO.DataVO;
 import com.system.mapper.AdministratorMapper;
 import com.system.pojo.Administrator;
+import com.wf.captcha.utils.CaptchaUtil;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -21,11 +19,16 @@ public class LoginController {
     AdministratorMapper administratorMapper;
 
     @PostMapping("/loginIn")
-    public DataVO login(Administrator administrator, HttpServletRequest request){
+    public DataVO login(Administrator administrator, HttpServletRequest request, @RequestParam("captcha")String captcha){
         //取出username和password字段
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         HttpSession session = request.getSession();
+        //验证码的判断
+        if(!CaptchaUtil.ver(captcha,request)){
+            CaptchaUtil.clear(request);
+            return DataVO.fail("验证码错误！请重新输入！");
+        }
         //从数据库按用户名查找
         Administrator admin = administratorMapper.selectById(username);
         if(admin != null){

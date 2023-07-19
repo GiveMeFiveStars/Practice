@@ -18,9 +18,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import javax.xml.transform.Result;
-import java.lang.reflect.Array;
 import java.math.BigDecimal;
 import java.util.*;
 
@@ -98,6 +95,12 @@ public class EmployeeController {
     @ResponseBody
     //实现“增“操作
     public DataVO<Object> insert(Employee param) {
+        List<Employee> employees=employeeMapper.selectList(null);
+        for(int i=0;i<employees.size();i++){
+            if(employees.get(i).getEId()==param.getEId()){
+                return DataVO.fail("添加失败！此员工ID已经存在！");
+            }
+        }
         employeeMapper.insert(param);
         return DataVO.success("添加成功");
     }
@@ -125,7 +128,7 @@ public class EmployeeController {
             return DataVO.fail("删除失败,未查到该数据");
         }
     }
-<<<<<<< HEAD
+
     /**
      * 编辑操作更新数据库！
      */
@@ -165,13 +168,10 @@ public class EmployeeController {
         }
         employeeMapper.update(null, wrapper);
     }
-=======
->>>>>>> 50305ea5c4d08c694205dac4a73538b3fd94f7ed
     @GetMapping("/list")
     @ResponseBody
     @Transactional
     public DataVO<Object> listAll(int page,int limit){
-
         QueryWrapper<Employee> queryWrapper = new QueryWrapper<>();
         //分页查询Employee信息
         Page<Employee>pages=new Page<Employee>(page,limit);

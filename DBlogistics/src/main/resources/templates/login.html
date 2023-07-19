@@ -21,8 +21,8 @@
 	<!--必要样式-->
 	<link href="../static/css/login/styles.css" rel="stylesheet" type="text/css" />
 	<link href="../static/css/login/demo.css" rel="stylesheet" type="text/css" />
-	<link href="../static/css/login/loaders.css" rel="stylesheet" type="text/css" />
-	<!--  -->
+	<link href="../static/css/login/loaders.css" rel="stylesheet" type="text/css" />\
+	<link rel="stylesheet" href="../static/lib/layui-v2.6.3/css/layui.css">
     <!--[if lt IE 9]>
     <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
     <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
@@ -43,6 +43,11 @@
         .captcha-img {display:inline-block;width:34%;float:right;}
         .captcha-img img {height:34px;border:1px solid #e6e6e6;height:36px;width:100%;}
     </style> -->
+	<style>
+		#captcha{
+			cursor:pointer ;
+		}
+		</style>
 </head>
 <body>
 	<div class='login'>
@@ -68,7 +73,7 @@
 					<!-- 密码登录的一个区域块 -->
 	                <div class="layui-form-item">
 	                    <div class='login_fields__password'>
-							<!-- 密码前面的小图标 -->
+<!--							 密码前面的小图标-->
 	                        <div class='icon'>
 	                            <img alt="" src='../static/images/login/lock_icon_copy.png'>
 	                        </div>
@@ -78,6 +83,27 @@
 	                        </div>
 	                    </div>
 	                </div>
+<!--					验证码登录板块-->
+					<div class="layui-form-item">
+						<div class='login_fields'>
+							<!-- 验证码前面的小图标 -->
+							<div class='icon'>
+								<img alt="" src="../static/images/login/user_icon_copy.png">
+							</div>
+							<!-- 验证码输入框 -->
+							<!-- <div class="layui-input-inline"> -->
+							<!-- 移动验证码输入框到新的容器中 -->
+							<div class="layui-row">
+								<div class="layui-col-md3">
+									<input type="text" name="captcha" required lay-verify="required|captcha" placeholder="请输入验证码" autocomplete="off" size="80px">
+								</div>
+								<div class="layui-col-md3 layui-col-md-offset6">
+									<img th:src="@{/captcha}" id="captcha" alt="8507">
+								</div>
+							</div>
+							<!-- </div> -->
+						</div>
+					</div>
 					<!-- 登录的区域块 -->
 	                <div class="layui-form-item">
 	                    <div class='login_fields__submit' align="center">
@@ -87,6 +113,7 @@
 	                        </div>
 	                    </div>
 	                </div>
+
 	            </div>
 				<!-- 底端的样式 -->
 	            <div class='disclaimer' align="center">
@@ -110,6 +137,13 @@
 	<script src="../static/lib/jq-module/jquery.particleground.min.js" charset="utf-8"></script>
 	<script th:inline="javascript">
 		var contextPath = [[@{/}]];
+
+			$("#captcha").click(function (){
+				$("#captcha").attr("src",contextPath+'captcha?date='+new Date().getTime());
+			}),
+
+
+
 		layui.use(['form'], function () {
 			var form = layui.form,
 				layer = layui.layer;
@@ -163,10 +197,10 @@
 					return false;
 				}
 				// 自己登录界面没有验证码
-				// if (data.captcha == '') {
-				// 	layer.msg('验证码不能为空');
-				// 	return false;
-				// }
+				 if (data.captcha == '') {
+					layer.msg('验证码不能为空');
+					return false;
+				}
 				/**
 				 * 异步登录请求
 				 */

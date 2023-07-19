@@ -26,15 +26,9 @@
 			</div>
 			<!-- 公司代号 -->
 			<div class="layui-form-item">
-<<<<<<< HEAD
 				<label class="layui-form-label">公司代号</label>
 					<div class="layui-input-block">
 						<select name="cId" lay-verify="" lay-search>
-=======
-				<label class="layui-form-label">公司名称</label>
-					<div class="layui-input-block">
-						<select name="cId">
->>>>>>> 50305ea5c4d08c694205dac4a73538b3fd94f7ed
 							<option value ="">请选择一个公司名称</option>
 							<option th:each="company:${cIdList}" th:value="${company.CId}">
 								<span th:text="${company.CName}"></span>

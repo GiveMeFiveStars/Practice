@@ -74,7 +74,7 @@
 				table.render({
 					elem: '#currentTableId',
 					// 这里需要修改数据库接口（试水的静态数据在staic的api的table.json下面）
-					url: contextPath + 'stash',
+					url: contextPath + 'stash/selectBy',
 					//
 					toolbar: '#toolbarDemo',
 					defaultToolbar: ['filter', 'exports', 'print', {
@@ -97,10 +97,20 @@
 					limits: [10, 15, 20, 25, 50, 100],
 					limit: 15,
 					page: true,
-					skin: 'line'
+					skin: 'line',
+					parseData:function(res){ //将原始数据解析成 table 组件所规定的数据
+						return {
+							"code": res.code, //解析接口状态
+							"msg": res.msg, //解析提示文本
+							"count": res.count, //解析数据长度
+							"data": res.data //解析数据列表
+						};
+					}
 				});
 
-				// 监听搜索操作
+
+
+		// 监听搜索操作
 				form.on('submit(data-search-btn)', function (data) {
 					var result = JSON.stringify(data.field);
 					layer.alert(result, {
