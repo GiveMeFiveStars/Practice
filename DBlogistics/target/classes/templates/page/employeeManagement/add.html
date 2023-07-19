@@ -26,21 +26,15 @@
 			</div>
 			<!-- 公司代号 -->
 			<div class="layui-form-item">
-<<<<<<< HEAD
-				<label class="layui-form-label">公司代号</label>
-					<div class="layui-input-block">
-						<select name="cId" lay-verify="" lay-search>
-=======
 				<label class="layui-form-label">公司名称</label>
-					<div class="layui-input-block">
-						<select name="cId">
->>>>>>> 50305ea5c4d08c694205dac4a73538b3fd94f7ed
-							<option value ="">请选择一个公司名称</option>
-							<option th:each="company:${cIdList}" th:value="${company.CId}">
-								<span th:text="${company.CName}"></span>
-							</option>
-						</select>
-					</div>
+				<div class="layui-input-block">
+					<select name="cId" lay-verify="" lay-search>
+						<option value ="">请选择一个公司名称</option>
+						<option th:each="company:${cIdList}" th:value="${company.CId}">
+							<span th:text="${company.CName}"></span>
+						</option>
+					</select>
+				</div>
 			</div>
 			<!-- 员工姓名 -->
 			<div class="layui-form-item">
@@ -86,6 +80,7 @@
 			</div>
 			<!--  -->
 	</div>
+	<script src="../../static/lib/jquery-3.4.1/jquery-3.4.1.min.js" charset="utf-8"></script>
 	<script src="../../../static/lib/layui-v2.6.3/layui.js" charset="utf-8"></script>
 	<script th:inline="javascript">
 		var contextPath = [[@{/}]];
@@ -98,27 +93,30 @@
 			form.on('submit(saveBtn)', function (data) {
 				var url = contextPath + "employee/add/insert"
 				console.log(data.field)//当前容器所有表单字段
-				//异步请求提交数据
-				$.post(url, data.field,function(response){
-					if(response.code == 0){
-						//成功提示
-						layer.msg(response.msg,{
-							icon:1,
-							time:1000
-						},function (){
-							// 关闭弹出层
-							var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层索引
-							parent.layer.close(index);//执行关闭
-						})
-					}else {
-						//失败则提示错误信息，窗口不关闭
-						layer.msg(response.msg, {
-							icon: 2,
-							anim: 6,
-							time: 2000
-						});
-					}
-				});
+				layer.alert(JSON.stringify(data.field));
+				// //异步请求提交数据
+				// $.post(url, data.field,function(response){
+				// 	if(response.code == 0){
+				// 		//成功提示
+				// 		layer.msg(response.msg,{
+				// 			icon:1,
+				// 			time:1000
+				// 		},function (){
+				// 			// 刷新表格
+				// 			parent.refreshTable();
+				// 			// 关闭弹出层
+				// 			var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层索引
+				// 			parent.layer.close(index);//执行关闭
+				// 		})
+				// 	}else {
+				// 		//失败则提示错误信息，窗口不关闭
+				// 		layer.msg(response.msg, {
+				// 			icon: 2,
+				// 			anim: 6,
+				// 			time: 2000
+				// 		});
+				// 	}
+				// });
 				return false;
 			});
 		});

@@ -28,6 +28,7 @@ import java.util.*;
 @Controller
 @RequestMapping("/employee")
 public class EmployeeController {
+
     @Autowired
     //创建EmployeeMapper对象，对数据库进行操作！
     EmployeeMapper employeeMapper;
@@ -43,17 +44,6 @@ public class EmployeeController {
     public String employeeManagement(){
         return "page/employeeManagement";
     }
-    /**
-     * 员工信息添加界面转发
-     * @return
-     */
-    @GetMapping("/add")
-    @Transactional
-    public String employeeAdd(Model model){
-        List<Company> cIdList = companyMapper.selectList(null);
-        model.addAttribute("cIdList",cIdList);
-        return "page/employeeManagement/add";
-    }
 
     /**
      * 员工信息编辑界面转发
@@ -66,7 +56,13 @@ public class EmployeeController {
         model.addAttribute("cIdList",companyMapper.selectList(null));
         return "page/employeeManagement/edit";
     }
-    @PostMapping  ("")
+
+    /**
+     * 编辑操作更新数据库！
+     * @param employee
+     * @return
+     */
+    @PostMapping  ("/edit/update")
     @ResponseBody
     public DataVO<Object> updateEmployee(Employee employee){
         UpdateWrapper<Employee> wrapper = new UpdateWrapper<>();
@@ -93,18 +89,29 @@ public class EmployeeController {
         }
         employeeMapper.update(null, wrapper);
         return DataVO.success("员工信息修改成功!");
-}
+    }
+    /**
+     * 员工信息添加界面转发
+     * @return
+     */
+    @GetMapping("/add")
+    @Transactional
+    public String employeeAdd(Model model){
+        List<Company> cIdList = companyMapper.selectList(null);
+        model.addAttribute("cIdList",cIdList);
+        return "page/employeeManagement/add";
+    }
+    /**
+     * 添加操作更新数据库
+     * @param param
+     * @return
+     */
     @RequestMapping("/add/insert")
     @ResponseBody
     //实现“增“操作
     public DataVO<Object> insert(Employee param) {
         employeeMapper.insert(param);
         return DataVO.success("添加成功");
-    }
-    //实现”查“操作！显示表中所有表项！
-    @GetMapping("/select1")
-    public List<Employee> select1(){
-      return employeeMapper.selectList(null);
     }
     /**
      * 根据主键删除表项
@@ -125,61 +132,6 @@ public class EmployeeController {
             return DataVO.fail("删除失败,未查到该数据");
         }
     }
-<<<<<<< HEAD
-    /**
-     * 编辑操作更新数据库！
-     */
-
-    @GetMapping("/update")
-    public void update(Integer eId, //插入各个属性
-                       Integer cId,
-                       String  eName,
-                       Long  ePhone,
-                       String  eSex,
-                       BigDecimal salary,
-                       String position) {
-        UpdateWrapper<Employee> wrapper = new UpdateWrapper<>();
-        //根据主键进行查询修改，主键不能为空！
-        if (eId == null) {
-            return;
-        }
-        wrapper.eq("e_id", eId);
-        //传入不为空的元素更改！
-        if (cId != null) {
-            wrapper.set("c_id", cId);
-        }
-        if (eName != null) {
-            wrapper.set("e_name", eName);
-        }
-        if (ePhone != null) {
-            wrapper.set("e_phone", ePhone);
-        }
-        if (eSex != null) {
-            wrapper.set("e_sex", eSex);
-        }
-        if (salary != null) {
-            wrapper.set("salary", salary);
-        }
-        if (position != null) {
-            wrapper.set("position", position);
-        }
-        employeeMapper.update(null, wrapper);
-    }
-=======
->>>>>>> 50305ea5c4d08c694205dac4a73538b3fd94f7ed
-    @GetMapping("/list")
-    @ResponseBody
-    @Transactional
-    public DataVO<Object> listAll(int page,int limit){
-
-        QueryWrapper<Employee> queryWrapper = new QueryWrapper<>();
-        //分页查询Employee信息
-        Page<Employee>pages=new Page<Employee>(page,limit);
-        IPage<Employee> employeePage = employeeMapper.selectPage(pages, queryWrapper);
-        List<Employee> list = employeePage.getRecords();
-        return DataVO.success(employeePage.getTotal(),list);
-    }
-
     /**
      * 选择查询所有记录
      * @param page
