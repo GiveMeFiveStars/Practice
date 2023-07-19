@@ -23,26 +23,26 @@
 							<div class="layui-inline">
 								<label class="layui-form-label">公司代号</label>
 								<div class="layui-input-inline">
-									<input type="text" name="c_id" autocomplete="off" class="layui-input">
+									<input type="text" name="cId" autocomplete="off" class="layui-input">
 								</div>
 							</div>
 							<!-- 公司名称板块 -->
 							<div class="layui-inline">
-								<label class="layui-form-label">员工姓名</label>
+								<label class="layui-form-label">公司名称</label>
 								<div class="layui-input-inline">
-									<input type="text" name="c_name" autocomplete="off" class="layui-input">
+									<input type="text" name="cName" autocomplete="off" class="layui-input">
 								</div>
 							</div>
 							<!-- 法定代表人 -->
 							<div class="layui-inline">
 								<label class="layui-form-label">法定代表人</label>
 								<div class="layui-input-inline">
-									<input type="text" name="representative_name" autocomplete="off" class="layui-input">
+									<input type="text" name="representativeName" autocomplete="off" class="layui-input">
 								</div>
 							</div>
 							<div class="layui-inline">
-								<button type="submit" class="layui-btn layui-btn-normal"  lay-submit lay-filter="data-search-btn"><i class="layui-icon"></i> 搜 索</button>
-								<button type="reset" class="layui-btn layui-btn-warm"><i class="layui-icon layui-icon-refresh-1"></i>重 置</button>
+								<button id="btn-search" type="submit" class="layui-btn layui-btn-warm"  lay-submit lay-filter="data-search-btn"><i class="layui-icon"></i> 搜 索</button>
+								<button type="reset" onclick="javascript:document.getElementById('search_deptid').value=''" class="layui-btn layui-btn-warm"><span class="layui-icon layui-icon-refresh-1"></span>重置</button>
 							</div>
 						</div>
 					</form>
@@ -56,17 +56,14 @@
 			</script>
 			<!-- 3.表格区域 -->
 			<table class="layui-hide" id="currentTableId" lay-filter="currentTableFilter"></table>
-
-			<!-- 4.行工具栏区域 -->
-			<script type="text/html" id="currentTableBar">
-				<a class="layui-btn layui-btn-xs layui-btn-danger data-count-delete" lay-event="delete">删除</a>
-			</script>
-
 		</div>
 	</div>
 	<script src="../../static/lib/jquery-3.4.1/jquery-3.4.1.min.js" charSet="utf-8"></script>
 	<script src="../../static/lib/layui-v2.6.3/layui.js" charSet="utf-8"></script>
 	<script th:inline="javascript">
+		function refreshTable(){
+			$("#btn-search").click();
+		}
 		var contextPath = [[@{/}]];
 		// 监听表单
 		layui.use(['form', 'table'], function () {
@@ -92,7 +89,6 @@
 					{field: 'caddress', width: 180, title: '公司地址'},
 					{field: 'registeredCapital', width: 120, title: '注册资金', sort: true},
 					{field: 'cphone', width: 180, title: '个人电话'},
-					{title: '操作', minWidth: 150, toolbar: '#currentTableBar', align: "center"}
 				] ],
 				limits: [10, 15, 20, 25, 50, 100],
 				limit: 15,
@@ -116,17 +112,16 @@
 				});
 				//执行搜索重载
 				table.reload('currentTableId', {
-					page: {
+					page: {	//重新从第一页开始
 						curr: 1
 					}
-					, where: {
-						eId:data.field.eId,
+					, where: { //设定异步数据接口的额外参数
 						cId:data.field.cId,
-						eName:data.field.eName,
-						position:data.field.position,
+						cName:data.field.cName,
+						representativeName:data.field.representativeName,
 					}
 				}, 'data');
-				return false;
+				return false; //阻止表单跳转
 			});
 
 			// 2.监听表格头部工具栏事件

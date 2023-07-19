@@ -5,128 +5,117 @@ import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.system.VO.DataVO;
+import com.system.VO.pieVO;
 import com.system.mapper.VehicleMapper;
+import com.system.pojo.Employee;
 import com.system.pojo.Vehicle;
+import com.system.service.VehicleService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
-@RestController
-@RequestMapping("Vehicle")
+@Controller
+@RequestMapping("vehicle")
 public class VehicleController {
     @Autowired
     //创建PlaceMapper对象，对数据库进行操作！
     VehicleMapper vehicleMapper;
-    @GetMapping("/insert")
-    //实现“增“操作
-    public DataVO<Object> insert(Vehicle param) {
-        vehicleMapper.insert(param);
-        return DataVO.success("添加成功!");
+    @Autowired
+    VehicleService vehicleService;
+    /**
+     * 车辆管理界面转发
+     * @return
+     */
+    @GetMapping("")
+    public String vehicle(){
+        return "page/vehicle";
     }
-    //实现”查“操作！显示表中所有表项！
-    @GetMapping("/select1")
-    public List<Vehicle> select1(){return vehicleMapper.selectList(null);}
-    //根据主键删除表项
-    @GetMapping("/delete")
-    public void delete(Integer gId){    //传入主键
-        vehicleMapper.deleteById(gId);
+    //实现表操作
+    @RequestMapping("/pieVO")
+    @ResponseBody
+    public List<pieVO> getpieVO(){
+        return vehicleService.getpieVO();
     }
-    //多条件删除
-    @GetMapping("/deleteByMap")
-    public void deleteByMap(String vId,//插入各个属性
-                            String vType,
-                            Integer vStatus,
-                            Integer stashId,
-                            Integer eId,
-                            Integer licenseId,
-                            Date tLimit) {
-        Map<String, Object> map = new HashMap<>();
-        //依次判断各属性值是否为空值
-        if (vId != null) {
-            map.put("v_Id",vId);  //注意！:map的key是数据表的列名
-        }
-        if (vType != null) {
-            map.put("v_Type", vType);
-        }
-        if (vStatus != null) {
-            map.put("v_Status",vStatus);
-        }
-        if (stashId != null) {
-            map.put("stash_Id", stashId);
-        }
-        if (eId != null) {
-            map.put("e_Id",eId);
-        }
-        if (licenseId != null) {
-            map.put("license_Id", licenseId);
-        }
-        if (licenseId != null) {
-            map.put("license_Id", licenseId);
-        }
-        if (tLimit != null) {
-            map.put("t_Limit",tLimit);
-        }
-        //满足条件的表项
-        vehicleMapper.deleteByMap(map);
-    }
-    //改操作！
-    @GetMapping("/update")
-    public void update(String vId,//插入各个属性
-                       String vType,
-                       Integer vStatus,
-                       Integer stashId,
-                       Integer eId,
-                       Integer licenseId,
-                       Date tLimit) {
+    /**
+     * 车辆信息编辑界面转发
+     * @return
+     */
+//    @GetMapping("/edit/{id}")
+//    public String getCompanyById(@PathVariable("id")String id, Model model){
+//        Vehicle vehicle = vehicleMapper.selectById(id);
+//        model.addAttribute("Vehicle",vehicle);
+//        model.addAttribute("cIdList",vehicleMapper.selectList(null));
+//        return "page/vehicle/edit";
+//    }
+
+    /**
+     * 编辑操作更新数据库！
+     * @param param
+     * @return
+     */
+    @PostMapping  ("/edit/update")
+    @ResponseBody
+    public DataVO<Object> updateVehicle(Vehicle param){
         UpdateWrapper<Vehicle> wrapper = new UpdateWrapper<>();
         //根据主键进行查询修改，主键不能为空！
-        if (vId == null) {
-            return;
-        }
-        wrapper.eq("v_Id",  vId);
+        wrapper.eq("v_id", param.getVId());
         //传入不为空的元素更改！
-        if (vType!= null) {
-            wrapper.set("v_Type", vType);
+        if (param.getVId() != null) {
+            wrapper.like("v_id", param.getVId());
         }
-        if (vStatus != null) {
-            wrapper.set("v_Status", vStatus);
+        if (param.getVType() != null) {
+            wrapper.like("v_type", param.getVType());
         }
-        if (stashId != null) {
-            wrapper.set("stash_Id", stashId);
+        if (param.getVStatus() != null) {
+            wrapper.like("v_status", param.getVStatus());
         }
-        if (eId!= null) {
-            wrapper.set("e_Id", eId);
+        if (param.getStashId() != null) {
+            wrapper.like("stash_id", param.getStashId());
         }
-        if (licenseId != null) {
-            wrapper.set("license_Id", licenseId);
+        if (param.getEId() != null) {
+            wrapper.like("e_id", param.getEId());
         }
-        if (tLimit != null) {
-            wrapper.set("t_Limit", tLimit);
+        if (param.getLicenseId() != null) {
+            wrapper.like("license_id", param.getLicenseId());
         }
-
+        if (param.getTLimit() != null) {
+            wrapper.like("t_limit", param.getTLimit());
+        }
         vehicleMapper.update(null, wrapper);
+        return DataVO.success("车辆信息修改成功!");
     }
-    @GetMapping("/list")
+    /**
+     * 根据主键删除表项
+     * @param ids
+     * @return
+     */
+    @DeleteMapping("/delete/{ids}")
     @ResponseBody
     @Transactional
-    public DataVO<Object> listAll(int page, int limit){
-
-        QueryWrapper<Vehicle> queryWrapper = new QueryWrapper<Vehicle>();
-        //分页查询Vehicle信息
-        Page<Vehicle> pages=new Page<Vehicle>(page,limit);
-        IPage<Vehicle> vehiclePage = vehicleMapper.selectPage(pages, queryWrapper);
-        List<Vehicle> list = vehiclePage.getRecords();
-        return DataVO.success(vehiclePage.getTotal(),list);
+    public DataVO<Object> deleteByIds(@PathVariable("ids") String ids){    //传入主键
+        List<String> list = new ArrayList<>();
+        String res[]=ids.split(",");
+        for(int i=0;i< res.length;i++){
+            list.add(res[i]);
+        }
+        int result = this.vehicleMapper.deleteBatchIds(list);
+        if(result > 0){
+            return DataVO.success("删除成功");
+        }else{
+            return DataVO.fail("删除失败,未查到该数据");
+        }
     }
-
+    /**
+     * 选择查询所有记录
+     * @param param
+     * @param page
+     * @param limit
+     * @return
+     */
     @GetMapping("/selectBy")
     @ResponseBody
     @Transactional

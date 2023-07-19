@@ -1,5 +1,6 @@
 package com.system.service;
 
+import com.system.VO.BarVo;
 import com.system.pojo.Employee;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -9,5 +10,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
 * @createDate 2023-07-17 09:44:02
 */
 public interface EmployeeService extends IService<Employee> {
-
+    public BarVo getBarVo();
 }

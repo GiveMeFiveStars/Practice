@@ -13,7 +13,7 @@
 	<div class="layuimini-container">
 		<div class="layuimini-main">
 			<!-- 1.搜索框区域 -->
-			<fieldset class="table-search-fieldset">
+			<fieldset class="table-search-fieldset" >
 				<legend>搜索信息</legend>
 				<div style="margin: 10px 10px 10px 10px">
 					<form class="layui-form layui-form-pane" id="form-search">
@@ -61,7 +61,6 @@
 					<button class="layui-btn layui-btn-normal layui-btn-sm data-add-btn" lay-event="add"><i class="layui-icon layui-icon-add-1"></i>添加 </button>
 					<button class="layui-btn layui-btn-danger layui-btn-sm data-delete-btn" lay-event="delete"><i class="layui-icon"></i>删除</button>
 				</div>
-				</div>
 			</script>
 
 			<!-- 3.表格区域 -->
@@ -72,14 +71,15 @@
 				<a class="layui-btn layui-btn-normal layui-btn-xs data-count-edit" lay-event="edit">编辑</a>
 				<a class="layui-btn layui-btn-xs layui-btn-danger data-count-delete" lay-event="delete">删除</a>
 			</script>
-
 		</div>
 	</div>
 	<script src="../../static/lib/jquery-3.4.1/jquery-3.4.1.min.js" charset="utf-8"></script>
 	<script src="../../static/lib/layui-v2.6.3/layui.js" charset="utf-8"></script>
 	<script th:inline="javascript">
+		function refreshTable(){
+			$("#btn-search").click();
+		};
 		var contextPath = [[@{/}]];
-
 		// 监听表单
 		layui.use(['form', 'table'], function () {
 			var $ = layui.jquery,
@@ -181,22 +181,16 @@
 								layer.msg(response.msg,{
 									icon:1,
 									time:1000
-								},function (){
-									// 关闭弹出层
-									var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层索引
-									parent.layer.close(index);//执行关闭
 								})
+								//刷新表格
+								refreshTable();
 							}else {
 								//失败则提示错误信息，同时关闭窗口
 								layer.msg(response.msg, {
 									icon: 2,
 									anim: 6,
 									time: 2000
-								},function (){
-									// 关闭弹出层
-									var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层索引
-									parent.layer.close(index);//执行关闭
-								});
+								})
 							}
 						});
 						return false;
@@ -206,7 +200,7 @@
 
 			//监听表格复选框选择
 			table.on('checkbox(currentTableFilter)', function (obj) {
-				//console.log(obj)
+				console.log(obj)
 			});
 
 			table.on('tool(currentTableFilter)', function (obj) {
@@ -227,13 +221,30 @@
 					});
 					return false;
 				} else if (obj.event === 'delete') {
-					layer.confirm('真的删除行么', function (index) {
-						obj.del();
-						layer.close(index);
+					layer.confirm('您确认删除选中记录:'+data.name + '?', function (index) {
+						var url = contextPath + "employee/delete/"+data.eid;
+						var params ={_method:"DELETE"}
+						$.post(url, params ,function(response){
+							if(response.code === 0){
+								//成功提示
+								layer.msg(response.msg,{
+									icon:1,
+									time:1000
+								});
+								//刷新表格
+								refreshTable();
+							}else {
+								//失败则提示错误信息，同时关闭窗口
+								layer.msg(response.msg, {
+									icon: 2,
+									anim: 6,
+									time: 2000
+								});
+							}
+						});
 					});
 				}
 			});
-
 		});
 	</script>
 

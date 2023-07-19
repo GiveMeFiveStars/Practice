@@ -3,6 +3,8 @@ package com.system.mapper;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
+import com.system.VO.CircleVO;
+import com.system.VO.EmployeeBarVo;
 import com.system.pojo.Employee;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Param;
@@ -21,7 +23,10 @@ import java.util.Map;
 */
 @Repository
 public interface EmployeeMapper extends BaseMapper<Employee> {
-
+    @Select("select position as name,count(e_id) as count from employee group by position")
+    List<EmployeeBarVo> findAllEmployeeBarVO();
+    @Select("select e_sex as name,count(e_id) as value from employee group by e_sex")
+    List<CircleVO> findAllCircleVO();
 }
 
 

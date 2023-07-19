@@ -7,9 +7,9 @@ import com.system.mapper.CargoMapper;
 import org.springframework.stereotype.Service;
 
 /**
-* @author 21628
+* @author Alex Mercer
 * @description 针对表【cargo(货物信息)】的数据库操作Service实现
-* @createDate 2023-07-16 09:57:54
+* @createDate 2023-07-19 15:32:53
 */
 @Service
 public class CargoServiceImpl extends ServiceImpl<CargoMapper, Cargo>

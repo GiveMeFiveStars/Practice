@@ -83,6 +83,8 @@
 							icon:1,
 							time:1000
 						},function (){
+							// 刷新表格
+							parent.refreshTable();
 							// 关闭弹出层
 							var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层索引
 							parent.layer.close(index);//执行关闭

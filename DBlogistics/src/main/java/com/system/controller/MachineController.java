@@ -5,9 +5,11 @@ import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.system.VO.DataVO;
+import com.system.VO.RoseVO;
 import com.system.mapper.MachineMapper;
 import com.system.pojo.Machine;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,8 +19,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@RestController
-@RequestMapping("Machine")
+@Controller
+@RequestMapping("machine")
 public class MachineController {
     @Autowired
     //创建MachineMapper对象，对数据库进行操作！
@@ -28,6 +30,12 @@ public class MachineController {
     public DataVO<Object> insert(Machine param) {
         machineMapper.insert(param);
         return DataVO.success("添加成功!");
+    }
+    //实现图表操作
+    @RequestMapping("/RoseVO")
+    @ResponseBody
+    public List<RoseVO> getRoseVO(){
+        return machineMapper.findRoseVO();
     }
     //实现”查“操作！显示表中所有表项！
     @GetMapping("/select1")

@@ -37,15 +37,6 @@ public class CommonController {
     }
 
     /**
-     * 车辆管理界面转发
-     * @return
-     */
-    @GetMapping("/vehicle")
-    public String vehicle(){
-        return "page/vehicle";
-    }
-
-    /**
      * 统计分析界面转发
      * @return
      */
@@ -74,14 +65,6 @@ public class CommonController {
         return "page/companyProfile";
     }
 
-    /**
-     * 货物管理界面转发
-     * @return
-     */
-    @GetMapping("/cargo")
-    public String cargo(){
-        return "page/cargo";
-    }
 
     /**
      * 用户密码修改界面转发
