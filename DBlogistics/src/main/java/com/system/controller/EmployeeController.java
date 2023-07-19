@@ -5,6 +5,8 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.system.VO.BarVo;
+import com.system.VO.CircleVO;
 import com.system.VO.DataVO;
 import com.system.mapper.CompanyMapper;
 import com.system.mapper.EmployeeMapper;
@@ -35,7 +37,8 @@ public class EmployeeController {
     @Autowired
     //创建EmployeeService对象，对数据库进行操作！
     CompanyMapper companyMapper;
-
+    @Autowired
+    EmployeeService employeeService;
     /**
      * 员工管理界面转发
      * @return
@@ -113,6 +116,16 @@ public class EmployeeController {
         employeeMapper.insert(param);
         return DataVO.success("添加成功");
     }
+    //实现图表操作
+    @RequestMapping("/barVO")
+    @ResponseBody
+    public BarVo getBarVo(){
+        return employeeService.getBarVo();
+    }
+    //实现圆环表操作
+    @RequestMapping("/circleVO")
+    @ResponseBody
+    public List<CircleVO> getCircleVO(){return employeeMapper.findAllCircleVO();}
 
     /**
      * 根据主键删除表项

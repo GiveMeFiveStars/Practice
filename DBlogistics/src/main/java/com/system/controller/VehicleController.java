@@ -5,9 +5,11 @@ import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.system.VO.DataVO;
+import com.system.VO.pieVO;
 import com.system.mapper.VehicleMapper;
 import com.system.pojo.Employee;
 import com.system.pojo.Vehicle;
+import com.system.service.VehicleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,6 +24,8 @@ public class VehicleController {
     @Autowired
     //创建PlaceMapper对象，对数据库进行操作！
     VehicleMapper vehicleMapper;
+    @Autowired
+    VehicleService vehicleService;
     /**
      * 车辆管理界面转发
      * @return
@@ -30,7 +34,12 @@ public class VehicleController {
     public String vehicle(){
         return "page/vehicle";
     }
-
+    //实现表操作
+    @RequestMapping("/pieVO")
+    @ResponseBody
+    public List<pieVO> getpieVO(){
+        return vehicleService.getpieVO();
+    }
     /**
      * 车辆信息编辑界面转发
      * @return

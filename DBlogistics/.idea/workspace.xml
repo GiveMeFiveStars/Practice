@@ -5,28 +5,26 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5639cb69-4aea-4206-8018-6d82caf88ef7" name="更改" comment="u">
-      <change beforePath="$PROJECT_DIR$/.idea/mybatisx/templates.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/mybatisx/templates.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/system/controller/CargoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/system/controller/CargoController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/system/controller/CommonController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/system/controller/CommonController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/system/controller/CompanyController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/system/controller/CompanyController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/system/controller/EmployeeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/system/controller/EmployeeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/system/controller/MachineController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/system/controller/MachineController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/system/controller/VehicleController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/system/controller/VehicleController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/system/mapper/CargoMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/system/mapper/CargoMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/system/pojo/Cargo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/system/pojo/Cargo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/system/service/CargoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/system/service/CargoService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/system/service/impl/CargoServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/system/service/impl/CargoServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/CargoMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/CargoMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/page/cargo.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/page/cargo.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/page/company.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/page/company.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/page/companyManagement/add.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/page/companyManagement/add.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/page/employeeManagement.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/page/employeeManagement.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/page/vehicle.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/page/vehicle.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/system/controller/CargoController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/system/controller/CargoController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/system/controller/CommonController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/system/controller/CommonController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/system/controller/CompanyController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/system/controller/CompanyController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/system/mapper/EmployeeMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/system/mapper/EmployeeMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/system/mapper/MachineMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/system/mapper/MachineMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/system/mapper/VehicleMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/system/mapper/VehicleMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/system/service/EmployeeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/system/service/EmployeeService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/system/service/VehicleService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/system/service/VehicleService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/system/service/impl/EmployeeServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/system/service/impl/EmployeeServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/system/service/impl/VehicleServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/system/service/impl/VehicleServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/page/statistics.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/page/statistics.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/system/controller/EmployeeController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/system/controller/EmployeeController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/system/controller/MachineController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/system/controller/MachineController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/system/controller/VehicleController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/system/controller/VehicleController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/system/mapper/EmployeeMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/system/mapper/EmployeeMapper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/system/mapper/MachineMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/system/mapper/MachineMapper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/system/mapper/VehicleMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/system/mapper/VehicleMapper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/system/service/impl/EmployeeServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/system/service/impl/EmployeeServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/system/service/impl/VehicleServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/system/service/impl/VehicleServiceImpl.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,23 +42,29 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;E:/DBlogistics&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;spring.configuration.checksum&quot;: &quot;1d3cd9f52669a56417e2a935f25e10e6&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "X:/GitHub repository/Practice/DBlogistics/src/main/resources/templates/page",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "spring.configuration.checksum": "1d3cd9f52669a56417e2a935f25e10e6",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="X:\GitHub repository\Practice\DBlogistics\src\main\resources\templates\page" />
+      <recent name="X:\GitHub repository\Practice\DBlogistics\src\main\java\com\system\VO" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="LogisticApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="DBlogistic" />
@@ -83,7 +87,7 @@
       <workItem from="1689688686471" duration="1211000" />
       <workItem from="1689689985704" duration="3767000" />
       <workItem from="1689697304481" duration="4744000" />
-      <workItem from="1689727835585" duration="17732000" />
+      <workItem from="1689727835585" duration="19211000" />
     </task>
     <servers />
   </component>

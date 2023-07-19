@@ -41,15 +41,20 @@
 		<div class="layui-row layui-col-space15">
 			<!-- 玫瑰图(每个工种的饼图) -->
 			<div class="layui-col-xs12 layui-col-md4">
-				<div id="echarts-pies" style="background-color:#ffffff;min-height:400px;padding: 10px"></div>
+				<div id="echarts-pies" style="background-color:#ffffff;min-height:300px;padding: 10px"></div>
 			</div>
 			<!-- 柱状图 -->
 			<div class="layui-col-xs12 layui-col-md8">
 				<div id="echarts-dataset" style="background-color:#ffffff;min-height:300px;padding: 10px"></div>
 			</div>
+
 			<!-- 饼图 -->
-			<div class="layui-col-xs12 layui-col-md8">
-				<div id="echarts-map" style="background-color:#ffffff;min-height:300px;padding: 10px"></div>
+			<div class="layui-col-xs12 layui-col-md6">
+				<div id="echarts-map" style="background-color:#ffffff;min-height:400px;padding: 10px"></div>
+			</div>
+			<!--圆环图-->
+			<div class="layui-col-xs12 layui-col-md6">
+				<div id="echarts-circle" style="background-color:#ffffff;min-height:400px;padding: 10px"></div>
 			</div>
 		</div>
 	</div>
@@ -65,128 +70,182 @@
 			
 			// 基于准备好的dom，初始化echarts实例
 			// 玫瑰图表(每个工种的饼图)
-			var echartsPies = echarts.init(document.getElementById('echarts-pies'), 'walden');
-			var optionPies = {
-				title: {
-					text: '轩然公司职位人数',
-					left: 'center'
-				},
-				tooltip: {
-					trigger: 'item',
-					formatter: '{a} {b} : {c} ({d}%)'
-				},
-				legend: {
-					orient: 'vertical',
-					left: 'left',
-					data: ['快递员', '技术人员', '货车司机', '仓库管理员', '修理工']
-				},
-				series: [
-					{
-						name: '访问来源',
-						type: 'pie',
-						radius: '55%',
-						center: ['50%', '60%'],
-						roseType: 'radius',
-						data: [
-							{value: 335, name: '技术人员'},
-							{value: 310, name: '快递员'},
-							{value: 234, name: '货车司机'},
-							{value: 135, name: '仓库管理员'},
-							{value: 368, name: '修理工'}
-						],
-						emphasis: {
-							itemStyle: {
-								shadowBlur: 10,
-								shadowOffsetX: 0,
-								shadowColor: 'rgba(0, 0, 0, 0.5)'
-							}
-						}
-					}
-				]
-			};
+			$(function(){
+				$.ajax({
+					type: 'POST',
+					url: contextPath + "machine/RoseVO",
+					success: function (data) {
+						var echartsPies = echarts.init(document.getElementById('echarts-pies'), 'walden');
+						var optionPies = {
+							title: {
+								text: '机电类型分布',
+								left: 'center'
+							},
+							tooltip: {
+								trigger: 'item',
+								formatter: '{a} <br/>{b} : {c} ({d}%)'
+							},
+
+							series: [
+								{
+									name: '访问来源',
+									type: 'pie',
+									radius: '55%',
+									center: ['50%', '60%'],
+									roseType: 'radius',
+									data: data.sort(function (a,b) {
+										return a.value - b.value;
+									}),
+									emphasis: {
+										itemStyle: {
+											shadowBlur: 10,
+											shadowOffsetX: 0,
+											shadowColor: 'rgba(0, 0, 0, 0.5)'
+										}
+									}
+								}
+							]
+						};
+						echartsPies.setOption(optionPies);
+					},
+
+				})
+			})
+
 			// 使用刚指定的配置项和数据显示图表。
-			echartsPies.setOption(optionPies);
-
-			// 柱状图
-			var echartsDataset = echarts.init(document.getElementById('echarts-dataset'), 'walden');
-			var optionDataset = {
-				title: {
-					text: '轩然公司工资分布',
-					left: 'center'
-				},
-				legend: {},
-				tooltip: {},
-				dataset: {
-					dimensions: ['product', '2015', '2016', '2017'],
-					source: [
-						{product: 'Matcha Latte', '2015': 43.3, '2016': 85.8, '2017': 93.7},
-						{product: 'Milk Tea', '2015': 83.1, '2016': 73.4, '2017': 55.1},
-						{product: 'Cheese Cocoa', '2015': 86.4, '2016': 65.2, '2017': 82.5},
-						{product: 'Walnut Brownie', '2015': 72.4, '2016': 53.9, '2017': 39.1}
-					]
-				},
-				xAxis: {type: 'category'},
-				yAxis: {},
-
-				series: [
-					{type: 'bar'},
-					{type: 'bar'},
-					{type: 'bar'}
-				],
-				xAxis: {
-				   type: 'category',
-				   data: ['[5k,8k]', '(8k,11k]', '(11k,14k]', '(14k,17k]', '(17k,20k]', '(20k,23k]', 'more']
-				},
-				yAxis: {
-				   type: 'value'
-				},
-				series: [
-				   {
-				    data: [120, 200, 150, 80, 70, 110, 130],
-				    type: 'bar'
-				  }
-				]
-			};
-
-			echartsDataset.setOption(optionDataset);
 
 
-			// 男女比例的图
-			var echartsMap = echarts.init(document.getElementById('echarts-map'), 'walden');
-			var optionMap = {
-				  title: {
-				    text: '轩然公司男女比例',
-				    subtext: '员工',
-				    left: 'center'
-				  },
-				  tooltip: {
-				    trigger: 'item'
-				  },
-				  legend: {
-				    orient: 'vertical',
-				    left: 'left'
-				  },
-				  series: [
-				    {
-				      name: 'Access From',
-				      type: 'pie',
-				      radius: '50%',
-				      data: [
-				        { value: 1048, name: '男' },
-				        { value: 735, name: '女' }
-				      ],
-				      emphasis: {
-				        itemStyle: {
-				          shadowBlur: 10,
-				          shadowOffsetX: 0,
-				          shadowColor: 'rgba(0, 0, 0, 0.5)'
-				        }
-				      }
-				    }
-				  ]
-			};
+			//轩然员工职位分布
+			$(function(){
+				$.ajax({
+					type: 'POST',
+					url: contextPath + "employee/barVO",
+					success: function (data) {
+						var echartsDataset = echarts.init(document.getElementById('echarts-dataset'), 'walden');
+						var optionDataset = {
+							title: {
+								text: '轩然公司职位人数',
+								left: 'center'
+							},
 
-			echartsMap.setOption(optionMap);
+							xAxis: {type: 'category',
+								data:data.names
+							},
+
+							yAxis: {
+								type: 'value'
+							},
+							series: [
+								{
+									data: data.values,
+									type: 'bar'
+								}
+							]
+						};
+						echartsDataset.setOption(optionDataset);
+					},
+				})
+			})
+
+
+			//男女比例的图表
+			$(function(){
+				$.ajax({
+					type: 'POST',
+					url: contextPath + "employee/circleVO",
+					success: function (data) {
+						var echartsCircle = echarts.init(document.getElementById('echarts-circle'), 'walden');
+						var optionCircle = {
+							title: {
+								text: '轩然公司男女比例',
+								left: 'right'
+							},
+							legend: {
+								orient: 'vertical',
+								x: 'left',
+								data: ['男', '女']
+							},
+							series: [
+								{
+									type: 'pie',
+									radius: ['50%', '70%'],
+									avoidLabelOverlap: false,
+									label: {
+										show: false,
+										position: 'center'
+									},
+									labelLine: {
+										show: false
+									},
+									emphasis: {
+										label: {
+											show: true,
+											fontSize: '30',
+											fontWeight: 'bold'
+										}
+									},
+									data: data.sort(function (a,b) {
+										return a.value - b.value;
+									}),
+									color: ['#ffb6c1', '#808080']
+								}
+							]
+						};
+						echartsCircle.setOption(optionCircle);
+					},
+
+				})
+			})
+
+
+
+
+			// 车辆状态的图
+			$(function(){
+				$.ajax({
+					type: 'POST',
+					url: contextPath + "vehicle/pieVO",
+					success: function (data) {
+						var echartsMap = echarts.init(document.getElementById('echarts-map'), 'walden');
+						var optionMap = {
+							title: {
+								text: '车辆状态',
+								subtext: '车辆',
+								left: 'center'
+							},
+							tooltip: {
+								trigger: 'item'
+							},
+							legend: {
+								orient: 'vertical',
+								left: 'left'
+							},
+							series: [
+								{
+									name: 'Access From',
+									type: 'pie',
+									radius: '50%',
+									data: data.sort(function (a,b) {
+										return a.value - b.value;
+									}),
+									emphasis: {
+										itemStyle: {
+											shadowBlur: 10,
+											shadowOffsetX: 0,
+											shadowColor: 'rgba(0, 0, 0, 0.5)'
+										}
+									}
+								}
+							]
+						};
+						echartsMap.setOption(optionMap);
+					},
+
+				})
+			})
+
+
+
 
 
 			// echarts 窗口缩放自适应
