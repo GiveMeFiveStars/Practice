@@ -47,13 +47,13 @@
 					</li>
 					
 					<li class="layui-nav-item layuimini-setting">
-						<a href="javascript:;">admin</a>
+						<a href="javascript:;" th:text="${session.userinfo.getAName()}"></a>
 						<dl class="layui-nav-child">
+<!--							<dd>-->
+<!--								<a href="javascript:;" class="user-setting" data-title="基本资料" data-icon="fa fa-gears">基本资料<span class="layui-badge-dot"></span></a>-->
+<!--							</dd>-->
 							<dd>
-								<a href="javascript:;" layuimini-content-href="page/admin/user-setting.html" data-title="基本资料" data-icon="fa fa-gears">基本资料<span class="layui-badge-dot"></span></a>
-							</dd>
-							<dd>
-								<a href="javascript:;" layuimini-content-href="page/admin/user-password.html" data-title="修改密码" data-icon="fa fa-gears">修改密码</a>
+								<a href="javascript:;" class="user-password" data-title="修改密码" data-icon="fa fa-gears">修改密码</a>
 							</dd>
 							<dd>
 								<hr>
@@ -152,6 +152,20 @@
 			$('.login-out').on("click", function () {
 				layer.msg('退出登录成功', function () {
 					window.location = 'login';
+				});
+			});
+			$('.user-password').on("click", function () {
+				var index = layer.open({
+					title: '修改密码',
+					type: 2,
+					shade: 0.2,
+					maxmin:true,
+					shadeClose: true,
+					area: ['80%', '80%'],
+					content: contextPath +'userPassword',
+				});
+				$(window).on("resize", function () {
+					layer.full(index);
 				});
 			});
 		});

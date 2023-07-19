@@ -6,8 +6,12 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.system.VO.DataVO;
 import com.system.VO.pieVO;
+import com.system.mapper.EmployeeMapper;
+import com.system.mapper.StashMapper;
 import com.system.mapper.VehicleMapper;
+import com.system.pojo.Company;
 import com.system.pojo.Employee;
+import com.system.pojo.Stash;
 import com.system.pojo.Vehicle;
 import com.system.service.VehicleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +28,10 @@ public class VehicleController {
     @Autowired
     //创建PlaceMapper对象，对数据库进行操作！
     VehicleMapper vehicleMapper;
+    @Autowired
+    EmployeeMapper employeeMapper;
+    @Autowired
+    StashMapper stashMapper;
     @Autowired
     VehicleService vehicleService;
     /**
@@ -51,7 +59,36 @@ public class VehicleController {
 //        model.addAttribute("cIdList",vehicleMapper.selectList(null));
 //        return "page/vehicle/edit";
 //    }
-
+    /**
+     * 员工信息添加界面转发
+     * @return
+     */
+    @GetMapping("/add")
+    @Transactional
+    public String vehicleAdd(Model model){
+        List<Employee> employeelist =employeeMapper.selectList(new QueryWrapper<Employee>().eq("position","货车司机"));
+        model.addAttribute("employeelist",employeelist);
+        List<Stash> stashList =stashMapper.selectList(null);
+        model.addAttribute("stashList",stashList);
+        return "page/vehicle/add";
+    }
+    @RequestMapping("/add/insert")
+    @ResponseBody
+    //实现“增“操作
+    public DataVO<Object> insert(Vehicle param) {
+        vehicleMapper.insert(param);
+        return DataVO.success("添加成功");
+    }
+    @GetMapping("/edit/{id}")
+    public String getvehicleById(@PathVariable("id")String id,Model model){
+        List<Employee> employeelist =employeeMapper.selectList(new QueryWrapper<Employee>().eq("position","货车司机"));
+        model.addAttribute("employeelist",employeelist);
+        List<Stash> stashList =stashMapper.selectList(null);
+        model.addAttribute("stashList",stashList);
+        Vehicle vehicle = vehicleMapper.selectById(id);
+        model.addAttribute("vehicle",vehicle);
+        return "page/vehicle/edit";
+    }
     /**
      * 编辑操作更新数据库！
      * @param param
@@ -64,23 +101,11 @@ public class VehicleController {
         //根据主键进行查询修改，主键不能为空！
         wrapper.eq("v_id", param.getVId());
         //传入不为空的元素更改！
-        if (param.getVId() != null) {
-            wrapper.like("v_id", param.getVId());
-        }
-        if (param.getVType() != null) {
-            wrapper.like("v_type", param.getVType());
-        }
-        if (param.getVStatus() != null) {
-            wrapper.like("v_status", param.getVStatus());
-        }
         if (param.getStashId() != null) {
             wrapper.like("stash_id", param.getStashId());
         }
         if (param.getEId() != null) {
             wrapper.like("e_id", param.getEId());
-        }
-        if (param.getLicenseId() != null) {
-            wrapper.like("license_id", param.getLicenseId());
         }
         if (param.getTLimit() != null) {
             wrapper.like("t_limit", param.getTLimit());

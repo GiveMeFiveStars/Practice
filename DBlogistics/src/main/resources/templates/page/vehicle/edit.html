@@ -18,15 +18,13 @@
 	<div class="layui-form layuimini-form">
 		<!--  车辆所属仓库-->
 		<div class="layui-form-item">
-			<label class="layui-form-label">仓库名</label>
+			<label class="layui-form-label">仓库编号</label>
 			<div class="layui-input-inline">
-				<select name="stash_id" lay-verify="" lay-search>
-					<option value ="">请选择所属仓库名字</option>
-					<!-- 可以自己设置 -->
-					<option value="1247">狼堡仓库</option>
-					<option value="4563">青青草原仓库</option>
-					<option value="5436">靠谱仓库</option>
-					
+				<select th:field="*{E}">.0
+					<option value="">请选择公司名称</option>
+					<option th:each="stash:${stashList}" th:value="${stash.stashId}">
+						<span th:text="${stash.SName}"></span>
+					</option>
 				</select>
 			</div>
 		</div>
@@ -34,8 +32,8 @@
 		<div class="layui-form-item">
 			<label class="layui-form-label">驾驶员</label>
 				<div class="layui-input-inline">
-					<select name="e_id" lay-verify="" lay-search>
-						<option value ="">请选择一个驾驶员</option>
+					<select name="eId" lay-verify="" lay-search>
+						<option value ="">请选择一个驾驶员编号</option>
 						<!-- 可以自己设置 -->
 						<option value="1004">1004_章君</option>
 						<option value="1009">1009_叶院</option>
@@ -52,7 +50,7 @@
 		<div class="layui-form-item">
 			<label class="layui-form-label">有效期限</label>
 			<div class="layui-input-block">
-				<input type="text" name="t_limit" lay-verify="required" lay-reqtext="有效期限不能为空" placeholder="请输入有效期限" value="" class="layui-input">
+				<input type="text" name="tLimit" lay-verify="required" lay-reqtext="有效期限不能为空" placeholder="请输入有效期限" value="" class="layui-input">
 			</div>
 		</div>
 		
@@ -68,18 +66,31 @@
 
 			//监听提交
 			form.on('submit(saveBtn)', function (data) {
-				var index = layer.alert(JSON.stringify(data.field), {
-					title: '最终的提交信息'
-				}, function () {
-
-					// 关闭弹出层
-					layer.close(index);
-
-					var iframeIndex = parent.layer.getFrameIndex(window.name);
-					parent.layer.close(iframeIndex);
-
+				var url = contextPath + "vehicle"
+				console.log(data.field)//当前容器所有表单字段
+				//异步请求提交数据
+				$.post(url, data.field,function(response){
+					if(response.code == 0){
+						//成功提示
+						layer.msg(response.msg,{
+							icon:1,
+							time:1000
+						},function (){
+							// 刷新表格
+							parent.refreshTable();
+							// 关闭弹出层
+							var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层索引
+							parent.layer.close(index);//执行关闭
+						})
+					}else {
+						//失败则提示错误信息，窗口不关闭
+						layer.msg(response.msg, {
+							icon: 2,
+							anim: 6,
+							time: 2000
+						});
+					}
 				});
-
 				return false;
 			});
 

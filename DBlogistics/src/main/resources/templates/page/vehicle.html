@@ -23,28 +23,28 @@
 							<div class="layui-inline">
 								<label class="layui-form-label">车牌号</label>
 								<div class="layui-input-inline">
-									<input type="text" name="v_id" autocomplete="off" class="layui-input">
+									<input type="text" name="vId" autocomplete="off" class="layui-input">
 								</div>
 							</div>
 							<!-- 车辆状态板块 -->
 							<div class="layui-inline">
 								<label class="layui-form-label">车辆状态</label>
 								<div class="layui-input-inline">
-									<input type="text" name="v_status" autocomplete="off" class="layui-input">
+									<input type="text" name="vStatus" autocomplete="off" class="layui-input">
 								</div>
 							</div>
 							<!-- 所属仓库板块 -->
 							<div class="layui-inline">
 								<label class="layui-form-label">所属仓库</label>
 								<div class="layui-input-inline">
-									<input type="text" name="stash_id" autocomplete="off" class="layui-input">
+									<input type="text" name="stashId" autocomplete="off" class="layui-input">
 								</div>
 							</div>
 							<!-- 驾驶员编号板块 -->
 							<div class="layui-inline">
 								<label class="layui-form-label">驾驶员编号</label>
 								<div class="layui-input-inline">
-									<input type="text" name="e_id" autocomplete="off" class="layui-input">
+									<input type="text" name="eId" autocomplete="off" class="layui-input">
 								</div>
 							</div>
 							<div class="layui-inline">
@@ -213,7 +213,7 @@
 						maxmin:true,
 						shadeClose: true,
 						area: ['80%', '80%'],
-						content: contextPath + 'vehicle/edit/'+ data.eid
+						content: contextPath + 'vehicle/edit/'+ data.vid
 					});
 					$(window).on("resize", function () {
 						layer.full(index);

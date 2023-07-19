@@ -65,14 +65,7 @@ public class CommonController {
         return "page/admin/user-password";
     }
 
-    /**
-     * 用户基本信息界面转发
-     * @return
-     */
-    @GetMapping("/userSetting")
-    public String userSetting(){
-        return "page/admin/user-setting";
-    }
+
     /**
      * 验证码功能实现
      */
