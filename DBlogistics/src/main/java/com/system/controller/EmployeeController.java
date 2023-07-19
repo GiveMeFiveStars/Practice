@@ -5,6 +5,8 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.system.VO.BarVo;
+import com.system.VO.CircleVO;
 import com.system.VO.DataVO;
 import com.system.mapper.CompanyMapper;
 import com.system.mapper.EmployeeMapper;
@@ -28,10 +30,30 @@ public class EmployeeController {
     @Autowired
     //创建EmployeeMapper对象，对数据库进行操作！
     EmployeeMapper employeeMapper;
+    //创建companyMapper对象
     @Autowired
-    //创建EmployeeService对象，对数据库进行操作！
     CompanyMapper companyMapper;
+    //创建EmployeeService对象，对数据库进行操作！
+    @Autowired
+    EmployeeService employeeService;
 
+    /**
+     * 实现图表操作
+     * @return
+     */
+    @RequestMapping("/barVO")
+    @ResponseBody
+    public BarVo getBarVo(){
+        return employeeService.getBarVo();
+    }
+
+    /**
+     * 实现圆环表操作
+      * @return
+     */
+    @RequestMapping("/circleVO")
+    @ResponseBody
+    public List<CircleVO> getCircleVO(){return employeeMapper.findAllCircleVO();}
     /**
      * 员工管理界面转发
      * @return
@@ -63,6 +85,12 @@ public class EmployeeController {
         model.addAttribute("cIdList",companyMapper.selectList(null));
         return "page/employeeManagement/edit";
     }
+
+    /**
+     * 编辑操作更新数据库！
+     * @param employee
+     * @return
+     */
     @PostMapping  ("")
     @ResponseBody
     public DataVO<Object> updateEmployee(Employee employee){
@@ -90,7 +118,13 @@ public class EmployeeController {
         }
         employeeMapper.update(null, wrapper);
         return DataVO.success("员工信息修改成功!");
-}
+    }
+
+    /**
+     * 添加操作更新数据库
+     * @param param
+     * @return
+     */
     @RequestMapping("/add/insert")
     @ResponseBody
     //实现“增“操作
@@ -104,11 +138,7 @@ public class EmployeeController {
         employeeMapper.insert(param);
         return DataVO.success("添加成功");
     }
-    //实现”查“操作！显示表中所有表项！
-    @GetMapping("/select1")
-    public List<Employee> select1(){
-      return employeeMapper.selectList(null);
-    }
+
     /**
      * 根据主键删除表项
      */
@@ -128,58 +158,6 @@ public class EmployeeController {
             return DataVO.fail("删除失败,未查到该数据");
         }
     }
-
-    /**
-     * 编辑操作更新数据库！
-     */
-
-    @GetMapping("/update")
-    public void update(Integer eId, //插入各个属性
-                       Integer cId,
-                       String  eName,
-                       Long  ePhone,
-                       String  eSex,
-                       BigDecimal salary,
-                       String position) {
-        UpdateWrapper<Employee> wrapper = new UpdateWrapper<>();
-        //根据主键进行查询修改，主键不能为空！
-        if (eId == null) {
-            return;
-        }
-        wrapper.eq("e_id", eId);
-        //传入不为空的元素更改！
-        if (cId != null) {
-            wrapper.set("c_id", cId);
-        }
-        if (eName != null) {
-            wrapper.set("e_name", eName);
-        }
-        if (ePhone != null) {
-            wrapper.set("e_phone", ePhone);
-        }
-        if (eSex != null) {
-            wrapper.set("e_sex", eSex);
-        }
-        if (salary != null) {
-            wrapper.set("salary", salary);
-        }
-        if (position != null) {
-            wrapper.set("position", position);
-        }
-        employeeMapper.update(null, wrapper);
-    }
-    @GetMapping("/list")
-    @ResponseBody
-    @Transactional
-    public DataVO<Object> listAll(int page,int limit){
-        QueryWrapper<Employee> queryWrapper = new QueryWrapper<>();
-        //分页查询Employee信息
-        Page<Employee>pages=new Page<Employee>(page,limit);
-        IPage<Employee> employeePage = employeeMapper.selectPage(pages, queryWrapper);
-        List<Employee> list = employeePage.getRecords();
-        return DataVO.success(employeePage.getTotal(),list);
-    }
-
     /**
      * 选择查询所有记录
      * @param page

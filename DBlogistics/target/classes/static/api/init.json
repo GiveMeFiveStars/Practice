@@ -55,7 +55,7 @@
           "target": "_self",
 		  "child":[
 			  {
-			    "title": "机电",
+			    "title": "机电设备",
 			    "href": "/machine",
 			    "icon": "fa fa-legal",
 			    "target": "_self"

@@ -6,19 +6,15 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.system.VO.DataVO;
 import com.system.mapper.StashMapper;
+import com.system.pojo.Company;
 import com.system.pojo.Stash;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 @RequestMapping("/stash")
@@ -34,57 +30,26 @@ public class StashController {
     public String stash(){
         return "page/stash";
     }
-    @GetMapping("/insert")
-    //实现“增“操作
+    /**
+     * 机电信息添加界面转发
+     * @return
+     */
+    @GetMapping("/add")
+    @Transactional
+    public String employeeAdd(Model model){
+//        List<Company> cIdList = companyMapper.selectList(null);
+//        model.addAttribute("cIdList",cIdList);
+        return "page/stash/add";
+    }
+    /**
+     * 添加操作更新数据库
+     */
+    @GetMapping("/add/insert")
     public DataVO<Object> insert(Stash param) {
         stashMapper.insert(param);
         return DataVO.success("添加成功!");
     }
-    //实现”查“操作！显示表中所有表项！
-    @GetMapping("/select1")
-    public List<Stash> select1(){return stashMapper.selectList(null);}
-    //根据主键删除表项
-    @GetMapping
-            ("/delete")
-    public void delete(Integer stashId){stashMapper.deleteById(stashId);}
-    @GetMapping("/deleteByMap")
-    public void deleteByMap(Integer stashId,//插入各个属性
-                            String sName,
-                            Integer sArea,
-                            String sAdress,
-                            Integer cId,
-                            String eName,
-                            Date sTime,
-                            Date cTime) {
-        Map<String, Object> map = new HashMap<>();
-        //依次判断各属性值是否为空值
-        if (stashId!= null) {
-            map.put("stash_id", stashId);  //注意！:map的key是数据表的列名
-        }
-        if (sName != null) {
-            map.put("s_name", sName);
-        }
-        if (sArea != null) {
-            map.put("s_area",  sArea);
-        }
-        if (sAdress != null) {
-            map.put("s_adress", sAdress);
-        }
-        if (cId!= null) {
-            map.put("c_id", cId);
-        }
-        if (eName != null) {
-            map.put("e_name", eName);
-        }
-        if (sTime != null) {
-            map.put("s_time", sTime);
-        }
-        if (cTime!= null) {
-            map.put("c_time", cTime);
-        }
-        //删除满足条件的表项
-        stashMapper.deleteByMap(map);
-    }
+
     //改操作！
     @GetMapping("/update")
     public void update(Integer stashId,//插入各个属性
@@ -125,9 +90,27 @@ public class StashController {
         }
        stashMapper.update(null, wrapper);
     }
-
     /**
-     * 查找
+     * 根据主键删除表项
+     */
+    @DeleteMapping("/delete/{ids}")
+    @ResponseBody
+    @Transactional
+    public DataVO<Object> deleteByIds(@PathVariable("ids") String ids){    //传入主键
+        List<Integer> list = new ArrayList<>();
+        String res[]=ids.split(",");
+        for(int i=0;i< res.length;i++){
+            list.add(Integer.parseInt(res[i]));
+        }
+        int result = this.stashMapper.deleteBatchIds(list);
+        if(result > 0){
+            return DataVO.success("删除成功");
+        }else{
+            return DataVO.fail("删除失败,该数据与其他表项关联");
+        }
+    }
+    /**
+     * 选择查询所有记录
      * @param
      * @param page
      * @param limit

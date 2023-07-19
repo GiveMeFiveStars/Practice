@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org" >
 <head>
     <meta charset="utf-8">
     <title>layui</title>
@@ -21,29 +21,29 @@
 			<div class="layui-form-item">
 				<label class="layui-form-label required">机电编号</label>
 				<div class="layui-input-inline">
-					<input type="number" name="m_id" lay-verify="required" lay-reqtext="机电编号不能为空" placeholder="请输入机电编号" value="" class="layui-input">
+					<input type="number" name="mId" lay-verify="required" lay-reqtext="机电编号不能为空" placeholder="请输入机电编号" value="" class="layui-input">
 				</div>
 			</div>
 			<!-- 设备名称 -->
 			<div class="layui-form-item">
 				<label class="layui-form-label required">设备名称</label>
 				<div class="layui-input-inline">
-					<input type="text" name="m_name" lay-verify="required" lay-reqtext="设备名称不能为空" placeholder="请输入设备名称" value="" class="layui-input">
+					<input type="text" name="mName" lay-verify="required" lay-reqtext="设备名称不能为空" placeholder="请输入设备名称" value="" class="layui-input">
 				</div>
 			</div>
 			<!-- 设备型号 -->
 			<div class="layui-form-item">
 				<label class="layui-form-label required">设备型号</label>
 				<div class="layui-input-inline">
-					<input type="text" name="model_num" lay-verify="required" lay-reqtext="设备型号不能为空" placeholder="请输入设备型号" value="" class="layui-input">
+					<input type="text" name="modelNum" lay-verify="required" lay-reqtext="设备型号不能为空" placeholder="请输入设备型号" value="" class="layui-input">
 				</div>
 			</div>
 			<!--  设备所属仓库-->
 			<div class="layui-form-item">
 				<label class="layui-form-label required">仓库名</label>
 				<div class="layui-input-inline">
-					<select name="stash_id" lay-verify="" lay-search>
-						<option value ="">请选择所属仓库名字</option>
+					<select name="stashId" lay-verify="" lay-search>
+						<option value ="">请选择所属仓库id</option>
 						<!-- 可以自己设置 -->
 						<option value="1247">狼堡仓库</option>
 						<option value="4563">青青草原仓库</option>
@@ -56,7 +56,7 @@
 			<div class="layui-form-item">
 				<label class="layui-form-label required">设备状态</label>
 				<div class="layui-input-inline">
-					<select name="v_status" lay-verify="" lay-search>
+					<select name="vStatus" lay-verify="" lay-search>
 						<option value ="">请选择设备状态</option>
 						<!-- 可以自己设置 -->
 						<option value="1">1_仍在使用</option>
@@ -79,26 +79,35 @@
 		var contextPath = [[@{/}]];
 		layui.use(['form'], function () {
 			var form = layui.form,
-				layer = layui.layer,
-				$ = layui.$;
-
+					layer = layui.layer,
+					$ = layui.$;
 			//监听提交
 			form.on('submit(saveBtn)', function (data) {
-				var index = layer.alert(JSON.stringify(data.field), {
-					title: '最终的提交信息'
-				}, function () {
-
-					// 关闭弹出层
-					layer.close(index);
-
-					var iframeIndex = parent.layer.getFrameIndex(window.name);
-					parent.layer.close(iframeIndex);
-
+				var url = contextPath + "machine/add/insert"
+				console.log(data.field)//当前容器所有表单字段
+				//异步请求提交数据
+				$.post(url, data.field,function(response){
+					if(response.code == 0){
+						//成功提示
+						layer.msg(response.msg,{
+							icon:1,
+							time:1000
+						},function (){
+							// 关闭弹出层
+							var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层索引
+							parent.layer.close(index);//执行关闭
+						})
+					}else {
+						//失败则提示错误信息，窗口不关闭
+						layer.msg(response.msg, {
+							icon: 2,
+							anim: 6,
+							time: 2000
+						});
+					}
 				});
-
 				return false;
 			});
-
 		});
 	</script>
 </body>

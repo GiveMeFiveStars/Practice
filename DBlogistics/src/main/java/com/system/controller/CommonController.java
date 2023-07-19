@@ -46,16 +46,6 @@ public class CommonController {
     }
 
 
-
-    /**
-     * 机电界面转发
-     * @return
-     */
-    @GetMapping("/machine")
-    public String machine(){
-        return "page/machine";
-    }
-
     /**
      * 公司简介界面转发
      * @return
