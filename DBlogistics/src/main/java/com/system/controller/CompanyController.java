@@ -46,8 +46,13 @@ public class CompanyController {
     @ResponseBody
     //实现“增“操作
     public DataVO<Object> insert(Company param) {
-        companyMapper.insert(param);
-        return DataVO.success("添加成功!");
+        Company company = companyMapper.selectById(param.getCId());
+        if(company != null){
+            return DataVO.fail("添加失败！此员工ID已经存在！");
+        }else{
+            companyMapper.insert(param);
+            return DataVO.success("添加成功");
+        }
     }
     /**
      * 选择查询所有记录

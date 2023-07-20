@@ -88,7 +88,7 @@
 					{field: 'representativeName',width: 120, title: '法定代表人'},
 					{field: 'caddress', width: 180, title: '公司地址'},
 					{field: 'registeredCapital', width: 120, title: '注册资金', sort: true},
-					{field: 'cphone', width: 180, title: '个人电话'},
+					{field: 'cphone', minWidth: 180, title: '个人电话'},
 				] ],
 				limits: [10, 15, 20, 25, 50, 100],
 				limit: 15,
@@ -107,9 +107,6 @@
 			//监听搜索的模糊查询
 			form.on('submit(data-search-btn)', function (data) {
 				var result = JSON.stringify(data.field);
-				layer.alert(result, {
-					title: '最终的搜索信息'
-				});
 				//执行搜索重载
 				table.reload('currentTableId', {
 					page: {	//重新从第一页开始

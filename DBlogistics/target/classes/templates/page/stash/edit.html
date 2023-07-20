@@ -15,18 +15,20 @@
     </style>
 </head>
 <body>
+  <form class="layui-form layuimini-form" action="" th:object="${stash}">
+	  <input type="hidden" th:field="*{stashId}">
 	<div class="layui-form layuimini-form">
 		<!--  设备所属仓库-->
 		<!-- 仓库管理员 -->
 		<div class="layui-form-item">
 			<label class="layui-form-label">仓库管理员</label>
 				<div class="layui-input-inline">
-					<select name="e_id" lay-verify="" lay-search>
+					<select th:field="*{EName}">
 						<option value ="">请选择一个仓库管理员</option>
 						<!-- 可以自己设置 -->
-						<option value="1005">1005_路云心</option>
-						<option value="1555">1555_姜瑜</option>
-						<option value="5552">5552_邵晓</option>
+						<option value="路云心">1005_路云心</option>
+						<option value="姜瑜">1555_姜瑜</option>
+						<option value="邵晓">5552_邵晓</option>
 						
 					</select>
 				</div>
@@ -47,21 +49,33 @@
 
 			//监听提交
 			form.on('submit(saveBtn)', function (data) {
-				var index = layer.alert(JSON.stringify(data.field), {
-					title: '最终的提交信息'
-				}, function () {
-
-					// 关闭弹出层
-					layer.close(index);
-
-					var iframeIndex = parent.layer.getFrameIndex(window.name);
-					parent.layer.close(iframeIndex);
-
+				var url = contextPath + "stash"
+				console.log(data.field)//当前容器所有表单字段
+				//异步请求提交数据
+				$.post(url, data.field,function(response){
+					if(response.code == 0){
+						//成功提示
+						layer.msg(response.msg,{
+							icon:1,
+							time:1000
+						},function (){
+							// 刷新表格
+							parent.refreshTable();
+							// 关闭弹出层
+							var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层索引
+							parent.layer.close(index);//执行关闭
+						})
+					}else {
+						//失败则提示错误信息，窗口不关闭
+						layer.msg(response.msg, {
+							icon: 2,
+							anim: 6,
+							time: 2000
+						});
+					}
 				});
-
 				return false;
 			});
-
 		});
 	</script>
 </body>

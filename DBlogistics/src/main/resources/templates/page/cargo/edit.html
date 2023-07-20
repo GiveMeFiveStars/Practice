@@ -16,11 +16,13 @@
 </head>
 <body>
 	<div class="layui-form layuimini-form">
+		<form class="layui-form layuimini-form" action="" th:object="${cargo}">
+			<input type="hidden" th:field="*{GId}">
 		<!--  货物状态-->
 		<div class="layui-form-item">
 			<label class="layui-form-label required">货物状态</label>
 			<div class="layui-input-inline">
-				<select name="c_id" lay-verify="" lay-search>
+				<select th:field="*{GType}">
 					<option value ="">请选择一个公司代号</option>
 					<!-- 可以自己设置 -->
 					<option value="1">1_运输中</option>
@@ -33,7 +35,7 @@
 		<div class="layui-form-item">
 			<label class="layui-form-label">仓库名</label>
 			<div class="layui-input-inline">
-				<select name="s_name" lay-verify="" lay-search>
+				<select th:field="*{SName}">
 					<option value ="">请选择所属仓库名字</option>
 					<!-- 可以自己设置 -->
 					<option value="狼堡仓库">狼堡仓库</option>
@@ -47,7 +49,7 @@
 		<div class="layui-form-item">
 			<label class="layui-form-label">车牌号</label>
 			<div class="layui-input-inline">
-				<select name="v_id" lay-verify="" lay-search>
+				<select th:field="*{VId}">
 					<option value ="">请选择所属车辆车牌号</option>
 					<!-- 可以自己设置 -->
 					<option value="川A-40989">川A-40989</option>
@@ -74,21 +76,33 @@
 
 			//监听提交
 			form.on('submit(saveBtn)', function (data) {
-				var index = layer.alert(JSON.stringify(data.field), {
-					title: '最终的提交信息'
-				}, function () {
-
-					// 关闭弹出层
-					layer.close(index);
-
-					var iframeIndex = parent.layer.getFrameIndex(window.name);
-					parent.layer.close(iframeIndex);
-
+				var url = contextPath + "cargo/edit/update"
+				console.log(data.field)//当前容器所有表单字段
+				//异步请求提交数据
+				$.post(url, data.field,function(response){
+					if(response.code == 0){
+						//成功提示
+						layer.msg(response.msg,{
+							icon:1,
+							time:1000
+						},function (){
+							// 刷新表格
+							parent.refreshTable();
+							// 关闭弹出层
+							var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层索引
+							parent.layer.close(index);//执行关闭
+						})
+					}else {
+						//失败则提示错误信息，窗口不关闭
+						layer.msg(response.msg, {
+							icon: 2,
+							anim: 6,
+							time: 2000
+						});
+					}
 				});
-
 				return false;
 			});
-
 		});
 	</script>
 </body>

@@ -10,6 +10,7 @@ import java.util.Date;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  * 车辆信息
@@ -54,6 +55,7 @@ public class Vehicle implements Serializable {
     /**
      * 有效期限
      */
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date tLimit;
 
     @TableField(exist = false)

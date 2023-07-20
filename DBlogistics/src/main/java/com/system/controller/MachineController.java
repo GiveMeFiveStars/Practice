@@ -8,6 +8,7 @@ import com.system.VO.DataVO;
 import com.system.VO.RoseVO;
 import com.system.mapper.MachineMapper;
 import com.system.pojo.Company;
+import com.system.pojo.Employee;
 import com.system.pojo.Machine;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.crypto.Mac;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -32,27 +34,29 @@ public class MachineController {
      * @return
      */
     @GetMapping("")
-    public String stash(){
+    public String machine(){
         return "page/machine";
     }
     /**
-     * 员工信息添加界面转发
+     * 机电信息添加界面转发
      * @return
      */
     @GetMapping("/add")
-    @Transactional
-    public String employeeAdd(Model model){
-//        List<Machine> cIdList = machineMapper.selectList(null);
-//        model.addAttribute("cIdList",cIdList);
+    public String machineAdd(){
         return "page/machine/add";
     }
-    @GetMapping("/add/insert")
+    @PostMapping("/add/insert")
+    @ResponseBody
     //实现“增“操作
     public DataVO<Object> insert(Machine param) {
-        machineMapper.insert(param);
-        return DataVO.success("添加成功!");
+        Machine machine = machineMapper.selectById(param.getMId());
+        if(machine != null){
+            return DataVO.fail("添加失败！此机电ID已经存在！");
+        }else{
+            machineMapper.insert(param);
+            return DataVO.success("添加成功");
+        }
     }
-
     /**
      * 实现图表操作
      * @return
@@ -64,32 +68,37 @@ public class MachineController {
     }
 
     //改操作！
-    @GetMapping("/update")
-    public void update(Integer mId,//插入各个属性
-                       String mName,
-                       String modelNum,
-                       Integer mStatus,
-                       Integer stashId) {
+    /**
+     * 员工信息编辑界面转发
+     * @return
+     */
+    @GetMapping("/edit/{id}")
+    public String getMachineById(@PathVariable("id")String id,Model model){
+        Machine machine = machineMapper.selectById(id);
+        model.addAttribute("machine",machine);
+        return "page/machine/edit";
+    }
+
+    /**
+     * 编辑操作更新数据库！
+     * @param
+     * @return
+     */
+    @PostMapping  ("")
+    @ResponseBody
+    public DataVO<Object> updateMachine(Machine machine){
         UpdateWrapper<Machine> wrapper = new UpdateWrapper<>();
         //根据主键进行查询修改，主键不能为空！
-        if (mId == null) {
-            return;
-        }
-        wrapper.eq("m_id",  mId);
+        wrapper.eq("m_id",machine.getMId() );
         //传入不为空的元素更改！
-        if (mName!= null) {
-            wrapper.set("m_name", mName);
+        if (machine.getStashId()!= null) {
+            wrapper.set("stash_id", machine.getStashId());
         }
-        if (modelNum != null) {
-            wrapper.set("model_num", modelNum);
-        }
-        if (mStatus != null) {
-            wrapper.set("m_status", mStatus);
-        }
-        if (stashId != null) {
-            wrapper.set("stash_id",stashId);
+        if (machine.getMStatus()!= null) {
+            wrapper.set("m_status",machine.getMStatus());
         }
         machineMapper.update(null, wrapper);
+        return DataVO.success("员工信息修改成功!");
     }
     /**
      * 根据主键删除表项

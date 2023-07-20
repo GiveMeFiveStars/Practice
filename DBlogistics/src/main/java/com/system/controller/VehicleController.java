@@ -9,7 +9,6 @@ import com.system.VO.pieVO;
 import com.system.mapper.EmployeeMapper;
 import com.system.mapper.StashMapper;
 import com.system.mapper.VehicleMapper;
-import com.system.pojo.Company;
 import com.system.pojo.Employee;
 import com.system.pojo.Stash;
 import com.system.pojo.Vehicle;
@@ -19,7 +18,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.*;
 
 @Controller
@@ -48,19 +46,9 @@ public class VehicleController {
     public List<pieVO> getpieVO(){
         return vehicleService.getpieVO();
     }
+
     /**
-     * 车辆信息编辑界面转发
-     * @return
-     */
-//    @GetMapping("/edit/{id}")
-//    public String getCompanyById(@PathVariable("id")String id, Model model){
-//        Vehicle vehicle = vehicleMapper.selectById(id);
-//        model.addAttribute("Vehicle",vehicle);
-//        model.addAttribute("cIdList",vehicleMapper.selectList(null));
-//        return "page/vehicle/edit";
-//    }
-    /**
-     * 员工信息添加界面转发
+     *车辆添加界面转发
      * @return
      */
     @GetMapping("/add")
@@ -76,8 +64,13 @@ public class VehicleController {
     @ResponseBody
     //实现“增“操作
     public DataVO<Object> insert(Vehicle param) {
-        vehicleMapper.insert(param);
-        return DataVO.success("添加成功");
+        Vehicle vehicle = vehicleMapper.selectById(param.getVId());
+        if(vehicle != null){
+            return DataVO.fail("添加失败！此员工ID已经存在！");
+        }else{
+            vehicleMapper.insert(param);
+            return DataVO.success("添加成功");
+        }
     }
     @GetMapping("/edit/{id}")
     public String getvehicleById(@PathVariable("id")String id,Model model){

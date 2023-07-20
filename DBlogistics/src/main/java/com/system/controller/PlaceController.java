@@ -73,7 +73,7 @@ public class PlaceController {
         wrapper.eq("p_id",  pId);
         //传入不为空的元素更改！
         if (pName!= null) {
-            wrapper.set("p_name", pName);
+            wrapper.set("pName", pName);
         }
         if (city != null) {
             wrapper.set("city", city);

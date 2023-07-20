@@ -72,6 +72,17 @@
 
 		</div>
 	</div>
+	<script type="text/html" id="convertType">
+		{{#
+		if(d.mstatus == 1){
+		return '使用中';
+		}else if(d.mstatus == 2){
+		return '闲置';
+		}else{
+		return '未知';
+		}
+		}}
+	</script>
 	<script src="../../static/lib/jquery-3.4.1/jquery-3.4.1.min.js" charset="utf-8"></script>
 	<script src="../../static/lib/layui-v2.6.3/layui.js" charset="utf-8"></script>
 	<script th:inline="javascript">
@@ -99,8 +110,8 @@
 					{field: 'mid', width: 150, title: '机电编号',sort: true ,fixed: true},
 					{field: 'mname', width: 150, title: '机电名称',},
 					{field: 'modelNum', width: 150, title: '型号'},
-					{field: 'mstatus', width: 150, title: '机电状态'},
-					{field: 'stashId',width: 150, title: '所属仓库编号'},
+					{field: 'mstatus', width: 150, title: '机电状态',templet:'#convertType',align: "center"},
+					{field: 'stashId',width: 150, title: '所属仓库编号',align: "center"},
 					{title: '操作', minWidth: 150, toolbar: '#currentTableBar', align: "center"}
 				] ],
 				limits: [10, 15, 20, 25, 50, 100],
@@ -210,7 +221,7 @@
 						maxmin:true,
 						shadeClose: true,
 						area: ['80%', '80%'],
-						content: contextPath + 'machine/edit/'+ data.eid
+						content: contextPath + 'machine/edit/'+ data.mid
 					});
 					$(window).on("resize", function () {
 						layer.full(index);

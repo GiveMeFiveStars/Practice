@@ -16,6 +16,12 @@
       "target": "_self",
       "child": [
         {
+          "title": "公司简介",
+          "href": "/companyProfile",
+          "icon": "fa fa-window-maximize",
+          "target": "_self"
+        },
+        {
           "title": "基本管理",
           "href": "",
           "icon": "fa fa-puzzle-piece",
@@ -35,14 +41,14 @@
             }
           ]
         },
-        
+
         {
           "title": "车辆管理",
           "href": "/vehicle",
           "icon": "fa fa-car",
           "target": "_self"
         },
-		{
+        {
           "title": "货物管理",
           "href": "/cargo",
           "icon": "fa fa-truck",
@@ -53,33 +59,27 @@
           "href": "",
           "icon": "fa fa-cubes",
           "target": "_self",
-		  "child":[
-			  {
-			    "title": "机电设备",
-			    "href": "/machine",
-			    "icon": "fa fa-legal",
-			    "target": "_self"
-			  },
-			  {
-			    "title": "仓库",
-			    "href": "/stash",
-			    "icon": "fa fa-home",
-			    "target": "_self"
-			  }
-		  ]
+          "child":[
+            {
+              "title": "机电设备",
+              "href": "/machine",
+              "icon": "fa fa-legal",
+              "target": "_self"
+            },
+            {
+              "title": "仓库",
+              "href": "/stash",
+              "icon": "fa fa-home",
+              "target": "_self"
+            }
+          ]
         },
         {
           "title": "统计分析",
           "href": "/statistics",
           "icon": "fa fa-area-chart",
           "target": "_self"
-        },
-		{
-		  "title": "公司简介",
-		  "href": "/companyProfile",
-		  "icon": "fa fa-window-maximize",
-		  "target": "_self"
-		}
+        }
       ]
     }
   ]

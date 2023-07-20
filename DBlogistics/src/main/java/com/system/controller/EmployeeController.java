@@ -12,9 +12,7 @@ import com.system.mapper.CompanyMapper;
 import com.system.mapper.EmployeeMapper;
 import com.system.pojo.Company;
 import com.system.pojo.Employee;
-import com.system.service.CompanyService;
 import com.system.service.EmployeeService;
-import org.apache.commons.lang3.StringEscapeUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -129,14 +127,13 @@ public class EmployeeController {
     @ResponseBody
     //实现“增“操作
     public DataVO<Object> insert(Employee param) {
-        List<Employee> employees=employeeMapper.selectList(null);
-        for(int i=0;i<employees.size();i++){
-            if(employees.get(i).getEId()==param.getEId()){
-                return DataVO.fail("添加失败！此员工ID已经存在！");
-            }
+        Employee employee = employeeMapper.selectById(param.getEId());
+        if(employee != null){
+            return DataVO.fail("添加失败！此员工ID已经存在！");
+        }else{
+            employeeMapper.insert(param);
+            return DataVO.success("添加成功");
         }
-        employeeMapper.insert(param);
-        return DataVO.success("添加成功");
     }
 
     /**

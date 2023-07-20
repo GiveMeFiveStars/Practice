@@ -7,9 +7,11 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.system.VO.DataVO;
 import com.system.mapper.CargoMapper;
 import com.system.pojo.Cargo;
+import com.system.pojo.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
@@ -37,17 +39,29 @@ public class CargoController {
     public String cargo(){
         return "page/cargo";
     }
-
+    /**
+     * 货物添加界面转发
+     */
+    @GetMapping("/add")
+    public String cargoAdd(){
+        return "page/cargo/add";
+    }
     /**
      * 添加操作更新数据库
      * @param param
      * @return
      */
-    @GetMapping("/add/insert")
+    @RequestMapping   ("/add/insert")
+    @ResponseBody
     //实现“增“操作
     public DataVO<Object> insert(Cargo param) {
-       cargoMapper.insert(param);
-        return DataVO.success("添加成功!");
+        Cargo cargo = cargoMapper.selectById(param.getGId());
+        if(cargo != null){
+            return DataVO.fail("添加失败！此员工ID已经存在！");
+        }else{
+            cargoMapper.insert(param);
+            return DataVO.success("添加成功");
+        }
     }
     /**
      * 根据主键删除表项
@@ -70,6 +84,42 @@ public class CargoController {
             return DataVO.fail("删除失败,未查到该数据");
         }
     }
+    /**
+     * 员工信息编辑界面转发
+     * @return
+     */
+    @GetMapping("/edit/{id}")
+    public String getCargoById(@PathVariable("id")String id, Model model){
+        Cargo cargo = cargoMapper.selectById(id);
+        model.addAttribute("cargo",cargo);
+        return "page/cargo/edit";
+    }
+
+    /**
+     * 编辑操作更新数据库！
+     * @param cargo
+     * @return
+     */
+    @PostMapping ("/edit/update")
+    @ResponseBody
+    public DataVO<Object> updateCargo(Cargo cargo){
+        UpdateWrapper<Cargo> wrapper = new UpdateWrapper<>();
+        //根据主键进行查询修改，主键不能为空！
+        wrapper.eq("g_id", cargo.getGId());
+        //传入不为空的元素更改！
+        if (cargo.getGType() != null) {
+            wrapper.set("g_type", cargo.getGType());
+        }
+        if (cargo.getSName() != null) {
+            wrapper.set("s_name", cargo.getSName());
+        }
+        if (cargo.getVId()!= null) {
+            wrapper.set("v_id", cargo.getVId());
+        }
+        cargoMapper.update(null, wrapper);
+        return DataVO.success("货物信息修改成功!");
+    }
+
     @GetMapping("/selectBy")
     @ResponseBody
     @Transactional

@@ -20,59 +20,50 @@
 			<!-- 机电编号 -->
 			<div class="layui-form-item">
 				<label class="layui-form-label required">机电编号</label>
-				<div class="layui-input-inline">
+				<div class="layui-input-block">
 					<input type="number" name="mId" lay-verify="required" lay-reqtext="机电编号不能为空" placeholder="请输入机电编号" value="" class="layui-input">
 				</div>
 			</div>
 			<!-- 设备名称 -->
 			<div class="layui-form-item">
 				<label class="layui-form-label required">设备名称</label>
-				<div class="layui-input-inline">
+				<div class="layui-input-block">
 					<input type="text" name="mName" lay-verify="required" lay-reqtext="设备名称不能为空" placeholder="请输入设备名称" value="" class="layui-input">
 				</div>
 			</div>
 			<!-- 设备型号 -->
 			<div class="layui-form-item">
 				<label class="layui-form-label required">设备型号</label>
-				<div class="layui-input-inline">
+				<div class="layui-input-block">
 					<input type="text" name="modelNum" lay-verify="required" lay-reqtext="设备型号不能为空" placeholder="请输入设备型号" value="" class="layui-input">
 				</div>
 			</div>
-			<!--  设备所属仓库-->
+			<!-- 设备所属仓库 -->
 			<div class="layui-form-item">
-				<label class="layui-form-label required">仓库名</label>
-				<div class="layui-input-inline">
-					<select name="stashId" lay-verify="" lay-search>
-						<option value ="">请选择所属仓库id</option>
-						<!-- 可以自己设置 -->
-						<option value="1247">狼堡仓库</option>
-						<option value="4563">青青草原仓库</option>
-						<option value="5436">靠谱仓库</option>
-						
-					</select>
+				<label class="layui-form-label required">设备所属仓库</label>
+				<div class="layui-input-block">
+					<input type="text" name="stashId"  lay-reqtext="设备所属仓库不能为空" placeholder="请输入设备型号" value="" class="layui-input">
 				</div>
 			</div>
-			
+			<!-- 设备状态 -->
 			<div class="layui-form-item">
 				<label class="layui-form-label required">设备状态</label>
-				<div class="layui-input-inline">
-					<select name="vStatus" lay-verify="" lay-search>
+				<div class="layui-input-block">
+					<select name="mStatus" lay-verify="" lay-search>
 						<option value ="">请选择设备状态</option>
 						<!-- 可以自己设置 -->
-						<option value="1">1_仍在使用</option>
-						<option value="2">2_报废</option>
-						
+						<option value="1">仍在使用</option>
+						<option value="2">报废</option>
 					</select>
 				</div>
 			</div>
 			
-			<!--  -->
+			<!--保存按钮-->
 			<div class="layui-form-item">
 				<div class="layui-input-block">
-					<button class="layui-btn layui-btn-normal" lay-submit lay-filter="saveBtn">确认保存</button>
+					<button class="layui-btn layui-btn-normal" lay-submit lay-filter="saveBtn">确认添加</button>
 				</div>
 			</div>
-			<!--  -->
 	</div>
 	<script src="../../../static/lib/layui-v2.6.3/layui.js" charset="utf-8"></script>
 	<script th:inline="javascript">

@@ -15,18 +15,19 @@
     </style>
 </head>
 <body>
-	<div class="layui-form layuimini-form">
+   <form class="layui-form layuimini-form" action="" th:object="${machine}">
+	   <input type="hidden" th:field="*{MId}">
+	   <div class="layui-form layuimini-form">
 		<!--  设备所属仓库-->
 		<div class="layui-form-item">
 			<label class="layui-form-label">仓库名</label>
 			<div class="layui-input-inline">
-				<select name="stash_id" lay-verify="" lay-search>
+				<select th:field="*{stashId}">
 					<option value ="">请选择所属仓库名字</option>
 					<!-- 可以自己设置 -->
 					<option value="1247">狼堡仓库</option>
 					<option value="4563">青青草原仓库</option>
 					<option value="5436">靠谱仓库</option>
-					
 				</select>
 			</div>
 		</div>
@@ -34,7 +35,7 @@
 		<div class="layui-form-item">
 			<label class="layui-form-label required">设备状态</label>
 			<div class="layui-input-inline">
-				<select name="v_status" lay-verify="" lay-search>
+				<select th:field="*{MStatus}">
 					<option value ="">请选择设备状态</option>
 					<!-- 可以自己设置 -->
 					<option value="1">1_仍在使用</option>
@@ -58,24 +59,35 @@
 			var form = layui.form,
 				layer = layui.layer,
 				$ = layui.$;
-
 			//监听提交
 			form.on('submit(saveBtn)', function (data) {
-				var index = layer.alert(JSON.stringify(data.field), {
-					title: '最终的提交信息'
-				}, function () {
-
-					// 关闭弹出层
-					layer.close(index);
-
-					var iframeIndex = parent.layer.getFrameIndex(window.name);
-					parent.layer.close(iframeIndex);
-
+				var url = contextPath + "machine"
+				console.log(data.field)//当前容器所有表单字段
+				//异步请求提交数据
+				$.post(url, data.field,function(response){
+					if(response.code == 0){
+						//成功提示
+						layer.msg(response.msg,{
+							icon:1,
+							time:1000
+						},function (){
+							// 刷新表格
+							parent.refreshTable();
+							// 关闭弹出层
+							var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层索引
+							parent.layer.close(index);//执行关闭
+						})
+					}else {
+						//失败则提示错误信息，窗口不关闭
+						layer.msg(response.msg, {
+							icon: 2,
+							anim: 6,
+							time: 2000
+						});
+					}
 				});
-
 				return false;
 			});
-
 		});
 	</script>
 </body>

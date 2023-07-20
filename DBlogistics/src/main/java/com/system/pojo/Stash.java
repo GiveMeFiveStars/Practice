@@ -10,6 +10,7 @@ import java.util.Date;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  * 仓库信息
@@ -54,11 +55,13 @@ public class Stash implements Serializable {
     /**
      * 租赁时间
      */
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date sTime;
 
     /**
      * 截止时间
      */
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date cTime;
 
     @TableField(exist = false)

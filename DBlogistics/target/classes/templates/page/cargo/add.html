@@ -21,7 +21,7 @@
 			<div class="layui-form-item">
 				<label class="layui-form-label required">包裹号</label>
 				<div class="layui-input-inline">
-					<input type="text" name="g_id" lay-verify="required" lay-reqtext="包裹号不能为空" placeholder="请输入包裹号" value="" class="layui-input">
+					<input type="text" name="gId" lay-verify="required" lay-reqtext="包裹号不能为空" placeholder="请输入包裹号" value="" class="layui-input">
 				</div>
 			</div>
 			
@@ -50,21 +50,21 @@
 			<div class="layui-form-item">
 				<label class="layui-form-label required">发件地</label>
 				<div class="layui-input-block">
-					<input type="text" name="departure_place" lay-verify="required" lay-reqtext="发件地不能为空" placeholder="请输入发件地" value="" class="layui-input">
+					<input type="text" name="departurePlace" lay-verify="required" lay-reqtext="发件地不能为空" placeholder="请输入发件地" value="" class="layui-input">
 				</div>
 			</div>
 			<!-- 收件地 -->
 			<div class="layui-form-item">
 				<label class="layui-form-label required">收件地</label>
 				<div class="layui-input-block">
-					<input type="text" name="reach_place" lay-verify="required" lay-reqtext="收件地不能为空" placeholder="请输入收件地" value="" class="layui-input">
+					<input type="text" name="reachPlace" lay-verify="required" lay-reqtext="收件地不能为空" placeholder="请输入收件地" value="" class="layui-input">
 				</div>
 			</div>
 			<!-- 公司代号 -->
 			<div class="layui-form-item">
 				<label class="layui-form-label required">公司代号</label>
 					<div class="layui-input-inline">
-						<select name="c_id" lay-verify="" lay-search>
+						<select name="cId" lay-verify="" lay-search>
 							<option value ="">请选择一个公司代号</option>
 							<!-- 可以自己设置 -->
 							<option value="1">1_中通快递</option>
@@ -81,7 +81,7 @@
 			<div class="layui-form-item">
 				<label class="layui-form-label required">货物状态</label>
 				<div class="layui-input-inline">
-					<select name="g_type" lay-verify="" lay-search>
+					<select name="gType" lay-verify="" lay-search>
 						<option value ="">请选择货物状态</option>
 						<!-- 可以自己设置 -->
 						<option value="1">1_运输中</option>
@@ -94,7 +94,7 @@
 			<div class="layui-form-item">
 				<label class="layui-form-label">仓库名</label>
 				<div class="layui-input-inline">
-					<select name="s_name" lay-verify="" lay-search>
+					<select name="sName" lay-verify="" lay-search>
 						<option value ="">请选择所属仓库名字</option>
 						<!-- 可以自己设置 -->
 						<option value="狼堡仓库">狼堡仓库</option>
@@ -108,7 +108,7 @@
 			<div class="layui-form-item">
 				<label class="layui-form-label">车牌号</label>
 				<div class="layui-input-inline">
-					<select name="v_id" lay-verify="" lay-search>
+					<select name="vId" lay-verify="" lay-search>
 						<option value ="">请选择所属车辆车牌号</option>
 						<!-- 可以自己设置 -->
 						<option value="川A-40989">川A-40989</option>
@@ -136,21 +136,31 @@
 
 			//监听提交
 			form.on('submit(saveBtn)', function (data) {
-				var index = layer.alert(JSON.stringify(data.field), {
-					title: '最终的提交信息'
-				}, function () {
-
-					// 关闭弹出层
-					layer.close(index);
-
-					var iframeIndex = parent.layer.getFrameIndex(window.name);
-					parent.layer.close(iframeIndex);
-
+				var url = contextPath + "cargo/add/insert"
+				console.log(data.field)//当前容器所有表单字段
+				//异步请求提交数据
+				$.post(url, data.field,function(response){
+					if(response.code == 0){
+						//成功提示
+						layer.msg(response.msg,{
+							icon:1,
+							time:1000
+						},function (){
+							// 关闭弹出层
+							var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层索引
+							parent.layer.close(index);//执行关闭
+						})
+					}else {
+						//失败则提示错误信息，窗口不关闭
+						layer.msg(response.msg, {
+							icon: 2,
+							anim: 6,
+							time: 2000
+						});
+					}
 				});
-
 				return false;
 			});
-
 		});
 	</script>
 </body>

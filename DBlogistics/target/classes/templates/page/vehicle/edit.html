@@ -15,12 +15,12 @@
     </style>
 </head>
 <body>
-	<div class="layui-form layuimini-form">
+	<form class="layui-form layuimini-form" action="" th:object="${vehicle}">
 		<!--  车辆所属仓库-->
 		<div class="layui-form-item">
 			<label class="layui-form-label">仓库编号</label>
-			<div class="layui-input-inline">
-				<select th:field="*{E}">.0
+			<div class="layui-input-block">
+				<select th:field="*{stashId}">.0
 					<option value="">请选择公司名称</option>
 					<option th:each="stash:${stashList}" th:value="${stash.stashId}">
 						<span th:text="${stash.SName}"></span>
@@ -30,32 +30,33 @@
 		</div>
 		<!-- 驾驶员 -->
 		<div class="layui-form-item">
-			<label class="layui-form-label">驾驶员</label>
-				<div class="layui-input-inline">
-					<select name="eId" lay-verify="" lay-search>
-						<option value ="">请选择一个驾驶员编号</option>
-						<!-- 可以自己设置 -->
-						<option value="1004">1004_章君</option>
-						<option value="1009">1009_叶院</option>
-						<option value="1010">1010_李玉恭</option>
-						<option value="1011">1011_温如</option>
-						<option value="1256">1256_马清</option>
-						<option value="1818">1818_那易</option>
-						<option value="1984">1984_张璇</option>
+			<label class="layui-form-label">驾驶员编号</label>
+				<div class="layui-input-block">
+					<select th:field="*{EId}">.0
+						<option value="">请选择驾驶员编号</option>
+						<option th:each="employee:${employeelist}" th:value="${employee.EId}">
+							<span th:text="${employee.EId}"></span>
+						</option>
 					</select>
 				</div>
 		</div>
-		
+
+
 		<!-- 有效期限 -->
 		<div class="layui-form-item">
 			<label class="layui-form-label">有效期限</label>
 			<div class="layui-input-block">
-				<input type="text" name="tLimit" lay-verify="required" lay-reqtext="有效期限不能为空" placeholder="请输入有效期限" value="" class="layui-input">
+				<input type="text" name="tLimit"  lay-reqtext="有效期限不能为空" placeholder="请输入有效期限" value="" class="layui-input">
 			</div>
 		</div>
-		
-	</div>
-	</div>
+
+			<div class="layui-form-item">
+				<div class="layui-input-block">
+					<button class="layui-btn layui-btn-normal" lay-submit lay-filter="saveBtn">确认保存</button>
+				</div>
+			</div>
+	</form>
+	<script src="../../static/lib/jquery-3.4.1/jquery-3.4.1.min.js" charset="utf-8"></script>
 	<script src="../../../static/lib/layui-v2.6.3/layui.js" charset="utf-8"></script>
 	<script th:inline="javascript">
 		var contextPath = [[@{/}]];
@@ -66,7 +67,7 @@
 
 			//监听提交
 			form.on('submit(saveBtn)', function (data) {
-				var url = contextPath + "vehicle"
+				var url = contextPath + "vehicle/edit/update"
 				console.log(data.field)//当前容器所有表单字段
 				//异步请求提交数据
 				$.post(url, data.field,function(response){

@@ -2,6 +2,7 @@ package com.system.mapper;
 
 import com.system.pojo.Cargo;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
@@ -10,7 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 * @createDate 2023-07-19 15:32:53
 * @Entity com.system.pojo.Cargo
 */
-@ResponseBody
+@Repository
 public interface CargoMapper extends BaseMapper<Cargo> {
 
 }

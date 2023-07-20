@@ -72,6 +72,17 @@
 
 		</div>
 	</div>
+	<script type="text/html" id="convertType">
+		{{#
+		if(d.vstatus == 1){
+		return '良好';
+		}else if(d.vstatus == 2){
+		return '故障';
+		}else{
+		return '未知';
+		}
+		}}
+	</script>
 	<script src="../../static/lib/jquery-3.4.1/jquery-3.4.1.min.js" charset="utf-8"></script>
 	<script src="../../static/lib/layui-v2.6.3/layui.js" charset="utf-8"></script>
 	<script th:inline="javascript">
@@ -97,13 +108,13 @@
 				}],
 				cols: [ [
 					{type: "checkbox", width: 50,fixed: true},
-					{field: 'vid', width: 150, title: '车牌号', sort: true,fixed: true},
-					{field: 'vtype', width: 150, title: '车辆类型',sort: true},
-					{field: 'vstatus', width: 150, title: '车辆状态'},
-					{field: 'stashId', width: 150, title: '所属仓库'},
-					{field: 'eid',width: 150, title: '驾驶员编号', sort: true},
-					{field: 'licenseId', width: 150, title: '许可证编号'},
-					{field: 'tlimit', width: 150, title: '有效期限'},
+					{field: 'vid', width: 130, title: '车牌号', sort: true,fixed: true},
+					{field: 'vtype', width: 130, title: '车辆类型',sort: true},
+					{field: 'vstatus', width: 130, title: '车辆状态',templet:'#convertType',align: "center"},
+					{field: 'stashId', width: 130, title: '所属仓库id',align: "center"},
+					{field: 'eid',width: 150, title: '驾驶员编号', sort: true,align: "center"},
+					{field: 'licenseId', width: 130, title: '许可证编号',align: "center"},
+					{field: 'tlimit', width: 170, title: '有效期限'},
 					{title: '操作', minWidth: 150, toolbar: '#currentTableBar', align: "center"}
 				] ],
 				limits: [10, 15, 20, 25, 50, 100],
@@ -207,7 +218,7 @@
 				if (obj.event === 'edit') {
 					// layer.alert(JSON.stringify(data.eid));	//抛出数据
 					var index = layer.open({
-						title: '编辑用户',
+						title: '编辑车辆信息',
 						type: 2,
 						shade: 0.2,
 						maxmin:true,

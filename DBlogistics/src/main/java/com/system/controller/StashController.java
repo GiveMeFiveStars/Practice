@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.system.VO.DataVO;
 import com.system.mapper.StashMapper;
 import com.system.pojo.Company;
+import com.system.pojo.Employee;
 import com.system.pojo.Stash;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -44,51 +45,47 @@ public class StashController {
     /**
      * 添加操作更新数据库
      */
-    @GetMapping("/add/insert")
+    @RequestMapping ("/add/insert")
+    @ResponseBody
     public DataVO<Object> insert(Stash param) {
-        stashMapper.insert(param);
-        return DataVO.success("添加成功!");
+        Stash stash = stashMapper.selectById(param.getStashId());
+        if(stash != null){
+            return DataVO.fail("添加失败！此员工ID已经存在！");
+        }else{
+            stashMapper.insert(param);
+            return DataVO.success("添加成功");
+        }
     }
 
-    //改操作！
-    @GetMapping("/update")
-    public void update(Integer stashId,//插入各个属性
-                       String sName,
-                       Integer sArea,
-                       String sAdress,
-                       Integer cId,
-                       String eName,
-                       Date sTime,
-                       Date cTime) {
+       /**
+     * 员工信息编辑界面转发
+     * @return
+     */
+    @GetMapping("/edit/{id}")
+    public String getEmployeeById(@PathVariable("id")String id,Model model){
+        Stash stash = stashMapper.selectById(id);
+        model.addAttribute("stash",stash);
+        model.addAttribute("cIdList",stashMapper.selectList(null));
+        return "page/stash/edit";
+    }
+
+    /**
+     * 编辑操作更新数据库！
+     * @param stash
+     * @return
+     */
+    @PostMapping  ("")
+    @ResponseBody
+    public DataVO<Object> updateEmployee(Stash stash){
         UpdateWrapper<Stash> wrapper = new UpdateWrapper<>();
         //根据主键进行查询修改，主键不能为空！
-        if (stashId == null) {
-            return;
+        wrapper.eq("stash_id", stash.getStashId());
+        //传入不为空的元素更改！
+        if (stash.getEName() != null) {
+            wrapper.set("e_name", stash.getEName());
         }
-        wrapper.eq("stash_id", stashId);
-        //对传入不为空的元素更改！
-        if (sName!= null) {
-            wrapper.set("s_name", sName);
-        }
-        if (sArea!= null) {
-            wrapper.set("s_area", sArea);
-        }
-        if (sAdress != null) {
-            wrapper.set("s_adress", sAdress);
-        }
-        if (cId != null) {
-            wrapper.set("c_id",cId);
-        }
-        if (eName!= null) {
-            wrapper.set("e_name", eName);
-        }
-        if (sTime != null) {
-            wrapper.set("s_time", sTime);
-        }
-        if (cTime!= null) {
-            wrapper.set("c_time",cTime);
-        }
-       stashMapper.update(null, wrapper);
+        stashMapper.update(null, wrapper);
+        return DataVO.success("员工信息修改成功!");
     }
     /**
      * 根据主键删除表项
@@ -119,7 +116,7 @@ public class StashController {
     @GetMapping("/selectBy")
     @ResponseBody
     @Transactional
-    public DataVO<Object> select(Stash param,int page,int limit) {
+    public DataVO<Object> select(int page,int limit,Stash param) {
         QueryWrapper<Stash> queryWrapper = new QueryWrapper<>();
         if (param.getStashId() != null) {
             queryWrapper.like("stash_id", param.getStashId());

@@ -1,0 +1,7 @@
+Employee employee = employeeMapper.selectById(param.getEId());
+        if(employee != null){
+            return DataVO.fail("添加失败！此员工ID已经存在！");
+        }else{
+            employeeMapper.insert(param);
+            return DataVO.success("添加成功");
+        }

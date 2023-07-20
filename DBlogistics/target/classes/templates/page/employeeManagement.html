@@ -99,7 +99,7 @@
 				cols: [ [
 					{type: "checkbox", width: 50,fixed: true},
 					{field: 'eid', width: 120, title: '员工ID', sort: true,fixed: true},
-					{field: 'cid', width: 120, title: '公司代号',sort: true},
+					{field: 'cid', width: 120, title: '公司代号',sort: true,align: "center"},
 					{field: 'ename', width: 120, title: '员工姓名'},
 					{field: 'ephone', width: 180, title: '个人电话'},
 					{field: 'esex',width: 80, title: '性别'},
@@ -221,7 +221,7 @@
 					});
 					return false;
 				} else if (obj.event === 'delete') {
-					layer.confirm('您确认删除选中记录:'+data.name + '?', function (index) {
+					layer.confirm('您确认删除选中记录:'+data.eid + '?', function (index) {
 						var url = contextPath + "employee/delete/"+data.eid;
 						var params ={_method:"DELETE"}
 						$.post(url, params ,function(response){
